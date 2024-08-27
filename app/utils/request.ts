@@ -1,3 +1,6 @@
+
+var XMLHttpRequest = require('xhr2');
+
 export function sendRequest(method: string, url: string, data={}) {
    const xhr = new XMLHttpRequest();
    xhr.open(method, url, false);

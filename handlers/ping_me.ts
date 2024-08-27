@@ -1,1 +1,2 @@
-console.log(process.env.MY_ENV_VAR);
+console.log(process.env.TOKEN);
+console.log(process.env.TOKEN.length);

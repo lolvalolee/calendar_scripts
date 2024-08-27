@@ -1,1 +1,1 @@
-console.log(123);
+console.log(process.env.MY_ENV_VAR);

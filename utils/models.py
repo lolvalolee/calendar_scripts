@@ -6,13 +6,17 @@ class BaseModel:
     url = ''
 
     @classmethod
-    def retrieve(cls, url=None):
-        return send_request('get', url or BASE_URL + cls.url).json()
+    def combine_url(cls, url):
+        return BASE_URL + url
+
+    @classmethod
+    def retrieve(cls, url):
+        return send_request('get', url).json()
 
     @classmethod
     def get_all_objects(cls):
         objects = []
-        url = cls.url
+        url = cls.combine_url(cls.url)
         while True:
             data = cls.retrieve(url)
             objects.extend(data['results'])

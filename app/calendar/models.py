@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from datetime import datetime
 
 from utils.models import BaseModel
 
 
+@dataclass
 class RegularEvent(BaseModel):
     url = '/api/regular-event/'
 
@@ -18,6 +20,7 @@ class RegularEvent(BaseModel):
         return Event.get_objects(regular_event=self.id)
 
 
+@dataclass
 class Event(BaseModel):
     url = '/api/event/'
 

@@ -5,6 +5,17 @@ from utils.models import BaseModel
 
 
 @dataclass
+class Event(BaseModel):
+    url = '/api/event/'
+
+    start: datetime
+    end: datetime
+    title: dict
+    sub_tasks: list
+    regular_event: int
+
+
+@dataclass
 class RegularEvent(BaseModel):
     url = '/api/regular-event/'
 
@@ -18,16 +29,5 @@ class RegularEvent(BaseModel):
 
     def events(self, start=None, end=None):
         return Event.get_objects(regular_event=self.id)
-
-
-@dataclass
-class Event(BaseModel):
-    url = '/api/event/'
-
-    start: datetime
-    end: datetime
-    title: dict
-    sub_tasks: list
-    regular_event: int
 
 

@@ -6,5 +6,6 @@ sys.path.append('./')
 
 r = RegularEvent.get_object(1)
 
-print(r.id)
-print(r.events())
+for i in r.events():
+    print(i)
+    print(i.start)

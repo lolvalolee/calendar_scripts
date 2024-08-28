@@ -1,3 +1,4 @@
+from constants import BASE_URL
 from utils.http import send_request
 
 
@@ -6,7 +7,7 @@ class BaseModel:
 
     @classmethod
     def retrieve(cls, url=None):
-        return send_request('get', url or cls.url).json()
+        return send_request('get', url or BASE_URL + cls.url).json()
 
     @classmethod
     def get_all_objects(cls):

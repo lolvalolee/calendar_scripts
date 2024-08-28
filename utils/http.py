@@ -10,4 +10,4 @@ def send_request(method, url, data=None, headers=None):
     headers = headers or {}
 
     headers['Authorization'] = f'Bearer {os.environ["TOKEN"]}'
-    return getattr(requests, method)(BASE_URL +  url, data=data, headers=headers)
+    return getattr(requests, method)(url, data=data, headers=headers)

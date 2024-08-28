@@ -1,15 +1,13 @@
+from dataclasses import dataclass
+
 from constants import BASE_URL
 from utils.http import send_request
 
 
+@dataclass
 class BaseModel:
     url = ''
-    _data = {}
-    id = None
-
-    def __init__(self, data):
-        self._data = data
-        self.id = data.get('id')
+    id: int
 
     @classmethod
     def combine_url(cls, url):

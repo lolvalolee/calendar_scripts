@@ -6,7 +6,7 @@ class BaseModel:
 
     @classmethod
     def retrieve(cls, url=None):
-        return send_request(url or self.url, 'get').json()
+        return send_request('get', url or cls.url).json()
 
     @classmethod
     def get_all_objects(cls):

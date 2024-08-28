@@ -1,7 +1,7 @@
 import sys
 
+from app.calendar.models import RegularEvent
+
 sys.path.append('../')
 
-from utils.http import send_request
-
-print(send_request('get', 'http://web:8000/api/condition/'))
+print(RegularEvent.get_all_objects())

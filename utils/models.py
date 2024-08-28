@@ -19,6 +19,7 @@ class BaseModel:
 
     @classmethod
     def get_object(cls, pk):
+        print(cls)
         data = cls.retrieve(cls.combine_url(cls.url) + f'{pk}/')
         _data = {'id': data.get('id')}
         return cls(**data)

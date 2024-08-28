@@ -21,7 +21,7 @@ class BaseModel:
     def get_object(cls, pk):
         data = cls.retrieve(cls.combine_url(cls.url) + f'{pk}/')
         _data = {'id': data.get('id')}
-        return cls(**_data)
+        return cls(**data)
 
     @classmethod
     def get_objects(cls, **kwargs):

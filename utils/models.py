@@ -19,7 +19,7 @@ class BaseModel:
 
     @classmethod
     def get_object(cls, pk):
-        return cls(cls.retrieve(cls.combine_url(cls.url) + f'{pk}/'))
+        return cls(**cls.retrieve(cls.combine_url(cls.url) + f'{pk}/'))
 
     @classmethod
     def get_objects(cls, **kwargs):

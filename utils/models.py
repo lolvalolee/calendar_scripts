@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 
 from constants import BASE_URL
 from utils.http import send_request
@@ -19,7 +19,6 @@ class BaseModel:
 
     @classmethod
     def get_object(cls, pk):
-        print(cls)
         data = cls.retrieve(cls.combine_url(cls.url) + f'{pk}/')
         _data = {'id': data.get('id')}
         return cls(**data)
@@ -38,3 +37,13 @@ class BaseModel:
             else:
                 break
         return objects
+
+    def __post_init__(self):
+        print(self)
+        for field, field_type in fields(self.__class__):
+            print('*****')
+            print(field)
+            print(field_type)
+            # d = getattr(self.__class__, field.name)
+            # print(dir(d))
+            # # print(field.name, getattr(self.__class__, field.name))

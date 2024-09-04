@@ -1,7 +1,18 @@
+import datetime
 from dataclasses import dataclass, fields
 
 from constants import BASE_URL
-from utils.http import send_request
+from utils.misc import send_request
+
+
+def apply_default_filters(*default_filters):
+    def decorator(function):
+        def wrapper(*args, **kwargs):
+            filters = kwargs.pop('filters', default_filters)
+            result = function(*args, filters=filters, **kwargs)
+            return result
+        return wrapper
+    return decorator
 
 
 @dataclass
@@ -15,7 +26,7 @@ class BaseModel:
 
     @classmethod
     def retrieve(cls, url, **kwargs):
-        return send_request('get', url, kwargs).json()
+        return send_request('get', url, data=kwargs).json()
 
     @classmethod
     def get_object(cls, pk):
@@ -29,7 +40,6 @@ class BaseModel:
         url = cls.combine_url(cls.url)
         while True:
             data = cls.retrieve(url, **kwargs)
-
             [objects.append(cls(**item)) for item in data['results']]
 
             if data['next']:
@@ -39,11 +49,19 @@ class BaseModel:
         return objects
 
     def __post_init__(self):
-        print(self)
-        for field, field_type in fields(self.__class__):
-            print('*****')
-            print(field)
-            print(field_type)
-            # d = getattr(self.__class__, field.name)
-            # print(dir(d))
-            # # print(field.name, getattr(self.__class__, field.name))
+        for field in fields(self.__class__):
+            if field.type == datetime.datetime:
+                value = getattr(self, field.name)
+                if not value:
+                    continue
+                setattr(self, field.name, datetime.datetime.strptime(
+                    value, '%Y-%m-%dT%H:%M:%S.%f%z').astimezone())
+
+    @classmethod
+    def create(cls, **kwargs):
+        print('creating !')
+        try:
+            r = send_request('post', cls.combine_url(cls.url), data=kwargs).json()
+            return r
+        except Exception as e:
+            print(e)

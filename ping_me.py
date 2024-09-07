@@ -7,7 +7,7 @@ from typing import List
 from app.calendar.models import RegularEvent, Event
 from app.profile.models import Profile
 
-sys.path.append('../')
+sys.path.append('./')
 
 
 def calc_total(_events: List[Event]):

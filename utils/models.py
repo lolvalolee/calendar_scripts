@@ -59,7 +59,6 @@ class BaseModel:
 
     @classmethod
     def create(cls, **kwargs):
-        print('creating !')
         try:
             r = send_request('post', cls.combine_url(cls.url), data=kwargs).json()
             return r

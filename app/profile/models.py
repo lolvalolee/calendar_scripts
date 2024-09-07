@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
 
-from utils.misc import send_request
 from utils.models import BaseModel
 
 

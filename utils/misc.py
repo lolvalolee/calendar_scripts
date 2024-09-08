@@ -4,8 +4,6 @@ import os
 
 import requests
 
-from constants import BASE_URL, DATETIME_FORMAT
-
 
 def send_request(method, url, data=None, headers=None):
     query_params = {
@@ -13,7 +11,7 @@ def send_request(method, url, data=None, headers=None):
         'headers': headers or {},
     }
 
-    query_params['headers']['Authorization'] = f'Bearer {os.environ["TOKEN"]}'
+    query_params['headers']['Authorization'] = f'Bearer {os.environ["jwt_token"]}'
 
     for k, v in query_params['data'].items():
         if not isinstance(v, datetime):

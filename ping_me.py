@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta, time
 
-import os
 import sys
 from typing import List
 
@@ -16,7 +15,6 @@ def calc_total(_events: List[Event]):
     return _total, _diff, abs(_diff) < allowed_diff, _diff < 0
 
 
-os.environ.setdefault('TOKEN', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzI2Mjc3ODU0LCJqdGkiOiIzOTgwNWQzYTFkOTI0YzZjODZhZDc4YTAwMWQ2ZTU5NSIsInVzZXJfaWQiOjF9.FrTijv92PJezMPszf5_sTXdZflI3SwbwfiWXKMt7hXE')
 r = RegularEvent.get_object(1)
 profile = Profile.get()
 

@@ -10,4 +10,7 @@ from app.profile.models import Profile
 sys.path.append('./')
 
 
-Message.create()
+r = Message.create()
+print('******')
+print(r)
+print(r.status_code)

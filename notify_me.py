@@ -12,3 +12,4 @@ sys.path.append('./')
 
 r = Message.create()
 print('******')
+print(r)

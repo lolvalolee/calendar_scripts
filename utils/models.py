@@ -1,5 +1,6 @@
 import datetime
 from dataclasses import dataclass, fields
+from json import JSONDecodeError
 
 from constants import BASE_URL
 from utils.misc import send_request
@@ -59,9 +60,14 @@ class BaseModel:
 
     @classmethod
     def create(cls, **kwargs):
+        r = None
         try:
-            r = send_request('post', cls.combine_url(cls.url), data=kwargs).json()
-            return r
+            r = send_request('post', cls.combine_url(cls.url), data=kwargs)
+            return r.json()
+        except JSONDecodeError:
+            print(r)
+            print(dir(r))
+            print('response not decoded')
         except Exception as e:
             print('error while execute')
             print(e)

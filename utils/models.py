@@ -63,4 +63,5 @@ class BaseModel:
             r = send_request('post', cls.combine_url(cls.url), data=kwargs).json()
             return r
         except Exception as e:
+            print('error while execute')
             print(e)

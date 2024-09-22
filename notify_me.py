@@ -12,5 +12,3 @@ sys.path.append('./')
 
 r = Message.create()
 print('******')
-print(r)
-print(r)

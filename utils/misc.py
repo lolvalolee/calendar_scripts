@@ -20,6 +20,7 @@ def send_request(method, url, data=None, headers=None):
 
     if method == 'get':
         query_params['params'] = query_params['data']
+        query_params['headers']['Content-Type'] = 'application/json'
 
     if method == 'post':
         query_params['data'] = json.dumps(query_params.pop('data', {}))

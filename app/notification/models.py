@@ -9,13 +9,19 @@ from utils.models import BaseModel
 class Message(BaseModel):
     url = '/api/message/'
 
-    name: dict
-    weekdays: list
-    public: bool
-    delayed_start_at: bool
-    started_at: datetime
-    max_duration: int
-    duration_required: bool
+    notification_type: str
+    due_to: datetime
+    content_type: int
+    object_id: int
+    extra_data: dict
+    transport: int
+
+    # weekdays: list
+    # public: bool
+    # delayed_start_at: bool
+    # started_at: datetime
+    # max_duration: int
+    # duration_required: bool
 
     @classmethod
     def simple_message(cls, **kwargs):

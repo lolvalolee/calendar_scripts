@@ -5,6 +5,7 @@ from app.notification.constants import NOTIFICATION_MESSAGE
 from utils.models import BaseModel, CRUDModel
 
 
+@dataclass
 class NotificationTransport(BaseModel):
     url = '/api/notification-transport/'
 

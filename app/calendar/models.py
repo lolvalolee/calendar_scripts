@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import List
 
-from utils.models import BaseModel, apply_default_filters
+from utils.models import apply_default_filters, CRUDModel
 
 
 @dataclass
-class Event(BaseModel):
+class Event(CRUDModel):
     url = '/api/event/'
 
     start: datetime
@@ -25,7 +25,7 @@ class Event(BaseModel):
 
 
 @dataclass
-class PlannedEvent(BaseModel):
+class PlannedEvent(CRUDModel):
     url = '/api/event-planned/'
 
     planned: bool
@@ -37,7 +37,7 @@ class PlannedEvent(BaseModel):
 
 
 @dataclass
-class RegularEvent(BaseModel):
+class RegularEvent(CRUDModel):
     url = '/api/regular-event/'
 
     name: dict
@@ -54,45 +54,3 @@ class RegularEvent(BaseModel):
 
     def planned_events(self, start_gte=None, end_gte=None, **kwargs):
         return PlannedEvent.get_objects(regular_event=self.id, start_gte=start_gte)
-
-#
-#
-# pipeline {
-#   agent {
-#       docker {
-#           image 'mycalendar/jenkins_agent'
-#           args  '--net="new_v2_calendar"'
-#       }
-#   }
-#   stages {
-#     stage('HelloWorld') {
-#       steps {
-#         echo 'Hello World'
-#       }
-#     }
-#     stage('git clone') {
-#       steps {
-#          cleanWs()
-#          script {
-#              img = 'mycalendar/handler'
-#              sh 'curl web:8000'
-#              sh 'git clone https://github.com/lolvalolee/calendar_scripts.git'
-#              withEnv(["TOKEN=$jwt_token"]){
-#                      dir('./calendar_scripts') {
-#                          sh 'git checkout user_${user_id}'
-#                          sh 'touch /tmp/dump.txt'
-#                          sh 'tcpdump -v > /tmp/dump.txt &'
-#                          sh 'python ${handler_name}'
-#                          sh 'cat /tmp/dump.txt'
-#                          sh 'echo ----------------'
-#                          sh 'echo ----------------'
-#                          sh 'echo ----------------'
-#                          sh 'echo ----------------'
-#                          sh 'wc -l < /tmp/dump.txt'
-#                 }
-#              }
-#          }
-#       }
-#     }
-#   }
-# }

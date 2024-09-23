@@ -4,12 +4,15 @@ import sys
 from typing import List
 
 from app.calendar.models import RegularEvent, Event
-from app.notification.models import Message
+from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
 
 sys.path.append('./')
 
+desktop = NotificationTransport.desktop
+print(desktop)
 
-r = Message.create()
-print('******')
-print(r)
+
+# r = Message.simple_message()
+# print('******')
+# print(r)

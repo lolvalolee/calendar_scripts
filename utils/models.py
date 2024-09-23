@@ -59,6 +59,13 @@ class BaseModel:
                     value, '%Y-%m-%dT%H:%M:%S.%f%z').astimezone())
 
     @classmethod
+    def search(cls, search):
+        return cls.get_objects(search=search)
+
+
+class CRUDModel(BaseModel):
+
+    @classmethod
     def create(cls, **kwargs):
         r = None
         try:

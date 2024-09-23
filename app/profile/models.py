@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from zoneinfo import ZoneInfo
 
-from utils.models import BaseModel
+from utils.models import BaseModel, CRUDModel
 
 
 @dataclass
-class Profile(BaseModel):
+class Profile(CRUDModel):
     url = '/api/profile/'
 
     first_name: str

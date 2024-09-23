@@ -2,11 +2,21 @@ from dataclasses import dataclass
 from datetime import datetime
 
 from app.notification.constants import NOTIFICATION_MESSAGE
-from utils.models import BaseModel
+from utils.models import BaseModel, CRUDModel
 
+
+class NotificationTransport(BaseModel):
+    url = '/api/notification-transport/'
+
+    name: str
+
+    @property
+    def desktop(self):
+        return self.search('desktop')[0]
+    
 
 @dataclass
-class Message(BaseModel):
+class Message(CRUDModel):
     url = '/api/message/'
 
     notification_type: str
@@ -15,13 +25,6 @@ class Message(BaseModel):
     object_id: int
     extra_data: dict
     transport: int
-
-    # weekdays: list
-    # public: bool
-    # delayed_start_at: bool
-    # started_at: datetime
-    # max_duration: int
-    # duration_required: bool
 
     @classmethod
     def simple_message(cls, **kwargs):

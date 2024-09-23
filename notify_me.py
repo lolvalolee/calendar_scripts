@@ -13,6 +13,6 @@ desktop = NotificationTransport.desktop()
 print(desktop.id)
 
 
-# r = Message.simple_message()
-# print('******')
-# print(r)
+r = Message.simple_message(transport=desktop)
+print('******')
+print(r)

@@ -68,6 +68,10 @@ class CRUDModel(BaseModel):
     @classmethod
     def create(cls, **kwargs):
         r = None
+
+        for k, v in kwargs.items():
+            kwargs[k] = v.id
+
         try:
             r = send_request('post', cls.combine_url(cls.url), data=kwargs)
             return r.json()

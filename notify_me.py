@@ -9,8 +9,8 @@ from app.profile.models import Profile
 
 sys.path.append('./')
 
-desktop = NotificationTransport.desktop
-print(desktop)
+desktop = NotificationTransport.desktop()
+print(desktop.id)
 
 
 # r = Message.simple_message()

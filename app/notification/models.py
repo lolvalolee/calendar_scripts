@@ -10,10 +10,10 @@ class NotificationTransport(BaseModel):
 
     name: str
 
-    @property
-    def desktop(self):
-        return self.search('desktop')[0]
-    
+    @classmethod
+    def desktop(cls):
+        return cls.search('desktop')[0]
+
 
 @dataclass
 class Message(CRUDModel):

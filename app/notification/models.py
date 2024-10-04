@@ -15,6 +15,10 @@ class NotificationTransport(BaseModel):
     def desktop(cls):
         return cls.search('desktop')[0]
 
+    @classmethod
+    def telegram(cls):
+        return cls.search('telegram')[0]
+
 
 @dataclass
 class Message(CRUDModel):

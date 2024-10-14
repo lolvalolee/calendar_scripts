@@ -12,6 +12,7 @@ desktop = NotificationTransport.desktop()
 
 
 api_key = os.environ["api_key"]
+print(api_key)
 
 client = OpenAI(api_key=api_key, project='proj_aqopDeyhEzIZzEK4PrePdFVt')
 

@@ -6,4 +6,4 @@ sys.path.append('./')
 
 desktop = NotificationTransport.desktop()
 
-r = Message.simple_message(transport=desktop, extra_data={'title': 'You have been notified'})
+r = Message.simple_message(transport=desktop, extra_data={'title': 'This is a message'})

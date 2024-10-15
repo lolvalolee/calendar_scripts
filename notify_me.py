@@ -2,6 +2,7 @@ import os
 import sys
 
 from openai import OpenAI
+from tenacity import retry
 
 from app.notification.models import Message, NotificationTransport
 
@@ -24,7 +25,7 @@ completion = client.chat.completions.create(
         {
             "role": "user",
             # "content": "Напиши сообщение о том что сон полезен для здоровья. Сообщение должно хоть немного отличаться от предыдущего.",
-            "content": "Рядом стоит Андрияна. Скажи ей что она замечательный человек."
+            "content": "Я не делал зарядку утром. Напиши о том что это необходимо делать каждый день."
 
 }
     ]

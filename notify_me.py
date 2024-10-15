@@ -2,7 +2,6 @@ import os
 import sys
 
 from openai import OpenAI
-from tenacity import retry
 
 from app.notification.models import Message, NotificationTransport
 
@@ -11,10 +10,7 @@ sys.path.append('./')
 
 desktop = NotificationTransport.desktop()
 
-
 api_key = os.environ["api_key"]
-print('api key!')
-print(api_key)
 
 client = OpenAI(api_key=api_key, project='proj_aqopDeyhEzIZzEK4PrePdFVt')
 

@@ -42,7 +42,7 @@ class UserStockRoomItem(CRUDModel):
     status: str
     measure: dict
     stock: dict
-    reserved_for: Optional[dict, bool]
+    reserved_for: Optional[dict]
     count: float
     stock_room_item: dict
     deleted: bool

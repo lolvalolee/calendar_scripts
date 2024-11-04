@@ -9,7 +9,6 @@ class Stock(CRUDModel):
 
     name: str
     user_group: dict
-    user_habit: int
     isolate_stock_items: bool
     default_encryption_keys: list
 

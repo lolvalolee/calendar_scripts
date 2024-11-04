@@ -7,7 +7,7 @@ from utils.models import apply_default_filters, CRUDModel
 
 @dataclass
 class UserHabitRecord(CRUDModel):
-    url = '/api/habit-record/'
+    url = '/api/user-habit-record/'
 
     result: str
     record_date: datetime

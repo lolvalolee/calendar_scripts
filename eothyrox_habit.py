@@ -2,7 +2,7 @@ import os
 import sys
 
 from app.habit.models import UserHabitRecord, UserHabit
-from app.stockRoom.models import Stock, StockItem, Measure
+from app.stockRoom.models import Stock, StockItem, Measure, UserStockRoomItem
 
 sys.path.append('./')
 
@@ -12,10 +12,12 @@ user_habit = UserHabit.get_object(user_habit_record.user_habit)
 
 stock_item = StockItem.get_objects(name='Eothyrox')[0]
 measure = Measure.get_objects(name='Штук')[0]
-print('items')
-print(stock_item, measure)
+stock = Stock.get_objects(name='Private and isolated')[0]
 
-# stock = Stock.get_objects(name='Private and isolated')[0]
+user_stock_room_item = UserStockRoomItem.get_objects()
+
+
+
 # stock.use()
 #
 # print('stock:')

@@ -36,3 +36,9 @@ class UserHabit(CRUDModel):
     count_skipped = int
     count_failed = int
     count_left = int
+    records = List[UserHabitRecord]
+    last_completed_record = dict
+    last_skipped_record = dict
+    last_failed_record = dict
+    created = datetime
+    changed = datetime

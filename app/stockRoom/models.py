@@ -19,6 +19,12 @@ class Stock(CRUDModel):
         print('use item')
         print(r.json())
 
+
+@dataclass
+class StockItem(CRUDModel):
+    url = '/api/stock-room/'
+    name: dict
+
 #
 #
 # @dataclass

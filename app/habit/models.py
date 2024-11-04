@@ -18,6 +18,7 @@ class UserHabitRecord(CRUDModel):
 class UserHabit(CRUDModel):
     url = '/api/user-habit/'
 
+    name: dict
     record_date: date
     name_encrypt: str
     description: str

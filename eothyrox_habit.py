@@ -15,7 +15,8 @@ measure = Measure.get_objects(name='Штук')[0]
 stock = Stock.get_objects(name='Private and isolated')[0]
 
 user_stock_room_item = UserStockRoomItem.get_objects()
-
+print('!!!!!')
+print(user_stock_room_item)
 
 
 # stock.use()

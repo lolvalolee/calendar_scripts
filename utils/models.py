@@ -40,6 +40,8 @@ class BaseModel:
         objects = []
         url = cls.combine_url(cls.url)
         while True:
+            print('URL!!!')
+            print(url)
             data = cls.retrieve(url, **kwargs)
             [objects.append(cls(**item)) for item in data['results']]
 

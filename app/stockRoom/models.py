@@ -25,6 +25,14 @@ class StockItem(CRUDModel):
     url = '/api/stock-room/'
     name: dict
 
+
+@dataclass
+class Measure(CRUDModel):
+    url = '/api/measure/'
+
+    name: str
+    short_name: str
+
 #
 #
 # @dataclass

@@ -14,8 +14,8 @@ class Stock(CRUDModel):
     default_encryption_keys: list
 
     def use(self):
-        data = {'stock': self.id}
-        r = send_request('post', self.combine_url(self.url + 'use/'), data=data)
+        data = {}
+        r = send_request('post', self.combine_url(self.url + f'{self.id}/use/'), data=data)
         print('use item')
         print(r)
 

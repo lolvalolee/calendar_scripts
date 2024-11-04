@@ -17,7 +17,7 @@ class Stock(CRUDModel):
         data = {}
         r = send_request('post', self.combine_url(self.url + f'{self.id}/use/'), data=data)
         print('use item')
-        print(r)
+        print(r.json())
 
 #
 #

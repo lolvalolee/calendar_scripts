@@ -1,8 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime, date, time
-from typing import List
 
-from utils.models import apply_default_filters, CRUDModel
+from utils.models import CRUDModel
 
 
 @dataclass

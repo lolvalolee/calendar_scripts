@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from utils.misc import send_request
 from utils.models import CRUDModel
 
 
@@ -12,10 +13,9 @@ class Stock(CRUDModel):
     isolate_stock_items: bool
     default_encryption_keys: list
 
-
-
-
-
+    def use(self):
+        data = {'stock': self.id}
+        send_request('post', self.combine_url(self.url + '/use/'), data=data)
 
 #
 #

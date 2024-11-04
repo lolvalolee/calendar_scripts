@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime, date, time
-from typing import List
+from typing import List, Optional
 
 from utils.models import apply_default_filters, CRUDModel
 
@@ -19,7 +19,6 @@ class UserHabit(CRUDModel):
     url = '/api/user-habit/'
 
     name: dict
-    record_date: date
     name_encrypt: str
     description: str
     name_on_skip: str
@@ -32,11 +31,11 @@ class UserHabit(CRUDModel):
     default_choice: str
     notification_time: time
     is_system: bool
-    count_today: int
-    count_done: int
-    count_skipped: int
-    count_failed: int
-    count_left: int
+    count_today: Optional[int]
+    count_done: Optional[int]
+    count_skipped: Optional[int]
+    count_failed: Optional[int]
+    count_left: Optional[int]
     records: list
     last_completed_record: dict
     last_skipped_record: dict

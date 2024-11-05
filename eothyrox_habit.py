@@ -23,7 +23,7 @@ stock = stock[0]
 
 count = UserStockRoomItem.get_objects_count(
     stock_room_item=stock_item.id, measure=piece.id, status=STATUS_IN_STOCK_ROOM)
-packs_count =  UserStockRoomItem.get_objects_count(
+packs_count = UserStockRoomItem.get_objects_count(
     stock_room_item=stock_item.id, measure=pack.id, status=STATUS_IN_STOCK_ROOM)
 
 if not count:
@@ -35,6 +35,7 @@ else:
     stock.use(stock_item.id, piece.id, 1)
 
 if not count and (not packs_count or packs_count == 1):
+    print('need plane item!')
     planned = UserStockRoomItem.get_objects_count(stock_room_item=stock_item.id, measure=pack.id,
                                             status=STATUS_PLANNED)
     if planned == 0:

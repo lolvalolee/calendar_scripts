@@ -14,8 +14,12 @@ class Stock(CRUDModel):
     isolate_stock_items: bool
     default_encryption_keys: list
 
-    def use(self):
-        data = {}
+    def use(self, stock_room_item_id, measure_id, count):
+        data = {
+            'stock_room_item': stock_room_item_id,
+            'measure': measure_id,
+            'count': count
+        }
         r = send_request('post', self.combine_url(self.url + f'{self.id}/use/'), data=data)
         print('use item')
         print(r.json())

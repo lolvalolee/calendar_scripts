@@ -19,6 +19,7 @@ user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.
 if not user_stock_room_item:
     print('no items')
     user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pack.id)
+    stock.use(stock_item.id, pack.id, 1)
     print('exists!!')
 else:
     print('!!!!!')

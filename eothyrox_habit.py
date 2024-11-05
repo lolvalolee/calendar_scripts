@@ -19,6 +19,8 @@ user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.
 if not user_stock_room_item:
     user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pack.id)
     stock.use(stock_item.id, pack.id, 1)
+    stock.add(stock_item.id, pieces.id, 25)
+    stock.use(stock_item.id, pieces.id, 1)
 else:
     print('!!!!!')
     print(user_stock_room_item)

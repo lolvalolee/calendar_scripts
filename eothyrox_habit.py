@@ -12,8 +12,8 @@ user_habit_record = UserHabitRecord.get_object(os.environ["object_id"])
 user_habit = UserHabit.get_object(user_habit_record.user_habit)
 
 stock_item, _ = StockItem.get_objects(name='Eothyrox')
-piece, _ = Measure.get_objects(name='Штук')[0]
-pack, _ = Measure.get_objects(name='Упаковок')[0]
+piece, _ = Measure.get_objects(name='Штук')
+pack, _ = Measure.get_objects(name='Упаковок')
 stock, _ = Stock.get_objects(name='dddd stock user group')
 
 stock_item = stock_item[0]

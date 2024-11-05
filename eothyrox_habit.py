@@ -31,15 +31,13 @@ if not count:
         stock.use(stock_item.id, pack.id, 1)
         stock.add(stock_item.id, piece.id, 25)
         stock.use(stock_item.id, piece.id, 1)
+        packs_count -= 1
 else:
     stock.use(stock_item.id, piece.id, 1)
 
-if not count and (not packs_count or packs_count == 1):
+if count < 10 and packs_count == 0:
     print('need plane item!')
     planned = UserStockRoomItem.get_objects_count(stock_room_item=stock_item.id, measure=pack.id,
                                             status=STATUS_PLANNED)
     if planned == 0:
         stock.plane(stock_item.id, piece.id, 2)
-
-
-

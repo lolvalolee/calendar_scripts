@@ -14,7 +14,7 @@ stock_item = StockItem.get_objects(name='Eothyrox')[0]
 measure = Measure.get_objects(name='Штук')[0]
 stock = Stock.get_objects(name='Private and isolated')[0]
 
-user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id)
+user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=measure.id)
 print('!!!!!')
 print(user_stock_room_item)
 

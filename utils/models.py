@@ -53,7 +53,7 @@ class BaseModel:
     @classmethod
     def get_objects_count(cls, **kwargs):
         data, count = cls.get_objects(**kwargs)
-        return sum(map(lambda item: item.get('count'), data))
+        return sum(map(lambda item: item['count'], data))
 
     def __post_init__(self):
         for field in fields(self.__class__):

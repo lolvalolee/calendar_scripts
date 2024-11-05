@@ -13,7 +13,7 @@ user_habit = UserHabit.get_object(user_habit_record.user_habit)
 stock_item = StockItem.get_objects(name='Eothyrox')[0]
 pieces = Measure.get_objects(name='Штук')[0]
 pack = Measure.get_objects(name='Упаковок')[0]
-stock = Stock.get_objects(name='Private and isolated')[0]
+stock = Stock.get_objects(name='dddd stock user group')[0]
 
 user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pieces.id)
 if not user_stock_room_item:

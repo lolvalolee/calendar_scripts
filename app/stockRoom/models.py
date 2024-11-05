@@ -30,7 +30,8 @@ class Stock(CRUDModel):
         data = {'stock_room_item': stock_room_item_id,
                 'measure': measure_id,
                 'count': count}
-        return send_request('post', self.combine_url(self.url + f'{self.id}/plane/'), data=data)
+        r =  send_request('post', self.combine_url(self.url + f'{self.id}/plane/'), data=data)
+        print(r.json())
 
 
 

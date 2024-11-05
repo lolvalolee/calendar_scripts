@@ -33,8 +33,6 @@ class BaseModel:
     def get_object(cls, pk):
         data = cls.retrieve(cls.combine_url(cls.url) + f'{pk}/')
         _data = {'id': data.get('id')}
-        print('data!')
-        print(data)
         return cls(**data)
 
     @classmethod
@@ -42,16 +40,19 @@ class BaseModel:
         objects = []
         url = cls.combine_url(cls.url)
         while True:
-            print('URL!!!')
-            print(url)
             data = cls.retrieve(url, **kwargs)
+            total_count = data.get('count')
             [objects.append(cls(**item)) for item in data['results']]
 
             if data['next']:
                 url = data['next']
             else:
                 break
-        return objects
+        return objects, total_count
+
+    @classmethod
+    def get_objects_count(cls, **kwargs):
+        return cls.retrieve(cls.combine_url(cls.url), **kwargs)['count']
 
     def __post_init__(self):
         for field in fields(self.__class__):

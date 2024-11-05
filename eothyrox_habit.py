@@ -2,6 +2,7 @@ import os
 import sys
 
 from app.habit.models import UserHabitRecord, UserHabit
+from app.stockRoom.constants import STATUS_IN_STOCK_ROOM, STATUS_PLANNED
 from app.stockRoom.models import Stock, StockItem, Measure, UserStockRoomItem
 
 sys.path.append('./')
@@ -10,18 +11,29 @@ objects = UserHabitRecord.get_objects()
 user_habit_record = UserHabitRecord.get_object(os.environ["object_id"])
 user_habit = UserHabit.get_object(user_habit_record.user_habit)
 
-stock_item = StockItem.get_objects(name='Eothyrox')[0]
-pieces = Measure.get_objects(name='Штук')[0]
-pack = Measure.get_objects(name='Упаковок')[0]
-stock = Stock.get_objects(name='dddd stock user group')[0]
+stock_item, _ = StockItem.get_objects(name='Eothyrox')[0]
+piece, _ = Measure.get_objects(name='Штук')[0]
+pack, _ = Measure.get_objects(name='Упаковок')[0]
+stock, _ = Stock.get_objects(name='dddd stock user group')[0]
 
-user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pieces.id)
+count = UserStockRoomItem.get_objects_count(
+    stock_room_item=stock_item.id, measure=piece.id, status=STATUS_IN_STOCK_ROOM)
+packs_count =  UserStockRoomItem.get_objects_count(
+    stock_room_item=stock_item.id, measure=pack.id, status=STATUS_IN_STOCK_ROOM)
 
-
-if not user_stock_room_item:
-    if UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pack.id):
+if not count:
+    if packs_count:
         stock.use(stock_item.id, pack.id, 1)
-        stock.add(stock_item.id, pieces.id, 25)
-        stock.use(stock_item.id, pieces.id, 1)
+        stock.add(stock_item.id, piece.id, 25)
+        stock.use(stock_item.id, piece.id, 1)
 else:
-    stock.use(stock_item.id, pieces.id, 1)
+    stock.use(stock_item.id, piece.id, 1)
+
+if not count and (not packs_count or packs_count == 1):
+    planned = UserStockRoomItem.get_objects_count(stock_room_item=stock_item.id, measure=pack.id,
+                                            status=STATUS_PLANNED)
+    if planned == 0:
+        stock.plane(stock_item.id, piece.id, 2)
+
+
+

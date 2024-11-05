@@ -1,0 +1,6 @@
+STATUS_IN_STOCK_ROOM = 'in_stock_room'
+STATUS_PLANNED = 'planned'
+STATUS_COOK_PLANNED = 'cook_planned'
+STATUS_READY_TO_COOK = 'ready'
+STATUS_USED = 'used'
+STATUS_DELETED = 'deleted'

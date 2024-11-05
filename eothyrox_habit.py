@@ -40,5 +40,7 @@ if count < 10 and packs_count == 0:
     print(count)
     planned = UserStockRoomItem.get_objects_count(stock_room_item=stock_item.id, measure=pack.id,
                                             status=STATUS_PLANNED)
+    print('planned')
+    print(planned)
     if planned == 0:
         stock.plane(stock_item.id, piece.id, 2)

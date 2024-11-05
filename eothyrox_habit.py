@@ -11,10 +11,15 @@ objects = UserHabitRecord.get_objects()
 user_habit_record = UserHabitRecord.get_object(os.environ["object_id"])
 user_habit = UserHabit.get_object(user_habit_record.user_habit)
 
-stock_item, _ = StockItem.get_objects(name='Eothyrox')[0]
+stock_item, _ = StockItem.get_objects(name='Eothyrox')
 piece, _ = Measure.get_objects(name='Штук')[0]
 pack, _ = Measure.get_objects(name='Упаковок')[0]
-stock, _ = Stock.get_objects(name='dddd stock user group')[0]
+stock, _ = Stock.get_objects(name='dddd stock user group')
+
+stock_item = stock_item[0]
+piece = piece[0]
+pack = pack[0]
+stock = stock[0]
 
 count = UserStockRoomItem.get_objects_count(
     stock_room_item=stock_item.id, measure=piece.id, status=STATUS_IN_STOCK_ROOM)

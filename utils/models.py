@@ -52,6 +52,9 @@ class BaseModel:
 
     @classmethod
     def get_objects_count(cls, **kwargs):
+        data = cls.retrieve(cls.combine_url(cls.url), **kwargs)['count']
+        print('data!!!')
+        print(data)
         return cls.retrieve(cls.combine_url(cls.url), **kwargs)['count']
 
     def __post_init__(self):

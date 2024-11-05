@@ -55,7 +55,7 @@ class BaseModel:
         data, count = cls.get_objects(**kwargs)
         print('!!!')
         print([item.count for item in data])
-        return sum(map(lambda item: item.count, data))
+        return sum(map(lambda item: float(item.count), data))
 
     def __post_init__(self):
         for field in fields(self.__class__):

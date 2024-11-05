@@ -16,11 +16,12 @@ pack = Measure.get_objects(name='Упаковок')[0]
 stock = Stock.get_objects(name='dddd stock user group')[0]
 
 user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pieces.id)
+
+
 if not user_stock_room_item:
-    user_stock_room_item = UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pack.id)
-    stock.use(stock_item.id, pack.id, 1)
-    stock.add(stock_item.id, pieces.id, 25)
-    stock.use(stock_item.id, pieces.id, 1)
+    if UserStockRoomItem.get_objects(stock_room_item=stock_item.id, measure=pack.id):
+        stock.use(stock_item.id, pack.id, 1)
+        stock.add(stock_item.id, pieces.id, 25)
+        stock.use(stock_item.id, pieces.id, 1)
 else:
-    print('!!!!!')
-    print(user_stock_room_item)
+    stock.use(stock_item.id, pieces.id, 1)

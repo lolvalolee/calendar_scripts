@@ -30,10 +30,14 @@ count = UserStockRoomItem.get_objects_count(
 
 packs_count = UserStockRoomItem.get_objects_count(
     stock_room_item=stock_item.id, measure=pack.id, status=STATUS_IN_STOCK_ROOM)
+planned_count = UserStockRoomItem.get_objects_count(
+    stock_room_item=stock_item.id, measure=pack.id, status=STATUS_PLANNED)
 
 if not count and not packs_count:
-    [Message.simple_message(transport=desktop, extra_data={'title': 'Eothyrox нет на складе. Добавлено к списку покупок'})
-     for transport in [desktop, telegram]]
+    if not planned_count:
+        [Message.simple_message(
+            transport=desktop, extra_data={'title': 'Eothyrox нет на складе. Добавлено к списку покупок'})
+            for transport in [desktop, telegram]]
     exit(0)
 
 if not count:
@@ -45,10 +49,7 @@ if not count:
 else:
     stock.use(stock_item.id, piece.id, 1)
 
-if count < 10 and packs_count == 0:
-    planned = UserStockRoomItem.get_objects_count(stock_room_item=stock_item.id, measure=pack.id,
-                                            status=STATUS_PLANNED)
-    if planned == 0:
-        stock.plane(stock_item.id, pack.id, 2)
-        [Message.simple_message(transport=desktop, extra_data={'title': 'Eothyrox добавлен в список покупок'})
+if count < 10 and packs_count == 0 and not planned_count:
+    stock.plane(stock_item.id, pack.id, 2)
+    [Message.simple_message(transport=desktop, extra_data={'title': 'Eothyrox добавлен в список покупок'})
          for transport in [desktop, telegram]]

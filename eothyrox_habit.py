@@ -31,6 +31,10 @@ count = UserStockRoomItem.get_objects_count(
 packs_count = UserStockRoomItem.get_objects_count(
     stock_room_item=stock_item.id, measure=pack.id, status=STATUS_IN_STOCK_ROOM)
 
+print('******')
+print(count)
+print(packs_count)
+
 if not count:
     if packs_count:
         stock.use(stock_item.id, pack.id, 1)

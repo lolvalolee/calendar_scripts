@@ -34,4 +34,7 @@ class Message(CRUDModel):
     @classmethod
     def simple_message(cls, **kwargs):
         kwargs['notification_type'] = NOTIFICATION_MESSAGE
-        return cls.create(**kwargs)
+        response = cls.create(**kwargs)
+        print('simple message')
+        print(response)
+        return response

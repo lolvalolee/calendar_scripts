@@ -38,7 +38,7 @@ if not count and not packs_count:
     if not planned_count:
         print('adding to buy')
         [Message.simple_message(
-            transport=desktop, extra_data={'title': 'Eothyrox нет на складе. Добавлено к списку покупок'})
+            transport=transport, extra_data={'title': 'Eothyrox нет на складе. Добавлено к списку покупок'})
             for transport in [desktop, telegram]]
         stock.plane(stock_item.id, pack.id, 2)
     exit(0)

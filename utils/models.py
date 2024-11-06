@@ -66,7 +66,8 @@ class BaseModel:
 
     @classmethod
     def search(cls, search):
-        return cls.get_objects(search=search)
+        data , _ = cls.get_objects(search=search)
+        return data
 
 
 class CRUDModel(BaseModel):

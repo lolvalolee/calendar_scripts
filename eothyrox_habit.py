@@ -34,10 +34,13 @@ planned_count = UserStockRoomItem.get_objects_count(
     stock_room_item=stock_item.id, measure=pack.id, status=STATUS_PLANNED)
 
 if not count and not packs_count:
+    print('no count on stock')
     if not planned_count:
+        print('adding to buy')
         [Message.simple_message(
             transport=desktop, extra_data={'title': 'Eothyrox нет на складе. Добавлено к списку покупок'})
             for transport in [desktop, telegram]]
+        stock.plane(stock_item.id, pack.id, 2)
     exit(0)
 
 if not count:

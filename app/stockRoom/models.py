@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 from app.calendar.models import Event
 from utils.misc import send_request
@@ -77,4 +77,5 @@ class Meal(CRUDModel):
 
     event: Event
     completed: bool
+    meal_items: List[MealItems]
 

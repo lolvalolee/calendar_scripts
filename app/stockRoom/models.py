@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
+from app.calendar.models import Event
 from utils.misc import send_request
 from utils.models import CRUDModel
 
@@ -60,3 +61,20 @@ class UserStockRoomItem(CRUDModel):
     count: float
     stock_room_item: dict
     deleted: bool
+
+
+@dataclass
+class MealItems(CRUDModel):
+    stock_room_item: StockItem
+    stock: Stock
+    count: float
+    measure: Measure
+    
+
+@dataclass
+class Meal(CRUDModel):
+    url = '/api/meal/'
+
+    event: Event
+    completed: bool
+

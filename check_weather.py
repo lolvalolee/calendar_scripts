@@ -1,7 +1,5 @@
 import requests
 
-# from dateutil import parser
-
 import sys
 from app.notification.models import NotificationTransport, Message
 

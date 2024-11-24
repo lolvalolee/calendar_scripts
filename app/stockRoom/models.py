@@ -69,7 +69,7 @@ class MealItems(CRUDModel):
     stock: Stock
     count: float
     measure: Measure
-    
+
 
 @dataclass
 class Meal(CRUDModel):

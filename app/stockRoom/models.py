@@ -71,7 +71,8 @@ class MealItem(CRUDModel):
     stock: Stock
     count: float
     measure: Measure
-
+    # debt: Optional[bool]
+    debt: int = 0
 
 @dataclass
 class Meal(CRUDModel):
@@ -80,4 +81,3 @@ class Meal(CRUDModel):
     event: Event
     completed: bool
     meal_items: List[MealItem]
-    debt: Optional[bool]

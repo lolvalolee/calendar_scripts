@@ -1,12 +1,13 @@
 import os
 import sys
 
-from app.stockRoom.models import Stock, StockItem, Measure, UserStockRoomItem, Meal, MealItem
+from app.notification.models import Message, NotificationTransport
+from app.stockRoom.models import Meal, MealItem
 
 sys.path.append('./')
-print('called')
 
+desktop = NotificationTransport.desktop()
 meal = Meal.get_object(os.environ["object_id"])
-for item in meal.meal_items:
-    # print(item)
-    print(MealItem.get_object(item['id']))
+
+debt_items = ' '.join([f'{item["debt"]} {item["measure"]["short_name"]} {item["stock_room_item"]["name"]["value"]}' for item in meal.meal_items if item['debt']])
+Message.simple_message(transport=desktop, extra_data={'title': debt_items})

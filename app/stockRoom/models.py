@@ -78,4 +78,4 @@ class Meal(CRUDModel):
     event: Event
     completed: bool
     meal_items: List[MealItems]
-
+    debt: Optional[bool]

@@ -64,7 +64,9 @@ class UserStockRoomItem(CRUDModel):
 
 
 @dataclass
-class MealItems(CRUDModel):
+class MealItem(CRUDModel):
+    url = '/api/meal-item/'
+
     stock_room_item: StockItem
     stock: Stock
     count: float
@@ -77,5 +79,5 @@ class Meal(CRUDModel):
 
     event: Event
     completed: bool
-    meal_items: List[MealItems]
+    meal_items: List[MealItem]
     debt: Optional[bool]

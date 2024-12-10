@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime
 
 sys.path.append('./')
 
@@ -20,3 +21,5 @@ from app.stockRoom.models import Meal, MealItem
 # Message.simple_message(transport=desktop, extra_data={'title': f'Message :{msg}'})
 
 profile = Profile.get()
+print(profile.timezone)
+now = datetime.now().astimezone(profile.timezone)

@@ -1,10 +1,12 @@
 import os
 import sys
 
+sys.path.append('./')
+
 from app.notification.models import Message, NotificationTransport
+from app.profile.models import Profile
 from app.stockRoom.models import Meal, MealItem
 
-sys.path.append('./')
 #
 # desktop = NotificationTransport.desktop()
 # meal = Meal.get_object(os.environ["object_id"])
@@ -17,3 +19,4 @@ sys.path.append('./')
 #
 # Message.simple_message(transport=desktop, extra_data={'title': f'Message :{msg}'})
 
+profile = Profile.get()

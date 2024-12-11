@@ -1,6 +1,6 @@
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 sys.path.append('./')
@@ -25,6 +25,9 @@ profile = Profile.get()
 ZoneInfo(profile.timezone)
 print(ZoneInfo(profile.timezone))
 now = datetime.now(ZoneInfo(profile.timezone))
+now = now.replace(hour=7, minute=0, second=0, microsecond=0)
+now += timedelta(days=1)
+
 print(now.isoformat())
 print(now.date())
 # events =

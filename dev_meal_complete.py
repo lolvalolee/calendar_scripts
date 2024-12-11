@@ -3,6 +3,9 @@ import sys
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
+from app.calendar.constants import EVENT_TYPE_MEAL
+from app.calendar.models import Event
+
 sys.path.append('./')
 
 from app.notification.models import Message, NotificationTransport
@@ -26,8 +29,14 @@ ZoneInfo(profile.timezone)
 print(ZoneInfo(profile.timezone))
 now = datetime.now(ZoneInfo(profile.timezone))
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
-now += timedelta(days=1)
+start = now + timedelta(days=1)
+end = now + timedelta(days=2)
+
 
 print(now.isoformat())
 print(now.date())
-# events =
+
+# filter events
+# if not event: create meal
+events = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT_TYPE_MEAL)
+print(events)

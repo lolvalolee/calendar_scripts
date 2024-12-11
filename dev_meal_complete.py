@@ -24,5 +24,7 @@ from app.stockRoom.models import Meal, MealItem
 profile = Profile.get()
 ZoneInfo(profile.timezone)
 print(ZoneInfo(profile.timezone))
-now = datetime.now().astimezone(ZoneInfo(profile.timezone))
+now = datetime.now(ZoneInfo(profile.timezone))
 print(now.isoformat())
+print(now.date())
+# events =

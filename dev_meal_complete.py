@@ -38,5 +38,5 @@ print(now.date())
 
 # filter events
 # if not event: create meal
-events = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT_TYPE_MEAL)
+events, count = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT_TYPE_MEAL)
 print(events)

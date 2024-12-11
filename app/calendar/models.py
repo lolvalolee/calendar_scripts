@@ -14,6 +14,7 @@ class Event(CRUDModel):
     title: dict
     sub_tasks: list
     regular_event: int
+    event_type: str
 
     @property
     def duration(self):

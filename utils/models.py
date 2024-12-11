@@ -2,6 +2,8 @@ import datetime
 from dataclasses import dataclass, fields
 from json import JSONDecodeError
 
+import dateutil.parser
+
 from constants import BASE_URL
 from utils.misc import send_request
 
@@ -61,8 +63,7 @@ class BaseModel:
                 value = getattr(self, field.name)
                 if not value:
                     continue
-                setattr(self, field.name, datetime.datetime.strptime(
-                    value, '%Y-%m-%dT%H:%M:%S.%f%z').astimezone())
+                setattr(self, field.name, dateutil.parser.isoparse(value))
 
     @classmethod
     def search(cls, search):

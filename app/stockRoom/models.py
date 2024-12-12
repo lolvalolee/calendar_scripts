@@ -35,10 +35,10 @@ class Stock(CRUDModel):
         return  send_request('post', self.combine_url(self.url + f'{self.id}/plane/'), data=data)
 
 
-    def plane_to_cook(self, stock_room_item: str, measure_id:int, count:float, recipe_items: List[dict]):
+    def plane_to_cook(self, stock_room_item: dict[], measure_id:int, count:float, recipe_items: List[dict]):
         data = {'stock': self.id,
                 'measure': measure_id,
-                'stock_room_item': {'name': stock_room_item},
+                'stock_room_item': stock_room_item,
                 'count': count,
                 'recipe_items': recipe_items}
         print('data to send: ', data)

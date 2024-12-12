@@ -43,6 +43,8 @@ if not events:
 
     for item in recipe.recipe_items:
         _recipe_item = item
-        _recipe_item['stock_room_item'] = item['stock_room_item']['name']
+        _recipe_item['stock_room_item'] = {'name': item['stock_room_item']['name']}
+        recipe_items.append(_recipe_item)
+        
     print('recipe items:', recipe_items)
-    stock.plane_to_cook({'name': 'хлеб из хлеба'}, gm.id, 450, recipe_items)
+    stock.plane_to_cook({'name': {'value': 'хлеб из хлеба'}}, gm.id, 450, recipe_items)

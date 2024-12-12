@@ -32,9 +32,17 @@ class Stock(CRUDModel):
         data = {'stock_room_item': stock_room_item_id,
                 'measure': measure_id,
                 'count': count}
-        r =  send_request('post', self.combine_url(self.url + f'{self.id}/plane/'), data=data)
-        print(r.json())
+        return  send_request('post', self.combine_url(self.url + f'{self.id}/plane/'), data=data)
 
+
+    def plane_to_cook(self, stock_room_item: str, measure_id:int, count:float, recipe_items: List[dict]):
+        data = {'stock': self.id,
+                'measure': measure_id,
+                'stock_room_item': {'name': stock_room_item},
+                'count': count,
+                'recipe_items': recipe_items}
+        r =  send_request('post', self.combine_url(self.url + f'{self.id}/plane-to-cook/'), data=data)
+        print(r)
 
 
 @dataclass

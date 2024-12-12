@@ -10,7 +10,7 @@ sys.path.append('./')
 
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
-from app.stockRoom.models import Meal, MealItem, MealSchedule, Measure, Stock, Recipe
+from app.stockRoom.models import Meal, MealItem, MealSchedule, Measure, Stock, Recipe, StockItem
 
 #
 # desktop = NotificationTransport.desktop()
@@ -25,28 +25,24 @@ from app.stockRoom.models import Meal, MealItem, MealSchedule, Measure, Stock, R
 # Message.simple_message(transport=desktop, extra_data={'title': f'Message :{msg}'})
 
 profile = Profile.get()
-ZoneInfo(profile.timezone)
-print(ZoneInfo(profile.timezone))
+
 now = datetime.now(ZoneInfo(profile.timezone))
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
 start = now + timedelta(days=1)
 end = now + timedelta(days=2)
-
-
-print(now.isoformat())
-print(now.date())
 
 # filter events
 # if not event: create meal
 events, count = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT_TYPE_MEAL)
 if not events:
     meal_schedule = MealSchedule.get_object(title__value='обед')
-    print('meal schedule', meal_schedule)
     gm = Measure.get_object(name='Грамм')
-    print('measure', gm)
     stock = Stock.get_object(name='Private and isolated')
-    print('stock', stock)
     recipe = Recipe.get_object(name='хлеб из хлеба')
-    print('recipe', recipe)
+    recipe_items = []
 
-print(events)
+    for item in recipe.recipe_items:
+        _recipe_item = item
+        _recipe_item['stock_room_item'] = item.stock_room_item['name']
+    print('recipe items:', recipe_items)
+    stock.plane_to_cook('хлеб из хлеба', gm.id, 450, recipe_items)

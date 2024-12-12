@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import time
 from typing import Optional, List
 
 from app.calendar.models import Event
@@ -81,3 +82,12 @@ class Meal(CRUDModel):
     event: Event
     completed: bool
     meal_items: List[MealItem]
+
+
+@dataclass
+class MealSchedule(CRUDModel):
+    url = '/api/meal-schedule/'
+
+    title: dict
+    start: time
+    end: time

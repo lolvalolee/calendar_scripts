@@ -10,7 +10,7 @@ sys.path.append('./')
 
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
-from app.stockRoom.models import Meal, MealItem
+from app.stockRoom.models import Meal, MealItem, MealSchedule
 
 #
 # desktop = NotificationTransport.desktop()
@@ -39,4 +39,8 @@ print(now.date())
 # filter events
 # if not event: create meal
 events, count = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT_TYPE_MEAL)
+if  not events:
+    meal_schedule, count = MealSchedule.get_objects(title__value='обед')
+    meal_schedule = meal_schedule[0]
+
 print(events)

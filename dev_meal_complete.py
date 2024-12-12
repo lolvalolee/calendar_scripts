@@ -42,8 +42,7 @@ events, count = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT
 if not events:
     meal_schedule = MealSchedule.get_object(title__value='обед')
     print('meal schedule', meal_schedule)
-    gm, _ = Measure.get_object(name='Грамм')
-    gm = gm[0]
+    gm = Measure.get_object(name='Грамм')
     print('measure', gm)
     stock = Stock.get_object(name='Private and isolated')
     print('stock', stock)

@@ -42,5 +42,6 @@ events, count = Event.get_objects(start__gte=start.isoformat(), event_type=EVENT
 if  not events:
     meal_schedule, count = MealSchedule.get_objects(title__value='обед')
     meal_schedule = meal_schedule[0]
+    print('meal schedule', meal_schedule)
 
 print(events)

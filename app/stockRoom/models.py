@@ -44,6 +44,7 @@ class Stock(CRUDModel):
         print('data to send: ', data)
         r =  send_request('post', self.combine_url(self.url + f'{self.id}/plane-to-cook/'), data=data)
         print(r)
+        print(r.json())
 
 
 @dataclass

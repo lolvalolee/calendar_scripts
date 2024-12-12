@@ -32,7 +32,11 @@ class BaseModel:
         return send_request('get', url, data=kwargs).json()
 
     @classmethod
-    def get_object(cls, pk):
+    def get_object(cls, pk=None, **kwargs):
+        if not pk and kwargs:
+            obj, _ = cls.get_objects(**kwargs)
+            return obj[0]
+
         data = cls.retrieve(cls.combine_url(cls.url) + f'{pk}/')
         _data = {'id': data.get('id')}
         return cls(**data)

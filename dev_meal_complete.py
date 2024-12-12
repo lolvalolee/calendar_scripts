@@ -47,5 +47,6 @@ if not events:
     stock = Stock.get_object(name='Private and isolated')
     print('stock', stock)
     recipe = Recipe.get_object(name='хлеб из хлеба')
+    print('recipe', recipe)
 
 print(events)

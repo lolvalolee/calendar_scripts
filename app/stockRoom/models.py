@@ -41,6 +41,7 @@ class Stock(CRUDModel):
 class StockItem(CRUDModel):
     url = '/api/stock-room/'
     name: dict
+    keys: List[str]
 
 
 @dataclass
@@ -91,3 +92,27 @@ class MealSchedule(CRUDModel):
     title: dict
     start: time
     end: time
+
+
+@dataclass
+class RecipeItem(CRUDModel):
+    stock_room_item: StockItem
+    measure: int
+    count: float
+    recipe: int
+    rate: bool
+
+
+@dataclass
+class Recipe(CRUDModel):
+    url = '/api/recipe/'
+
+    description: str
+    public: bool
+    known_by: list
+    known: bool
+    stock_room_item: StockItem
+    measure: int
+    count: float
+    recipe_items: List[dict]
+

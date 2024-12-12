@@ -10,7 +10,7 @@ sys.path.append('./')
 
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
-from app.stockRoom.models import Meal, MealItem, MealSchedule, Measure, Stock
+from app.stockRoom.models import Meal, MealItem, MealSchedule, Measure, Stock, Recipe
 
 #
 # desktop = NotificationTransport.desktop()
@@ -46,5 +46,6 @@ if not events:
     print('measure', gm)
     stock = Stock.get_object(name='Private and isolated')
     print('stock', stock)
+    recipe = Recipe.get_object(name='хлеб из хлеба')
 
 print(events)

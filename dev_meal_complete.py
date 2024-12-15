@@ -1,6 +1,6 @@
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from zoneinfo import ZoneInfo
 
 from app.calendar.constants import EVENT_TYPE_MEAL
@@ -50,8 +50,8 @@ if not events:
     data = {
         'meal_schedule': meal_schedule.id,
         'title': {'value': meal_schedule.title['value']},
-        'start': datetime.combine(start.date(), meal_schedule.start, tz),
-        'end': datetime.combine(start.date(), meal_schedule.end, tz),
+        'start': datetime.combine(start.date(), time(meal_schedule.start.split(':')), tz),
+        'end': datetime.combine(start.date(), time(meal_schedule.end.split(':')), tz),
         'meal_items': [
             dict(stock=stock.id, **item) for item in recipe_items
         ]

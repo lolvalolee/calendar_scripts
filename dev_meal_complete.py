@@ -50,8 +50,8 @@ if not events:
     data = {
         'meal_schedule': meal_schedule.id,
         'title': {'value': meal_schedule.title['value']},
-        'start': datetime.combine(start.date(), time(*meal_schedule.start.split(':')), tz),
-        'end': datetime.combine(start.date(), time(*meal_schedule.end.split(':')), tz),
+        'start': datetime.combine(start.date(), time(*map(int, meal_schedule.start.split(':'))), tz),
+        'end': datetime.combine(start.date(), time(*map(int, meal_schedule.end.split(':'))), tz),
         'meal_items': [
             dict(stock=stock.id, **item) for item in recipe_items
         ]

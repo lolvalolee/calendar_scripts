@@ -25,8 +25,8 @@ from app.stockRoom.models import Meal, MealItem, MealSchedule, Measure, Stock, R
 # Message.simple_message(transport=desktop, extra_data={'title': f'Message :{msg}'})
 
 profile = Profile.get()
-
-now = datetime.now(ZoneInfo(profile.timezone))
+tz = ZoneInfo(profile.timezone)
+now = datetime.now(tz)
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
 start = now + timedelta(days=1)
 end = now + timedelta(days=2)
@@ -45,6 +45,28 @@ if not events:
         _recipe_item = item
         _recipe_item['stock_room_item'] = {'name': item['stock_room_item']['name']}
         recipe_items.append(_recipe_item)
-        
-    print('recipe items:', recipe_items)
+
     stock.plane_to_cook({'name': {'value': 'хлеб из хлеба'}}, gm.id, 450, recipe_items)
+    data = {
+        'meal_schedule': meal_schedule.id,
+        'title': {'value': meal_schedule.title['value']},
+        'start': datetime.combine(start.date(), meal_schedule.start, tz),
+        'end': datetime.combine(start.date(), meal_schedule.end, tz),
+        'meal_items': [
+            dict(stock=stock.id, **item) for item in recipe_items
+        ]
+    }
+    Meal.create(**data)
+
+
+
+# {
+#     "action":"manage","action_type":"meal",
+#  "data":{"meal_schedule":4,
+#          "title":{"value":"обед"},
+#          "start":"2024-12-14T12:00:00.414Z",
+#          "end":"2024-12-14T12:20:00.414Z",
+#          "meal_items":[{"stock":1,"stock_room_item":{"name":{"keys":[],"value":"хлеб из хлеба"}},
+#                         "measure":1,"count":"100","recipe_items":[]}]},
+#  "requestCode":"dm16y3wxjt5"
+# }

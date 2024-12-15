@@ -87,6 +87,8 @@ class CRUDModel(BaseModel):
 
         try:
             r = send_request('post', cls.combine_url(cls.url), data=kwargs)
+            print(cls.combine_url(cls.url))
+            print(r.json())
             return r.json()
         except JSONDecodeError:
             print(r)

@@ -47,13 +47,16 @@ if not events:
         recipe_items.append(_recipe_item)
 
     stock.plane_to_cook({'name': {'value': 'хлеб из хлеба'}}, gm.id, 450, recipe_items)
+    print([
+            dict(stock=stock.id,  **item) for item in recipe_items
+        ])
     data = {
         'meal_schedule': meal_schedule.id,
         'title': {'value': meal_schedule.title['value']},
         'start': datetime.combine(start.date(), time(*map(int, meal_schedule.start.split(':'))), tz),
         'end': datetime.combine(start.date(), time(*map(int, meal_schedule.end.split(':'))), tz),
         'meal_items': [
-            dict(stock=stock.id, **item) for item in recipe_items
+            dict(stock=stock.id,  **item) for item in recipe_items
         ]
     }
     Meal.create(**data)

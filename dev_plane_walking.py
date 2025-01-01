@@ -13,11 +13,12 @@ tz = profile.user_timezone
 now = profile.now
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
 start = now + timedelta(days=1)
-end = now + timedelta(days=2)
+start = start.replace(hour=10)
+end = start.replace(hour=10, minute=45)
 
 # filter events
 # if not event: create meal
 regular_event = RegularEvent.get_object(name='Сон')
-Event.create(regular_event=regular_event.id)
+Event.create(regular_event=regular_event.id, start=start, end=end, title={'value': 'Сон'})
 
 

@@ -17,6 +17,6 @@ end = now + timedelta(days=2)
 
 # filter events
 # if not event: create meal
-events, count = RegularEvent.get_object(name='Сон')
+regular_event = RegularEvent.get_object(name='Сон')
 
 

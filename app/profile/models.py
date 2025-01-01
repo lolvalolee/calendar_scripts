@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from utils.models import BaseModel, CRUDModel
@@ -26,3 +27,7 @@ class Profile(CRUDModel):
     @property
     def user_timezone(self):
         return ZoneInfo(self.timezone)
+
+    @property
+    def now(self):
+        return datetime.now(self.user_timezone)

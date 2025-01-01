@@ -12,13 +12,15 @@ profile = Profile.get()
 tz = profile.user_timezone
 now = profile.now
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
-start = now + timedelta(days=1)
-start = start.replace(hour=10)
-end = start.replace(hour=10, minute=45)
+
+walking = 'Ходьба на беговой'
+walking_start = now + timedelta(days=1)
+walking_start = walking_start.replace(hour=10)
+walking_end = walking_start.replace(hour=10, minute=45)
 
 # filter events
 # if not event: create meal
-regular_event = RegularEvent.get_object(name='Сон')
-Event.create(regular_event=regular_event.id, start=start, end=end, title={'value': 'Сон'})
+regular_event = RegularEvent.get_object(name=walking)
+Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
 
 

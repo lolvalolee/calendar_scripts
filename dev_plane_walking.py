@@ -13,7 +13,7 @@ tz = profile.user_timezone
 now = profile.now
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
 
-walking = 'Ходьба на беговой'
+walking = 'Ходьба не беговой'
 walking_start = now + timedelta(days=1)
 walking_start = walking_start.replace(hour=10)
 walking_end = walking_start.replace(hour=10, minute=45)

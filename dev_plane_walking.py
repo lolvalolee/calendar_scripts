@@ -18,5 +18,6 @@ end = now + timedelta(days=2)
 # filter events
 # if not event: create meal
 regular_event = RegularEvent.get_object(name='Сон')
+Event.create(regular_event=regular_event.id)
 
 

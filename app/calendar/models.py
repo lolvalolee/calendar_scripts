@@ -44,7 +44,6 @@ class RegularEvent(CRUDModel):
     name: dict
     weekdays: list
     public: bool
-    delayed_start_at: bool
     started_at: datetime
     max_duration: int
     duration_required: bool

@@ -14,12 +14,16 @@ tz = profile.user_timezone
 now = profile.now
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
 
-walking = 'Ходьба не беговой'
+walking = 'Ходьба на беговой'
 walking_start = now + timedelta(days=1)
 walking_start = walking_start.replace(hour=10)
 walking_end = walking_start.replace(hour=10, minute=45)
 
-regular_event = RegularEvent.get_object(name=walking)
-Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
+for item in RegularEvent.get_objects():
+    print(item)
 
-Message.simple_message(transport=NotificationTransport.desktop(), extra_data={'title': f'{walking} запланировано на завтра с 10:00 до 10:45'})
+# regular_event = RegularEvent.get_object(name=walking)
+#
+# Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
+#
+# Message.simple_message(transport=NotificationTransport.desktop(), extra_data={'title': f'{walking} запланировано на завтра с 10:00 до 10:45'})

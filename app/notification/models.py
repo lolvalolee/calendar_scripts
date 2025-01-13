@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from app.notification.constants import NOTIFICATION_MESSAGE
+from app.notification.constants import NOTIFICATION_MESSAGE, NOTIFICATION_QUESTION
 from utils.models import BaseModel, CRUDModel
 
 
@@ -34,7 +34,9 @@ class Message(CRUDModel):
     @classmethod
     def simple_message(cls, **kwargs):
         kwargs['notification_type'] = NOTIFICATION_MESSAGE
-        response = cls.create(**kwargs)
-        print('response!!!')
-        print(response)
-        return response
+        return cls.create(**kwargs)
+
+    @classmethod
+    def question(cls, **kwargs):
+        kwargs['notification_type'] = NOTIFICATION_QUESTION
+        return cls.create(**kwargs)

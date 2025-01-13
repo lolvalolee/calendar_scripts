@@ -23,4 +23,4 @@ extra_data = {
     ]
 }
 
-Message.simple_message(transport=NotificationTransport.desktop(), extra_data={'title': f'запланировано на завтра с 10:00 до 10:45'})
+Message.question(transport=NotificationTransport.desktop(), extra_data=extra_data)

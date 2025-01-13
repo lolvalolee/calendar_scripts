@@ -4,7 +4,7 @@ from app.notification.models import Message, NotificationTransport
 sys.path.append('./')
 
 extra_data = {
-    'title': 'Начать событие сон',
+    'title': 'Начать событие сон?',
     'questions': [
         {
             'title': 'Нет',

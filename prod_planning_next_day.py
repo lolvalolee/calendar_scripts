@@ -20,11 +20,17 @@ walking_start = now + timedelta(days=1)
 walking_start = walking_start.replace(hour=10)
 walking_end = walking_start.replace(hour=10, minute=45)
 
+evening_walking_start = walking_start + timedelta(hours=13)
+evening_walking_end = walking_end + timedelta(hours=13)
+
 regular_event = RegularEvent.get_object(name=walking)
 
 Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
+Event.create(regular_event=regular_event.id, start=evening_walking_start, end=evening_walking_end,
+             title={'value': walking})
 
-Message.simple_message(transport=NotificationTransport.desktop(), extra_data={'title': f'{walking} запланировано на завтра с 10:00 до 10:45'})
+Message.simple_message(transport=NotificationTransport.desktop(),
+                       extra_data={'title': f'{walking} запланировано на завтра с 10:00 до 10:45'})
 
 meal_stock_item = 'гречневая каша'
 

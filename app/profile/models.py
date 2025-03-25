@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from utils.models import BaseModel, CRUDModel
+from utils.models import CRUDModel
 
 
 @dataclass
@@ -31,3 +31,19 @@ class Profile(CRUDModel):
     @property
     def now(self):
         return datetime.now(self.user_timezone)
+
+
+@dataclass
+class Param(CRUDModel):
+    url = '/api/param/'
+
+    name: dict
+
+
+@dataclass
+class ParamRecord(CRUDModel):
+    url = '/api/param-record/'
+
+    record: float
+    created: datetime
+    comment: str

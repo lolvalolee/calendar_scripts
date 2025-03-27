@@ -16,6 +16,8 @@ now = profile.now
 now = now.replace(hour=7, minute=0, second=0, microsecond=0)
 
 walking = 'Ходьба на беговой'
+morning_routine = 'Душ'
+
 walking_start = now + timedelta(days=1)
 walking_start = walking_start.replace(hour=10)
 walking_end = walking_start.replace(hour=10, minute=45)
@@ -25,7 +27,13 @@ evening_walking_end = walking_end + timedelta(hours=13)
 
 regular_event = RegularEvent.get_object(name=walking)
 
+morning_routine_regular = RegularEvent.get_object(name=morning_routine)
+
 Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
+
+Event.create(regular_event=regular_event.id, start=walking_start + timedelta(minutes=45),
+             end=walking_end + timedelta(minutes=45), title={'value': morning_routine_regular})
+
 Event.create(regular_event=regular_event.id, start=evening_walking_start, end=evening_walking_end,
              title={'value': walking})
 

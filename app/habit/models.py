@@ -43,3 +43,15 @@ class UserHabit(CRUDModel):
     count_skipped: int = 0
     count_failed: int = 0
     count_left: int = 0
+
+    def results(self, **kwargs):
+        return UserHabitRecord.get_objects(url=f'/api/user-habit{self.id}/records/', **kwargs)
+
+
+@dataclass
+class UserHabitRecord(CRUDModel):
+    url = '/api/user-habit-record/'
+
+    user_habit: int
+    record_date: datetime
+    result: str

@@ -42,9 +42,9 @@ class BaseModel:
         return cls(**data)
 
     @classmethod
-    def get_objects(cls, **kwargs):
+    def get_objects(cls, url=None,**kwargs):
         objects = []
-        url = cls.combine_url(cls.url)
+        url = cls.combine_url(url or cls.url)
         while True:
             data = cls.retrieve(url, **kwargs)
             total_count = data.get('count')

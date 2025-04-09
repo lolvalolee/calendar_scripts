@@ -13,10 +13,28 @@ from app.profile.models import Profile
 profile = Profile.get()
 tz = profile.user_timezone
 now = profile.now
-now = now.replace(hour=7, minute=0, second=0, microsecond=0)
+start = now.replace(hour=8, minute=0, second=0, microsecond=0)
+
+routine = 'Личная рутина'
+brushing_teeth = 'Чистить зубы'
+
+routine__regular = RegularEvent.get_object(name=routine)
+Event.create(regular_event=routine__regular.id, start=start, end=start + timedelta(minutes=30),
+             title={'value': routine}, sub_tasks=[{'title': {'value': brushing_teeth}}])
 
 walking = 'Ходьба на беговой'
+walking__regular = RegularEvent.get_object(name=walking)
+Event.create(regular_event=routine__regular.id, start=start + timedelta(minutes=30), end=start + timedelta(hours=1),
+             title={'value': walking})
+
 morning_routine = 'Душ'
+walking__regular = RegularEvent.get_object(name=walking)
+breakfast = 'Завтрак'
+
+Event.create(regular_event=routine__regular.id, start=start, end=start + timedelta(minutes=30),
+             title={'value': routine})
+
+Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
 
 walking_start = now + timedelta(days=1)
 walking_start = walking_start.replace(hour=10)
@@ -29,16 +47,16 @@ regular_event = RegularEvent.get_object(name=walking)
 
 morning_routine_regular = RegularEvent.get_object(name=morning_routine)
 
+# walking
 Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
-
+# eating
 Event.create(regular_event=regular_event.id, start=walking_start + timedelta(minutes=45),
              end=walking_end + timedelta(minutes=45), title={'value': morning_routine_regular})
-
+# bath
 Event.create(regular_event=regular_event.id, start=evening_walking_start, end=evening_walking_end,
              title={'value': walking})
 
-Message.simple_message(transport=NotificationTransport.desktop(),
-                       extra_data={'title': f'{walking} запланировано на завтра с 10:00 до 10:45'})
+
 
 meal_stock_item = 'гречневая каша'
 

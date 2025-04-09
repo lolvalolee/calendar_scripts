@@ -45,7 +45,7 @@ class UserHabit(CRUDModel):
     last_failed_record = None
 
     def results(self, **kwargs):
-        return UserHabitRecord.get_objects(url=f'/api/user-habit{self.id}/records/', **kwargs)
+        return UserHabitRecord.get_objects(url=f'/api/user-habit/{self.id}/records/', **kwargs)
 
 
 @dataclass

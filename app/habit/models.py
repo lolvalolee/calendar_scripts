@@ -31,7 +31,7 @@ class UserHabit(CRUDModel):
     default_choice: str
     notification_time: time
     is_system: bool
-    records: list
+    records = None
     last_completed_record: dict
     last_skipped_record: dict
     last_failed_record: dict
@@ -44,7 +44,6 @@ class UserHabit(CRUDModel):
     count_failed: int = 0
     count_left: int = 0
     record_date: datetime = 0
-    records = None
     last_completed_record = dict()
     last_skipped_record = dict()
 

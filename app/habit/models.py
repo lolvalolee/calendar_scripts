@@ -44,7 +44,7 @@ class UserHabit(CRUDModel):
     count_failed: int = 0
     count_left: int = 0
     record_date: datetime = 0
-    records = []
+    records = None
     last_completed_record = dict()
     last_skipped_record = dict()
 

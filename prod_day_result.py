@@ -1,7 +1,11 @@
+from datetime import datetime
+
 from app.habit.models import UserHabit
+
+now = datetime.now()
 # '❌'
 
 habit, _ = UserHabit.get_objects()
-print(habit)
 for item in habit:
-    print(item.results())
+    results, _ = item.results()
+    print(results)

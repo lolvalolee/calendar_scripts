@@ -31,7 +31,6 @@ class UserHabit(CRUDModel):
     notification_time: time
     is_system: bool
     records = None
-    last_failed_record: dict
     created: datetime
     changed: datetime
 
@@ -43,6 +42,7 @@ class UserHabit(CRUDModel):
     record_date: datetime = 0
     last_completed_record = None
     last_skipped_record = None
+    last_failed_record = None
 
     def results(self, **kwargs):
         return UserHabitRecord.get_objects(url=f'/api/user-habit{self.id}/records/', **kwargs)

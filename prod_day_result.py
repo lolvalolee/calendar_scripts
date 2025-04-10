@@ -8,9 +8,11 @@ now = datetime.now()
 
 events, _ = Event.get_objects('/api/event/current/')
 event = events[0]
-print(event.start)
+_now = datetime.now()
+diff = (_now - event.start).total_seconds()
 
-habit, _ = UserHabit.get_objects()
+habit, _ = UserHabit.get_objects(record_date__lte=event.start)
+
 for item in habit:
     results, _ = item.results()
     print(results)

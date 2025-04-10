@@ -6,8 +6,10 @@ from app.calendar.models import Event
 now = datetime.now()
 # '❌'
 
-event = Event.get_objects('/api/event/current/')
-print(event)
+events, _ = Event.get_objects('/api/event/current/')
+event = events[0]
+print(event.start)
+
 habit, _ = UserHabit.get_objects()
 for item in habit:
     results, _ = item.results()

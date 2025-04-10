@@ -13,7 +13,7 @@ tz = ZoneInfo(profile.timezone)
 now = datetime.now(tz)
 events, _ = Event.get_objects('/api/event/current/')
 event = events[0]
-_now = datetime.now()
+_now = datetime.now(tz)
 diff = (_now - event.start).total_seconds()
 
 habit, _ = UserHabit.get_objects(record_date__lte=event.start)

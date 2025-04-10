@@ -1,6 +1,7 @@
 import datetime
 from dataclasses import dataclass, fields
 from json import JSONDecodeError
+from zoneinfo import ZoneInfo
 
 import dateutil.parser
 
@@ -67,7 +68,7 @@ class BaseModel:
                 value = getattr(self, field.name)
                 if not value:
                     continue
-                setattr(self, field.name, dateutil.parser.isoparse(value))
+                setattr(self, field.name, dateutil.parser.isoparse(value).astimezone(ZoneInfo('UTC')))
 
     @classmethod
     def search(cls, search):

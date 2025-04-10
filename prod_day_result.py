@@ -10,11 +10,10 @@ now = datetime.now()
 
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
-now = datetime.now(tz)
 events, _ = Event.get_objects('/api/event/current/')
 event = events[0]
 _now = datetime.now(tz)
-diff = (_now - event.start).total_seconds()
+diff = int((_now - event.start).total_seconds())
 print(diff)
 
 habit, _ = UserHabit.get_objects(record_date__lte=event.start)
@@ -22,3 +21,6 @@ habit, _ = UserHabit.get_objects(record_date__lte=event.start)
 for item in habit:
     results, _ = item.results()
     print(results)
+    if len(results) < 3:
+        exit(0)
+

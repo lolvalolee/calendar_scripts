@@ -15,6 +15,7 @@ class Profile(CRUDModel):
     timezone: str
     telegram_nickname: str
     telegram_status: str
+    image: str
 
     _instance = None
 

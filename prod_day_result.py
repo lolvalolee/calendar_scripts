@@ -23,4 +23,9 @@ for item in habit:
     print(results)
     if len(results) < 3:
         exit(0)
-
+    for i, habit_result in enumerate(results):
+        try:
+            duration = (results[i+2].record_date - habit_result.record_date).total_seconds()
+            print('duration:', duration)
+        except IndexError:
+            exit(0)

@@ -12,6 +12,8 @@ profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
 events, _ = Event.get_objects('/api/event/current/')
 event = events[0]
+event_chill = 'Отдых'
+event_work = 'Calendar'
 _now = datetime.now(tz)
 diff = int((_now - event.start).total_seconds())
 print(diff)
@@ -26,6 +28,12 @@ for item in habit:
     for i, habit_result in enumerate(results):
         try:
             duration = (results[i+2].record_date - habit_result.record_date).total_seconds()
-            print('duration:', duration)
+            if duration > (60 * 5):
+                print('sevent should be stopped')
+                _calendar, _ = Event.get_objects(name=event_work)[0]
+                _calendar._call_action()
+                # _chill, _ = Event.get_objects(name=event_chill)[0]
+                # _calendar.end_now()
+
         except IndexError:
             exit(0)

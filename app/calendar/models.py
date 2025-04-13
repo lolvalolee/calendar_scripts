@@ -20,6 +20,9 @@ class Event(CRUDModel):
     def duration(self):
         return self.end - self.start if self.end else (max(datetime.utcnow().astimezone(), self.start) - self.start)
 
+    def end_now(self):
+
+
     @property
     def duration_seconds(self):
         return self.duration.total_seconds()

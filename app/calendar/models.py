@@ -21,7 +21,7 @@ class Event(CRUDModel):
         return self.end - self.start if self.end else (max(datetime.utcnow().astimezone(), self.start) - self.start)
 
     def end_now(self):
-
+        self._call_action('')
 
     @property
     def duration_seconds(self):

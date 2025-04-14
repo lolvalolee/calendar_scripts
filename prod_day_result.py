@@ -17,7 +17,7 @@ current_test_event = test_event.current()
 
 event = events[0]
 regular_event_chill_title = 'Отдых'
-regular_chill_title = RegularEvent.get_object(name=regular_event_chill_title)
+regular_event_chill = RegularEvent.get_object(name=regular_event_chill_title)
 
 regular_event_work_title = 'Calendar'
 regular_event_work = RegularEvent.get_object(name=regular_event_work_title)
@@ -41,7 +41,7 @@ for item in habit:
             if duration > 1:
                 print('sevent should be stopped')
                 regular_event_work.end_now()
-                regular_chill.start_now()
+                regular_event_chill.start_now()
                 exit(0)
 
         except IndexError:

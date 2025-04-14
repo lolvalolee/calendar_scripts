@@ -28,7 +28,7 @@ print(diff)
 habit, _ = UserHabit.get_objects()
 
 for item in habit:
-    results, _ = item.results(record_date__lte=event.start, order_by='record_date')
+    results, _ = item.results(record_date__gte=event.start, order_by='record_date')
     print(results)
     if len(results) < 3:
         exit(0)

@@ -59,4 +59,8 @@ class RegularEvent(CRUDModel):
         return PlannedEvent.get_objects(regular_event=self.id, start_gte=start_gte)
 
     def current(self):
-        return Event.get_objects(url=f'/api/regular-event/{self.id}/current/')
+        obj, _ = Event.get_objects(url=f'/api/regular-event/{self.id}/current/')
+        try:
+            return obj[0]
+        except IndexError:
+            return None

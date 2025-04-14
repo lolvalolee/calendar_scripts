@@ -21,7 +21,7 @@ class Event(CRUDModel):
         return self.end - self.start if self.end else (max(datetime.utcnow().astimezone(), self.start) - self.start)
 
     def end_now(self):
-        self._call_action('')
+        self._call_action('POST', 'end-now')
 
     @property
     def duration_seconds(self):
@@ -64,3 +64,6 @@ class RegularEvent(CRUDModel):
             return obj[0]
         except IndexError:
             return None
+
+    def end_now(self):
+        self._call_action('POST', 'end-now')

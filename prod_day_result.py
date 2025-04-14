@@ -14,11 +14,13 @@ events, _ = Event.get_objects('/api/event/current/')
 
 test_event = RegularEvent.get_object(name='new regular event')
 current_test_event = test_event.current()
-print(current_test_event)
-exit(0)
+
 event = events[0]
-event_chill = 'Отдых'
-event_work = 'Calendar'
+regular_chill = 'Отдых'
+regular_event_work_title = 'Calendar'
+regular_event_work = RegularEvent.get_object(name=regular_event_work_title)
+
+
 _now = datetime.now(tz)
 diff = int((_now - event.start).total_seconds())
 print(diff)
@@ -35,10 +37,10 @@ for item in habit:
             duration = (results[i+2].record_date - habit_result.record_date).total_seconds()
             if duration > (60 * 5):
                 print('sevent should be stopped')
-                _calendar, _ = Event.get_objects(name=event_work)[0]
-                _calendar._call_action()
+                regular_event_work.end_now()
                 # _chill, _ = Event.get_objects(name=event_chill)[0]
                 # _calendar.end_now()
+                exit(0)
 
         except IndexError:
             exit(0)

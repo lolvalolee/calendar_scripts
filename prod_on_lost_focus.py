@@ -1,6 +1,8 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from utils.logger import logger
+
 from app.notification.models import NotificationTransport, Message
 
 from app.habit.models import UserHabit
@@ -20,6 +22,7 @@ regular_event_work = RegularEvent.get_object(name=regular_event_work_title)
 event = regular_event_work.current()
 
 if not event:
+    logger.warning('Calendar is not started')
     exit(0)
 
 regular_event_chill_title = 'Отдых'
@@ -29,6 +32,7 @@ _now = datetime.now(tz)
 diff = int((_now - event.start).total_seconds())
 
 results, _ = habit.results(record_date__gte=event.start, order_by='record_date')
+logger.warning(f'Habit results: {len(results)}')
 
 for i, habit_result in enumerate(results):
     try:

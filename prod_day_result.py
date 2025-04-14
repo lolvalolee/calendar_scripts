@@ -35,6 +35,7 @@ for item in habit:
     for i, habit_result in enumerate(results):
         try:
             duration = (results[i+2].record_date - habit_result.record_date).total_seconds()
+            print('duratrion', duration)
             if duration > (60 * 5):
                 print('sevent should be stopped')
                 regular_event_work.end_now()

@@ -41,8 +41,7 @@ for item in habit:
             if duration > 1:
                 print('sevent should be stopped')
                 regular_event_work.end_now()
-                # _chill, _ = Event.get_objects(name=event_chill)[0]
-                # _calendar.end_now()
+                regular_chill.start_now()
                 exit(0)
 
         except IndexError:

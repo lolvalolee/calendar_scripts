@@ -72,7 +72,7 @@ class BaseModel:
 
     def _call_action(self, method_name='GET', action_name=None, url=None, data=None, **kwargs):
         print('calling url', self.combine_url(self.url) + f'{self.id}/{action_name}/')
-        return send_request(method_name.lower(), self.combine_url(self.url) + f'/{self.id}/{action_name}/',
+        return send_request(method_name.lower(), self.combine_url(self.url) + f'{self.id}/{action_name}/',
                             data=kwargs)
 
     @classmethod

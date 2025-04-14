@@ -1,6 +1,8 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from utils.logger import logger
+
 from app.habit.models import UserHabit
 from app.calendar.models import Event, RegularEvent
 from app.profile.models import Profile
@@ -25,21 +27,19 @@ regular_event_work = RegularEvent.get_object(name=regular_event_work_title)
 
 _now = datetime.now(tz)
 diff = int((_now - event.start).total_seconds())
-print(diff)
 
 habit, _ = UserHabit.get_objects()
+logger.info('HERE IS LOGGGG')
 
 for item in habit:
     results, _ = item.results(record_date__gte=event.start, order_by='record_date')
-    print(results)
     if len(results) < 3:
         exit(0)
     for i, habit_result in enumerate(results):
         try:
             duration = (results[i+2].record_date - habit_result.record_date).total_seconds()
-            print('duratrion', duration)
+
             if duration > 1:
-                print('sevent should be stopped')
                 regular_event_work.end_now()
                 regular_event_chill.start_now()
                 exit(0)

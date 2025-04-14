@@ -1,6 +1,7 @@
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
+from app.notification.models import NotificationTransport, Message
 from utils.logger import logger
 
 from app.habit.models import UserHabit
@@ -42,6 +43,10 @@ for item in habit:
             if duration > 1:
                 regular_event_work.end_now()
                 regular_event_chill.start_now()
+
+                r = Message.simple_message(transport=NotificationTransport.telegram(),
+                                           extra_data={'title': 'Начал отвлекаться. Отдохни немного.'})
+
                 exit(0)
 
         except IndexError:

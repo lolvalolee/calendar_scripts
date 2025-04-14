@@ -9,7 +9,6 @@ from app.calendar.models import Event, RegularEvent
 from app.profile.models import Profile
 
 now = datetime.now()
-# '❌'
 
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)

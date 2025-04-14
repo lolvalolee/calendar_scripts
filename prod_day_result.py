@@ -16,7 +16,9 @@ test_event = RegularEvent.get_object(name='new regular event')
 current_test_event = test_event.current()
 
 event = events[0]
-regular_chill = 'Отдых'
+regular_event_chill_title = 'Отдых'
+regular_chill_title = RegularEvent.get_object(name=regular_event_chill_title)
+
 regular_event_work_title = 'Calendar'
 regular_event_work = RegularEvent.get_object(name=regular_event_work_title)
 

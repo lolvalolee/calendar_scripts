@@ -66,4 +66,4 @@ class RegularEvent(CRUDModel):
             return None
 
     def end_now(self):
-        self._call_action('POST', 'end-now')
+        print(self._call_action('POST', 'end-now'))

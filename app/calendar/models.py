@@ -29,7 +29,7 @@ class Event(CRUDModel):
 
     @classmethod
     def today_events(cls, **kwargs):
-        cls.get_objects(range_type='today', **kwargs)
+        return cls.get_objects(range_type='today', **kwargs)
 
 
 @dataclass

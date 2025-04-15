@@ -24,8 +24,8 @@ result = 0
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
 
-now = datetime.now(tz)
-print(now)
+tomorrow = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
+today = tomorrow - timedelta(days=1)
 events, _ = Event.today_events()
 
 print('events')

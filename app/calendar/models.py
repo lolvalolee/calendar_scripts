@@ -31,6 +31,10 @@ class Event(CRUDModel):
     def today_events(cls, **kwargs):
         return cls.get_objects(range_type='today', **kwargs)
 
+    @classmethod
+    def yesterday_events(cls, **kwargs):
+        return cls.get_objects(range_type='yesterday', **kwargs)
+
 
 @dataclass
 class PlannedEvent(CRUDModel):

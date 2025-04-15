@@ -49,6 +49,8 @@ for event in events:
 
 total = sum(map(lambda _item: _item[1] - _item[0], intervals)) // 10
 print('total:', total)
+print('percent: ', total /  (60 * 60 * 24) * 100, '%')
+
 for i in intervals:
     print(i)
     print(i[0])

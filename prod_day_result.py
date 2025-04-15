@@ -29,12 +29,13 @@ today = tomorrow - timedelta(days=1)
 events, _ = Event.today_events()
 
 print('events')
-print(events)
+# print(events)
 intervals = interval()
 
-# for event in events:
-#     intervals = intervals | interval[max(start, item.start).timestamp(), min(
-#         end or datetime.max, item.end).timestamp()]
+for event in events:
+    print(events.start, events.end)
+    # intervals = intervals | interval[max(start, item.start).timestamp(), min(
+    #     end or datetime.max, item.end).timestamp()]
 
 
 #

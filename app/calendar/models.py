@@ -27,6 +27,10 @@ class Event(CRUDModel):
     def duration_seconds(self):
         return self.duration.total_seconds()
 
+    @classmethod
+    def today_events(cls, **kwargs):
+        cls.get_objects(range_type='today', **kwargs)
+
 
 @dataclass
 class PlannedEvent(CRUDModel):

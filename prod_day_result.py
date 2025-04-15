@@ -1,52 +1,113 @@
-from datetime import datetime
-from zoneinfo import ZoneInfo
+import sys
+from datetime import timedelta, datetime, time
 
-from app.notification.models import NotificationTransport, Message
-from utils.logger import logger
-
+from app.calendar.models import RegularEvent, Event
 from app.habit.models import UserHabit
-from app.calendar.models import Event, RegularEvent
+from app.stockRoom.models import MealSchedule, Measure, Stock, Recipe, Meal
+
+sys.path.append('./')
+
 from app.profile.models import Profile
 
-now = datetime.now()
+result = 0
 
-profile = Profile.get()
-tz = ZoneInfo(profile.timezone)
-events, _ = Event.get_objects('/api/event/current/')
+# no_sugar_today = UserHabit.get_object(name='Ел сладкое')
+# eothyrox = UserHabit.get_object(name='Eothyrox')
+# posture_app_complete = UserHabit.get_object(name='Posture up 40 минут')
+# woke_up_ontime = UserHabit.get_object(name='Встал вовремя')
+# went_sleep_ontime = UserHabit.get_object(name='Лег спать вовремя')
+# played_games = UserHabit.get_object(name='Задротил')
 
-test_event = RegularEvent.get_object(name='new regular event')
-current_test_event = test_event.current()
-
-event = events[0]
-regular_event_chill_title = 'Отдых'
-regular_event_chill = RegularEvent.get_object(name=regular_event_chill_title)
-
-regular_event_work_title = 'Calendar'
-regular_event_work = RegularEvent.get_object(name=regular_event_work_title)
-
-
-_now = datetime.now(tz)
-diff = int((_now - event.start).total_seconds())
-
-habit, _ = UserHabit.get_objects()
-logger.info('HERE IS LOGGGG')
-
-for item in habit:
-    results, _ = item.results(record_date__gte=event.start, order_by='record_date')
-    if len(results) < 3:
-        exit(0)
-    for i, habit_result in enumerate(results):
-        try:
-            duration = (results[i+2].record_date - habit_result.record_date).total_seconds()
-
-            if duration > 1:
-                regular_event_work.end_now()
-                regular_event_chill.start_now()
-
-                r = Message.simple_message(transport=NotificationTransport.telegram(),
-                                           extra_data={'title': 'Начал отвлекаться. Отдохни немного.'})
-
-                exit(0)
-
-        except IndexError:
-            exit(0)
+events = Event.today_events()
+print('events')
+print(events)
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# profile = Profile.get()
+# tz = profile.user_timezone
+# now = profile.now
+# start = now.replace(hour=8, minute=0, second=0, microsecond=0)
+#
+# routine = 'Личная рутина'
+# brushing_teeth = 'Чистить зубы'
+#
+# routine__regular = RegularEvent.get_object(name=routine)
+# Event.create(regular_event=routine__regular.id, start=start, end=start + timedelta(minutes=30),
+#              title={'value': routine}, sub_tasks=[{'title': {'value': brushing_teeth}}])
+#
+# walking = 'Ходьба на беговой'
+# walking__regular = RegularEvent.get_object(name=walking)
+# Event.create(regular_event=routine__regular.id, start=start + timedelta(minutes=30), end=start + timedelta(hours=1),
+#              title={'value': walking})
+#
+# morning_routine = 'Душ'
+# walking__regular = RegularEvent.get_object(name=walking)
+# breakfast = 'Завтрак'
+#
+# Event.create(regular_event=routine__regular.id, start=start, end=start + timedelta(minutes=30),
+#              title={'value': routine})
+#
+# Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
+#
+# walking_start = now + timedelta(days=1)
+# walking_start = walking_start.replace(hour=10)
+# walking_end = walking_start.replace(hour=10, minute=45)
+#
+# evening_walking_start = walking_start + timedelta(hours=13)
+# evening_walking_end = walking_end + timedelta(hours=13)
+#
+# regular_event = RegularEvent.get_object(name=walking)
+#
+# morning_routine_regular = RegularEvent.get_object(name=morning_routine)
+#
+# # walking
+# Event.create(regular_event=regular_event.id, start=walking_start, end=walking_end, title={'value': walking})
+# # eating
+# Event.create(regular_event=regular_event.id, start=walking_start + timedelta(minutes=45),
+#              end=walking_end + timedelta(minutes=45), title={'value': morning_routine_regular})
+# # bath
+# Event.create(regular_event=regular_event.id, start=evening_walking_start, end=evening_walking_end,
+#              title={'value': walking})
+#
+#
+#
+# meal_stock_item = 'гречневая каша'
+#
+# meal_schedule = MealSchedule.get_object(title__value='завтрак')
+# gm = Measure.get_object(name='Грамм')
+# stock = Stock.get_object(name='Дом')
+# recipe = Recipe.get_object(name=meal_stock_item)
+# recipe_items = []
+#
+# for item in recipe.recipe_items:
+#     _recipe_item = item
+#     _recipe_item['stock_room_item'] = {'name': item['stock_room_item']['name']}
+#     recipe_items.append(_recipe_item)
+#
+# stock.plane_to_cook({'name': {'value': meal_stock_item}}, gm.id, 90, recipe_items)
+#
+# data = {
+#     'meal_schedule': meal_schedule.id,
+#     'title': {'value': meal_schedule.title['value']},
+#     'start': datetime.combine(walking_start.date(), time(*map(int, meal_schedule.start.split(':'))), tz),
+#     'end': datetime.combine(walking_start.date(), time(*map(int, meal_schedule.end.split(':'))), tz),
+#     'meal_items': [
+#         dict(stock=stock.id, **item) for item in recipe_items
+#     ]
+# }
+# Meal.create(**data)

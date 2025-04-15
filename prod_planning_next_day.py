@@ -2,12 +2,40 @@ import sys
 from datetime import timedelta, datetime, time
 
 from app.calendar.models import RegularEvent, Event
-from app.notification.models import Message, NotificationTransport
+from app.habit.models import UserHabit
 from app.stockRoom.models import MealSchedule, Measure, Stock, Recipe, Meal
 
 sys.path.append('./')
 
 from app.profile.models import Profile
+
+result = 0
+
+no_sugar_today = UserHabit.get_object(name='Ел сладкое')
+eothyrox = UserHabit.get_object(name='Eothyrox')
+posture_app_complete = UserHabit.get_object(name='Posture up 40 минут')
+woke_up_ontime = UserHabit.get_object(name='Встал вовремя')
+went_sleep_ontime = UserHabit.get_object(name='Лег спать вовремя')
+played_games = UserHabit.get_object(name='Задротил')
+
+events = Event.today_events()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 profile = Profile.get()

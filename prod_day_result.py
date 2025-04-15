@@ -30,14 +30,14 @@ events, _ = Event.today_events()
 
 print('events')
 # print(events)
-intervals = interval()
+intervals = interval(events)
 
 for event in events:
     print(event.start, event.end)
     intervals = intervals | interval[max(tomorrow, event.start).timestamp(), min(
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
-for i in interval:
+for i in intervals:
     print(i)
     print(i[0])
     print(i[1])

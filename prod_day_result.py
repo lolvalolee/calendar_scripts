@@ -33,7 +33,7 @@ print('events')
 intervals = interval()
 
 for event in events:
-    print(events.start, events.end)
+    print(event.start, event.end)
     # intervals = intervals | interval[max(start, item.start).timestamp(), min(
     #     end or datetime.max, item.end).timestamp()]
 

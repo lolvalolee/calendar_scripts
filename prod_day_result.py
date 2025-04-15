@@ -34,6 +34,11 @@ intervals = interval()
 
 
 for event in events:
+    print('adding interval')
+    print(interval[max(tomorrow, event.start).timestamp(), min(
+        tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()])
+    print(event.start, event.end)
+    print('********************')
     intervals = intervals | interval[max(tomorrow, event.start).timestamp(), min(
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 

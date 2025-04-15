@@ -1,5 +1,8 @@
 import sys
 from datetime import timedelta, datetime, time
+from zoneinfo import ZoneInfo
+
+from interval import interval
 
 from app.calendar.models import RegularEvent, Event
 from app.habit.models import UserHabit
@@ -18,9 +21,22 @@ result = 0
 # went_sleep_ontime = UserHabit.get_object(name='Лег спать вовремя')
 # played_games = UserHabit.get_object(name='Задротил')
 
-events = Event.today_events()
+profile = Profile.get()
+tz = ZoneInfo(profile.timezone)
+
+now = datetime.now().astimezone(tz)
+print(now)
+events, _ = Event.today_events()
+
 print('events')
 print(events)
+intervals = interval()
+
+# for event in events:
+#     intervals = intervals | interval[max(start, item.start).timestamp(), min(
+#         end or datetime.max, item.end).timestamp()]
+
+
 #
 #
 #

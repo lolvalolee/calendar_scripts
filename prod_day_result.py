@@ -1,5 +1,5 @@
 import sys
-from datetime import timedelta, datetime, time
+from datetime import timedelta, datetime, time, timezone
 from zoneinfo import ZoneInfo
 
 from interval import interval
@@ -24,7 +24,7 @@ result = 0
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
 
-now = datetime.now(datetime.timezone.utc)
+now = datetime.now(timezone.utc)
 print(now)
 events, _ = Event.today_events()
 

@@ -21,6 +21,7 @@ result = 0
 events = Event.today_events()
 print('events')
 print(events)
+
 #
 #
 #

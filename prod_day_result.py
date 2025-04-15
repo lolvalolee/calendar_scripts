@@ -24,7 +24,7 @@ result = 0
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
 
-now = datetime.now().astimezone(tz)
+now = datetime.now(tz)
 print(now)
 events, _ = Event.today_events()
 

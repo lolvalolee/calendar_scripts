@@ -32,10 +32,13 @@ print('events')
 # print(events)
 intervals = interval()
 
+
 for event in events:
     intervals = intervals | interval[max(tomorrow, event.start).timestamp(), min(
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
+total = sum(map(lambda _item: _item[1] - _item[0], intervals)) // 10
+print('total:', total)
 for i in intervals:
     print(i)
     print(i[0])

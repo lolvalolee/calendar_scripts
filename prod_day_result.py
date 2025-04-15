@@ -53,16 +53,9 @@ for event in events:
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
 total = sum(map(lambda _item: _item[1] - _item[0], intervals))
-print('total:', total)
-print('percent: ', total /  (60 * 60 * 24) * 100, '%')
+percent = total /  (60 * 60 * 24) * 100
 
-for i in intervals:
-    print(i)
-    print(i[0])
-    print(i[1])
-
-msg += f'{ok_text if total > 50 else failed} {int(total)}% времени записано'
-
+msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени записано'
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 
 #

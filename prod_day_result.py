@@ -34,8 +34,8 @@ intervals = interval()
 
 for event in events:
     print(event.start, event.end)
-    # intervals = intervals | interval[max(start, item.start).timestamp(), min(
-    #     end or datetime.max, item.end).timestamp()]
+    intervals = intervals | interval[max(tomorrow, event.start).timestamp(), min(
+        tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
 
 #

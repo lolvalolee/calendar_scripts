@@ -37,6 +37,11 @@ for event in events:
     intervals = intervals | interval[max(tomorrow, event.start).timestamp(), min(
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
+for i in interval:
+    print(i)
+    print(i[0])
+    print(i[1])
+
 
 #
 #

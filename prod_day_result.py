@@ -24,8 +24,8 @@ result = 0
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
 
-tomorrow = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
-today = tomorrow - timedelta(days=1)
+today = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
+tomorrow = today + timedelta(days=1)
 
 print('today:', today)
 print('tomorrow:', tomorrow)

@@ -6,6 +6,7 @@ from interval import interval
 
 from app.calendar.models import RegularEvent, Event
 from app.habit.models import UserHabit
+from app.notification.models import Message, NotificationTransport
 from app.stockRoom.models import MealSchedule, Measure, Stock, Recipe, Meal
 
 sys.path.append('./')
@@ -13,6 +14,10 @@ sys.path.append('./')
 from app.profile.models import Profile
 
 result = 0
+
+msg = ''
+ok_text = '✅'
+failed = '❌'
 
 # no_sugar_today = UserHabit.get_object(name='Ел сладкое')
 # eothyrox = UserHabit.get_object(name='Eothyrox')
@@ -56,6 +61,9 @@ for i in intervals:
     print(i[0])
     print(i[1])
 
+msg += f'{ok_text if total > 50 else failed} {int(total)}% времени записано'
+
+Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 
 #
 #

@@ -27,8 +27,8 @@ tz = ZoneInfo(profile.timezone)
 today = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
 tomorrow = today + timedelta(days=1)
 
-print('today:', today)
-print('tomorrow:', tomorrow)
+print('today:', today, today.timestamp())
+print('tomorrow:', tomorrow, tomorrow.timestamp())
 
 events, _ = Event.today_events()
 

@@ -49,6 +49,7 @@ Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'
 
 ate_sweats = UserHabit.get_object(name='Ел сладкое')
 ate_sweats_result = ate_sweats.completed(date.today())
+print(ate_sweats_result)
 
 #
 #

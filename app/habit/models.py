@@ -52,6 +52,8 @@ class UserHabit(CRUDModel):
         if date is None:
             pass
         data, _ = self.results(record_date__day=record_date.isoformat())
+        print(data)
+        return data
 
 
 @dataclass

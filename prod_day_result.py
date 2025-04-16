@@ -60,7 +60,7 @@ for habit_title, points in habits:
         continue
 
     msg += f'\n{ok_text if habit_result else failed} {habit_title}'
-    total = points if habit_result else 0
+    result += points if habit_result else 0
 
 comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
 

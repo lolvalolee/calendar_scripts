@@ -53,6 +53,7 @@ class UserHabit(CRUDModel):
         if date is None:
             pass
         data, _ = self.results(record_date__day=record_date.isoformat())
+        print(data, _)
         if not _:
             return None
         return len(data) and all((item.result == RESULT_COMPLETED for item in data))

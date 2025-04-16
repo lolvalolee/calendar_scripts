@@ -59,6 +59,7 @@ for habit_title, points in habits:
     if habit_result is None:
         msg += f'\n{undefined} {habit_title}'
         continue
+        
     msg += f'\n{ok_text if habit_result else failed} {habit_title}'
     total = points if habit_result else 0
 

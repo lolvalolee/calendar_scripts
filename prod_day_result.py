@@ -51,9 +51,7 @@ msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени за
 ate_sweats_title = 'Ел сладкое'
 ate_sweats = UserHabit.get_object(name='Ел сладкое')
 ate_sweats_result = ate_sweats.completed_at_date(date.today())
-msg += f'{ok_text if ate_sweats_result else failed} {ate_sweats_title}'
-
-
+msg += f'\n {ok_text if ate_sweats_result else failed} {ate_sweats_title}'
 
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 #

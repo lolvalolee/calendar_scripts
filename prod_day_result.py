@@ -6,6 +6,7 @@ from interval import interval
 
 from app.calendar.models import RegularEvent, Event
 from app.habit.models import UserHabit
+from app.tag.models import Comment
 from app.notification.models import Message, NotificationTransport
 from app.stockRoom.models import MealSchedule, Measure, Stock, Recipe, Meal
 
@@ -47,13 +48,36 @@ percent = total /  (60 * 60 * 24) * 100
 
 msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени записано'
 
-
 ate_sweats_title = 'Ел сладкое'
 ate_sweats = UserHabit.get_object(name='Ел сладкое')
 ate_sweats_result = ate_sweats.completed_at_date(date.today())
-msg += f'\n {ok_text if ate_sweats_result else failed} {ate_sweats_title}'
+msg += f'\n{ok_text if ate_sweats_result else failed} {ate_sweats_title}'
 
-Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
+# Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
+
+comments = Comment.get_objects(tag=['tag', 'tag2'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #
 #
 #

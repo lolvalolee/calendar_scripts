@@ -30,15 +30,15 @@ undefined = '❓'
 
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
-today_date = date.today()
 
 today = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
+today_date = today.date()
+
 tomorrow = today + timedelta(days=1)
 
 events, _ = Event.today_events()
 
 intervals = interval()
-
 
 for event in events:
     intervals = intervals | interval[max(today, event.start).timestamp(), min(
@@ -51,6 +51,7 @@ msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени за
 
 habits = [
     ('Ел сладкое', 1)
+    ('Eothyrox', 1)
 ]
 
 for habit_title, points in habits:
@@ -59,13 +60,13 @@ for habit_title, points in habits:
     if habit_result is None:
         msg += f'\n{undefined} {habit_title}'
         continue
-        
+
     msg += f'\n{ok_text if habit_result else failed} {habit_title}'
     total = points if habit_result else 0
 
 comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
-print(comments)
 
+msg += f'\nDay result: 10/{total}'
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 
 

@@ -55,8 +55,8 @@ msg += f'\n{ok_text if ate_sweats_result else failed} {ate_sweats_title}'
 
 # Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 
-comments = Comment.get_objects(tag=['tag', 'tag2'])
-
+comments, _ = Comment.get_objects(tag=['tag', 'tag2'])
+print(comments)
 
 
 

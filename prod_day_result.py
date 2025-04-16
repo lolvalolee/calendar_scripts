@@ -50,7 +50,7 @@ percent = total /  (60 * 60 * 24) * 100
 msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени записано'
 
 habits = [
-    ('Ел сладкое', 1)
+    ('Ел сладкое', 1),
     ('Eothyrox', 1)
 ]
 
@@ -66,6 +66,7 @@ for habit_title, points in habits:
 
 comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
 
+print('total', percent)
 msg += f'\nDay result: 10/{total}'
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 

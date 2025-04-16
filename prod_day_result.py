@@ -1,5 +1,5 @@
 import sys
-from datetime import timedelta, datetime, time, timezone
+from datetime import timedelta, datetime, time, timezone, date
 from zoneinfo import ZoneInfo
 
 from interval import interval
@@ -32,23 +32,12 @@ tz = ZoneInfo(profile.timezone)
 today = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
 tomorrow = today + timedelta(days=1)
 
-print('today:', today, today.timestamp())
-print('tomorrow:', tomorrow, tomorrow.timestamp())
-
 events, _ = Event.today_events()
 
-print('events')
-# print(events)
 intervals = interval()
 
 
 for event in events:
-    print('adding interval')
-    print(interval[max(today, event.start).timestamp(), min(
-        tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()])
-    print(event.start.timestamp(), event.end.timestamp())
-    print(event.start, event.end)
-    print('********************')
     intervals = intervals | interval[max(today, event.start).timestamp(), min(
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
@@ -59,7 +48,7 @@ msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени за
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 
 ate_sweats = UserHabit.get_object(name='Ел сладкое')
-ate_sweats_result = ate_sweats.completed()
+ate_sweats_result = ate_sweats.completed(date.today())
 
 #
 #

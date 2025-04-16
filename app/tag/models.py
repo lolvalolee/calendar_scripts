@@ -14,3 +14,4 @@ class Comment(BaseModel):
     tags: list
     object_id = None
     related_object = None
+    is_main_page_displayed: bool

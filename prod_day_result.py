@@ -53,11 +53,11 @@ habits = [
     ('Ел сладкое', 1)
 ]
 
-for habit_title in habits:
+for habit_title, points in habits:
     habit = UserHabit.get_object(name=habit_title)
     habit_result = habit.completed_at_date(today_date.isoformat())
     msg += f'\n{ok_text if habit_result else failed} {habit_title}'
-    total = 1 if habit_result else 0
+    total = points if habit_result else 0
 
 comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
 print(comments)

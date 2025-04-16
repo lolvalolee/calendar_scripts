@@ -51,7 +51,7 @@ class UserHabit(CRUDModel):
     def completed(self, record_date: date=None):
         if date is None:
             pass
-        data, _ = self.results(record_date=record_date.isoformat())
+        data, _ = self.results(record_date__day=record_date.isoformat())
 
 
 @dataclass

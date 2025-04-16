@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from datetime import datetime, time, date
 
+from app.habit.constants import RESULT_COMPLETED
 from utils.models import CRUDModel
 
 
@@ -48,12 +49,12 @@ class UserHabit(CRUDModel):
     def results(self, **kwargs):
         return UserHabitRecord.get_objects(url=f'/api/user-habit/{self.id}/records/', **kwargs)
 
-    def completed(self, record_date: date=None):
+    def completed_at_date(self, record_date: date=None):
         if date is None:
             pass
         data, _ = self.results(record_date__day=record_date.isoformat())
-        print(data)
-        return data
+        print(len(data) and all((item.result == RESULT_COMPLETED for item in data)))
+        return len(data) and all((item.result == RESULT_COMPLETED for item in data))
 
 
 @dataclass

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from datetime import datetime, time
+
+from datetime import datetime, time, date
 
 from utils.models import CRUDModel
 
@@ -46,6 +47,11 @@ class UserHabit(CRUDModel):
 
     def results(self, **kwargs):
         return UserHabitRecord.get_objects(url=f'/api/user-habit/{self.id}/records/', **kwargs)
+
+    def completed(self, record_date: date=None):
+        if date is None:
+            pass
+        data, _ = self.results(record_date=record_date.isoformat())
 
 
 @dataclass

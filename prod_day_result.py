@@ -65,5 +65,5 @@ for habit_title, points in habits:
 comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
 
 print('total', percent)
-msg += f'\nDay result: 10/{total}'
+msg += f'\nDay result: 10/{result}'
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})

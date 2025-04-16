@@ -18,6 +18,7 @@ result = 0
 msg = ''
 ok_text = '✅'
 failed = '❌'
+undefined = '❓'
 
 # no_sugar_today = UserHabit.get_object(name='Ел сладкое')
 # eothyrox = UserHabit.get_object(name='Eothyrox')
@@ -45,13 +46,16 @@ total = sum(map(lambda _item: _item[1] - _item[0], intervals))
 percent = total /  (60 * 60 * 24) * 100
 
 msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени записано'
-Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
+
 
 ate_sweats_title = 'Ел сладкое'
 ate_sweats = UserHabit.get_object(name='Ел сладкое')
 ate_sweats_result = ate_sweats.completed_at_date(date.today())
 msg += f'{ok_text if ate_sweats_result else failed} {ate_sweats_title}'
 
+
+
+Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 #
 #
 #

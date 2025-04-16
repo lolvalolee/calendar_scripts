@@ -1,55 +1,39 @@
 import sys
 from datetime import timedelta, datetime, time
 
+sys.path.append('./')
+
 from app.calendar.models import RegularEvent, Event
 from app.habit.models import UserHabit
 from app.stockRoom.models import MealSchedule, Measure, Stock, Recipe, Meal
-
-sys.path.append('./')
-
 from app.profile.models import Profile
 
-result = 0
-
-# no_sugar_today = UserHabit.get_object(name='Ел сладкое')
-# eothyrox = UserHabit.get_object(name='Eothyrox')
-# posture_app_complete = UserHabit.get_object(name='Posture up 40 минут')
-# woke_up_ontime = UserHabit.get_object(name='Встал вовремя')
-# went_sleep_ontime = UserHabit.get_object(name='Лег спать вовремя')
-# played_games = UserHabit.get_object(name='Задротил')
 
 events = Event.today_events()
-print('events')
-print(events)
+profile = Profile.get()
+tz = profile.user_timezone
+now = profile.now + timedelta(days=1)
 
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-# profile = Profile.get()
-# tz = profile.user_timezone
-# now = profile.now
-# start = now.replace(hour=8, minute=0, second=0, microsecond=0)
-#
-# routine = 'Личная рутина'
-# brushing_teeth = 'Чистить зубы'
-#
-# routine__regular = RegularEvent.get_object(name=routine)
-# Event.create(regular_event=routine__regular.id, start=start, end=start + timedelta(minutes=30),
-#              title={'value': routine}, sub_tasks=[{'title': {'value': brushing_teeth}}])
+start = now.replace(hour=8, minute=0, second=0, microsecond=0)
+
+routine = 'Личная рутина'
+brushing_teeth = 'Чистить зубы'
+shower = 'Душ'
+
+routine__regular = RegularEvent.get_object(name=routine)
+Event.create(regular_event=routine__regular.id, start=start, end=start + timedelta(minutes=30),
+             title={'value': routine}, sub_tasks=[{'title': {'value': brushing_teeth}},
+                                                  {'title': {'value': shower}}])
+
+
+
+
+
+
+
+
+
+
 #
 # walking = 'Ходьба на беговой'
 # walking__regular = RegularEvent.get_object(name=walking)

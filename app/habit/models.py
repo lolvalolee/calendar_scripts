@@ -55,12 +55,3 @@ class UserHabit(CRUDModel):
         data, _ = self.results(record_date__day=record_date.isoformat())
         print(len(data) and all((item.result == RESULT_COMPLETED for item in data)))
         return len(data) and all((item.result == RESULT_COMPLETED for item in data))
-
-
-@dataclass
-class UserHabitRecord(CRUDModel):
-    url = '/api/user-habit-record/'
-
-    user_habit: int
-    record_date: datetime
-    result: str

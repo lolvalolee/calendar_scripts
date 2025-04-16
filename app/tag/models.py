@@ -12,6 +12,6 @@ class Comment(BaseModel):
     created: datetime
     text: dict
     tags: list
-    object_id = None
     is_main_page_displayed: bool
+    object_id: int = None
     related_object: dict = None

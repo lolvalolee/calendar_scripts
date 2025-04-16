@@ -30,7 +30,7 @@ undefined = '❓'
 
 profile = Profile.get()
 tz = ZoneInfo(profile.timezone)
-today = date.today()
+today_date = date.today()
 
 today = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0)
 tomorrow = today + timedelta(days=1)
@@ -55,12 +55,11 @@ habits = [
 
 for habit_title in habits:
     habit = UserHabit.get_object(name=habit_title)
-    habit_result = habit.completed_at_date(date.today())
+    habit_result = habit.completed_at_date(today_date.isoformat())
     msg += f'\n{ok_text if habit_result else failed} {habit_title}'
     total = 1 if habit_result else 0
 
-today = (datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=5)).date().isoformat()
-comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today)
+comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
 print(comments)
 
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})

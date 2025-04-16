@@ -55,7 +55,7 @@ msg += f'\n{ok_text if ate_sweats_result else failed} {ate_sweats_title}'
 
 # Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})
 
-today = datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0).date().isoformat()
+today = (datetime.now(tz).replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=5)).date().isoformat()
 comments, _ = Comment.get_objects(tag=['tag', 'tag2'], created__day=today)
 print(comments)
 

@@ -53,7 +53,7 @@ habits = [
     ('Отвлекался от работы на ютуб\твич', 1, True)
 ]
 
-for habit_title, points, _reverse_result in habits:
+for habit_title, points, *_reverse_result in habits:
     habit = UserHabit.get_object(name=habit_title)
     habit_result = habit.completed_at_date(today_date)
     if habit_result is None:
@@ -70,7 +70,6 @@ for habit_title, points, _reverse_result in habits:
 
 comments, _ = Comment.get_objects(tag=['дневник', ], created__day=today_date.isoformat())
 
-print('total', percent)
 msg += f'\nDay result: 11/{result}'
 
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': msg})

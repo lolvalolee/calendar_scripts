@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 
 import dateutil.parser
 
-from constants import BASE_URL
+from constants.api_urls import BASE_URL
 from utils.misc import send_request
 
 

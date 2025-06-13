@@ -6,4 +6,4 @@ transport = NotificationTransport.desktop()
 friends, _ = Friend.get_objects()
 
 for item in friends:
-    print(item.send_simple_message('here is text', transport))
+    print(item.send_simple_message('here is text:)', transport))

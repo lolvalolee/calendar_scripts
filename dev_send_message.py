@@ -5,4 +5,4 @@ from app.social.models import Friend
 transport = NotificationTransport.desktop()
 
 for item in Friend.get_objects():
-    item.send_simple_message('here is text', transport)
+    print(item.send_simple_message('here is text', transport))

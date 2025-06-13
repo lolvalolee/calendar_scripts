@@ -33,6 +33,10 @@ class BaseModel:
         return send_request('get', url, data=kwargs).json()
 
     @classmethod
+    def create(cls, data, url=None, **kwargs):
+        return send_request('post', url, data=kwargs).json()
+
+    @classmethod
     def get_object(cls, pk=None, **kwargs):
         if not pk and kwargs:
             obj, _ = cls.get_objects(**kwargs)

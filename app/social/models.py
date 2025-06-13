@@ -19,7 +19,7 @@ class Friend(CRUDModel):
     user_permissions: list
 
     def send_message(self, text: str, message_type: str, transport):
-        return send_request('post', API_URL_FRIEND_MESSAGE,
+        return send_request('post', self.combine_url(API_URL_FRIEND_MESSAGE),
                          data={'extra_data': {'title': text},
                                'transport': transport.id,
                                'id': self.id,

@@ -40,6 +40,8 @@ total = sum(map(lambda _item: _item[1] - _item[0], intervals))
 percent = total /  (60 * 60 * 24) * 100
 print(percent)
 print(total)
+percent = ((60 * 60 * 24) - total) / (60 * 10)
+print('total', percent)
 
 #
 # msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени записано'

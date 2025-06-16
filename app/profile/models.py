@@ -16,6 +16,7 @@ class Profile(CRUDModel):
     telegram_nickname: str
     telegram_status: str
     image: str
+    statuses: list
 
     _instance = None
 

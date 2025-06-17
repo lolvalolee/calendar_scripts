@@ -47,7 +47,7 @@ Message.simple_message(transport=NotificationTransport.telegram(),
 
 point_type = PointType.get_object(name='в')
 
-PointRecord.create(point_type=point_type.id, record=percent)
+PointRecord.create(point_type=point_type.id, record=-percent)
 
 
 #

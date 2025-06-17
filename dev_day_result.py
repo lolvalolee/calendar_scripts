@@ -3,7 +3,7 @@ import sys
 from datetime import timedelta, datetime
 from zoneinfo import ZoneInfo
 
-from app.reward.models import PointType
+from app.reward.models import PointType, PointRecord
 
 sys.path.append('./')
 
@@ -46,10 +46,8 @@ Message.simple_message(transport=NotificationTransport.telegram(),
                        extra_data={'title': f'Снято {percent} баллов за незаписаное время.'})
 
 point_type = PointType.get_object(name='в')
-print(point_type.name)
 
-
-
+PointRecord.create(point_type=point_type.id, record=percent)
 
 
 #

@@ -9,3 +9,11 @@ class PointType(CRUDModel):
 
     name: dict
     total_amount: float
+
+
+@dataclass
+class PointRecord(CRUDModel):
+    url = '/api/point-record/'
+
+    point_type: int
+    record: float

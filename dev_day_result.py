@@ -3,6 +3,8 @@ import sys
 from datetime import timedelta, datetime
 from zoneinfo import ZoneInfo
 
+from app.reward.models import PointType
+
 sys.path.append('./')
 
 from interval import interval
@@ -37,11 +39,18 @@ for event in events:
         tomorrow, event.end or datetime.max.astimezone(tz)).timestamp()]
 
 total = sum(map(lambda _item: _item[1] - _item[0], intervals))
-percent = total /  (60 * 60 * 24) * 100
-print(percent)
-print(total)
-percent = ((60 * 60 * 24) - total) / (60 * 10)
-print('total', percent)
+# percent = total /  (60 * 60 * 24) * 100
+percent = int(((60 * 60 * 24) - total) / 60)
+
+Message.simple_message(transport=NotificationTransport.telegram(),
+                       extra_data={'title': f'Снято {percent} баллов за незаписаное время.'})
+
+point_type = PointType.get_object(name='в')
+print(point_type.name)
+
+
+
+
 
 #
 # msg += f'{ok_text if total > 50 else failed} {int(percent)}% времени записано'

@@ -39,7 +39,7 @@ for event in events:
 total = sum(map(lambda _item: _item[1] - _item[0], intervals))
 percent = int(((60 * 60 * 24) - total) / 60)
 
-Message.simple_message(transport=NotificationTransport.desktop(),
+Message.simple_message(transport=NotificationTransport.telegram(),
                        extra_data={'title': f'Снято {percent} баллов за незаписаное время.'})
 
 point_type = PointType.get_object(name='в')

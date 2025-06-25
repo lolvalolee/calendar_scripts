@@ -6,4 +6,4 @@ transport = NotificationTransport.telegram()
 friends, _ = Friend.get_objects()
 
 for item in friends:
-    print(item.send_simple_message('кусь!', transport))
+    print(item.send_simple_message('Жопашник спать не ложиться! Кусьни его!', transport))

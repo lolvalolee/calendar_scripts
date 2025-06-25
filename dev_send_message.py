@@ -2,6 +2,7 @@ from app.notification.models import NotificationTransport
 from app.social.models import Friend
 
 
+exit(0)
 transport = NotificationTransport.telegram()
 friends, _ = Friend.get_objects()
 

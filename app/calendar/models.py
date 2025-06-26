@@ -47,6 +47,9 @@ class PlannedEvent(CRUDModel):
     event_planned_timer: list
     sub_tasks: list
 
+    def get_planning(self):
+        return self._call_action('GET', 'planning')
+
 
 @dataclass
 class RegularEvent(CRUDModel):

@@ -15,10 +15,11 @@ extra_data = {
             }
         },
         {
-            'title': 'Да',
+            'title': 'Сьел!',
             'action': {
-                'type': 'start_regular_event',
-                'qs': {'name': 'Сон'}
+                'type': 'habit_report',
+                'result': 'completed',
+                'qs': {'name': 'Eothyrox'}
             }
         },
     ]

@@ -1,5 +1,27 @@
-from app.calendar.models import PlannedEvent
+import sys
 
-planned, _ = PlannedEvent.get_objects()
-for e in planned:
-    print(e.get_planning().json())
+from app.notification.models import Message, NotificationTransport
+
+sys.path.append('./')
+
+extra_data = {
+    'title': 'Начать событие сон?',
+    'questions': [
+        {
+            'title': 'Нет',
+            'action': {
+                'type': 'delete_notification',
+                'qs': {'name': 'Сон'}
+            }
+        },
+        {
+            'title': 'Да',
+            'action': {
+                'type': 'start_regular_event',
+                'qs': {'name': 'Сон'}
+            }
+        },
+    ]
+}
+
+Message.question(transport=NotificationTransport.desktop(), extra_data=extra_data)

@@ -17,9 +17,8 @@ extra_data = {
         {
             'title': 'Сьел!',
             'action': {
-                'type': 'habit_report',
-                'result': 'completed',
-                'qs': {'name': 'Eothyrox'}
+                'type': 'call_handler',
+                'qs': {'id': 9}
             }
         },
     ]

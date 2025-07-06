@@ -25,16 +25,16 @@ response = requests.get(url)
 
 if response.status_code == 200:
     data = response.json()
-    print(data)
     if "response" in data and "players" in data["response"]:
         player = data["response"]["players"][0]
 
         if "gameextrainfo" in player:
             game = player["gameextrainfo"]
-            print(f"Вы играете в игру: {game}")
         else:
-            print("Вы сейчас не играете в игру.")
-    else:
-        print("Информация о пользователе не найдена.")
+            exit(0)
 else:
-    print("Ошибка при выполнении запроса.")
+    print(f'Unexpected response code: {response.status_code}')
+    exit(0)
+
+regular_event = RegularEvent.get_object(name='Задротство')
+print(regular_event.current())

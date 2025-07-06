@@ -15,7 +15,7 @@ steam_api_key = ApiKey.get_object(name='steam')
 steam_id = "76561198082140903"  # Замените на ваш SteamID
 api_key = steam_api_key.key
 
-url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={api_key}&steamids={steam_id}"
+url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={api_key}&steamids={steam_id}"
 
 response = requests.get(url)
 game = None

@@ -2,6 +2,8 @@ import sys
 
 import requests
 
+from app.notification.models import Message, NotificationTransport
+
 sys.path.append('./')
 
 from app.calendar.models import RegularEvent
@@ -38,5 +40,11 @@ current = regular_event.current()
 
 if not current and game:
     regular_event.start_now(title=game)
+    Message.simple_message(transport=NotificationTransport.telegram(),
+                           extra_data={'title': f'Задротишь а время не записано! жопашник!'})
+
 elif current and not game:
     regular_event.end_now()
+
+    Message.simple_message(transport=NotificationTransport.telegram(),
+                           extra_data={'title': f'Не задротишь а время записано! красава!'})

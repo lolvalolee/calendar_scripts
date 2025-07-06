@@ -2,6 +2,8 @@ import sys
 
 import requests
 
+from app.notification.models import Message, NotificationTransport
+
 sys.path.append('./')
 
 from app.calendar.models import RegularEvent
@@ -15,7 +17,7 @@ steam_api_key = ApiKey.get_object(name='steam')
 steam_id = "76561198082140903"  # Замените на ваш SteamID
 api_key = steam_api_key.key
 
-url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={api_key}&steamids={steam_id}"
+url = f"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={api_key}&steamids={steam_id}"
 
 response = requests.get(url)
 game = None
@@ -38,5 +40,11 @@ current = regular_event.current()
 
 if not current and game:
     regular_event.start_now(title=game)
+    Message.simple_message(transport=NotificationTransport.telegram(),
+                           extra_data={'title': f'Задротишь а время не записано! жопашник!'})
+
 elif current and not game:
     regular_event.end_now()
+
+    Message.simple_message(transport=NotificationTransport.telegram(),
+                           extra_data={'title': f'Не задротишь а время записано! красава!'})

@@ -5,8 +5,9 @@ from app.profile.models import UserStatus
 
 sys.path.append('./')
 
+statuses, _ = UserStatus.get_objects()
 
-for item in UserStatus.get_objects():
+for item in statuses:
     print(item.label)
 
 

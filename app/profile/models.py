@@ -65,6 +65,7 @@ class UserStatus(CRUDModel):
     url = '/api/user-status/'
 
     name: dict
+    is_used: bool
 
     def label(self):
         return self.name['value']

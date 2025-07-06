@@ -18,7 +18,10 @@ extra_data = {
             'title': 'Сьел!',
             'action': {
                 'type': 'call_handler',
-                'qs': {'id': 9}
+                'qs': {'id': 9},
+                'handler_extra_data': {
+                    'test_key': 'test_value'
+                }
             }
         },
     ]

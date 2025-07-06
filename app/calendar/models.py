@@ -55,6 +55,7 @@ class PlannedEvent(CRUDModel):
 class RegularEvent(CRUDModel):
     url = '/api/regular-event/'
 
+    archived: bool
     name: dict
     weekdays: list
     public: bool

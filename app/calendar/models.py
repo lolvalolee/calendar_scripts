@@ -61,6 +61,7 @@ class RegularEvent(CRUDModel):
     started_at: datetime
     max_duration: int
     duration_required: bool
+    created: datetime
 
     @apply_default_filters('-start')
     def events(self, start=None, end=None, start_lte=None, end_lte=None, start_gte=None, end_gte=None, **kwargs) -> List[Event]:

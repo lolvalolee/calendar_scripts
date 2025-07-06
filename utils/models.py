@@ -75,8 +75,11 @@ class BaseModel:
                 setattr(self, field.name, dateutil.parser.isoparse(value).astimezone(ZoneInfo('UTC')))
 
     def _call_action(self, method_name='GET', action_name=None, url=None, data=None, **kwargs):
+        data = data or {}
+        data.update(kwargs)
+        
         return send_request(method_name.lower(), self.combine_url(self.url) + f'{self.id}/{action_name}/',
-                            data=kwargs)
+                            data=data)
 
     @classmethod
     def search(cls, search):

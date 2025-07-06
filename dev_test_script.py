@@ -1,12 +1,14 @@
-import os
 import sys
 
 from app.notification.models import Message, NotificationTransport
+from app.profile.models import UserStatus
 
 sys.path.append('./')
 
-print('param!')
-print(os.environ.get('handler_extra_data'))
+
+for item in UserStatus.get_objects():
+    print(item.label)
+
 
 extra_data = {
     'title': 'Начать событие сон?',

@@ -58,3 +58,13 @@ class ApiKey(CRUDModel):
 
     name: str
     key: str
+
+
+@dataclass
+class UserStatus(CRUDModel):
+    url = '/api/user-status/'
+
+    name: dict
+
+    def label(self):
+        return self.name['value']

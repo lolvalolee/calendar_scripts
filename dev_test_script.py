@@ -1,8 +1,12 @@
+import os
 import sys
 
 from app.notification.models import Message, NotificationTransport
 
 sys.path.append('./')
+
+print('param!')
+print(os.environ.get('handler_extra_data'))
 
 extra_data = {
     'title': 'Начать событие сон?',

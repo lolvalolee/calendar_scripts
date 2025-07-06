@@ -89,6 +89,13 @@ class BaseModel:
 
 class CRUDModel(BaseModel):
 
+    def _label(self):
+        return f'{self.__class__.__name__} {self.id}'
+
+    @property
+    def label(self):
+        return self._label()
+
     @classmethod
     def create(cls, **kwargs):
         r = None

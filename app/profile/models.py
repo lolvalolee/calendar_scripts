@@ -67,5 +67,5 @@ class UserStatus(CRUDModel):
     name: dict
     is_used: bool
 
-    def label(self):
+    def _label(self):
         return self.name['value']

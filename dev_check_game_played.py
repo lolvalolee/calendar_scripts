@@ -22,6 +22,7 @@ api_key = steam_api_key.key
 url = f"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={api_key}&steamids={steam_id}"
 
 response = requests.get(url)
+game = None
 
 if response.status_code == 200:
     data = response.json()
@@ -37,4 +38,7 @@ else:
     exit(0)
 
 regular_event = RegularEvent.get_object(name='Задротство')
-print(regular_event.current())
+current = regular_event.current()
+
+if not current:
+    regular_event.start_now(title=game)

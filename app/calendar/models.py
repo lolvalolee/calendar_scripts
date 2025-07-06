@@ -85,6 +85,5 @@ class RegularEvent(CRUDModel):
         data = {}
         if title:
             data['title'] = {'value': title}
-        print('!!!!!!!!!')
-        print(data)
+
         self._call_action('POST', 'start-now', data=data)

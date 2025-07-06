@@ -77,7 +77,7 @@ class BaseModel:
     def _call_action(self, method_name='GET', action_name=None, url=None, data=None, **kwargs):
         data = data or {}
         data.update(kwargs)
-        
+
         return send_request(method_name.lower(), self.combine_url(self.url) + f'{self.id}/{action_name}/',
                             data=data)
 

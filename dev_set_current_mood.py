@@ -8,4 +8,4 @@ sys.path.append('./')
 
 statuses, _ = UserStatus.get_objects()
 
-print(os.environ.get('handler_extra_data'))
+print(os.environ.get('handler_extra_data') == 'хорошее настроение')

@@ -7,31 +7,22 @@ sys.path.append('./')
 
 statuses, _ = UserStatus.get_objects()
 
-for item in statuses:
-    print(item.label)
+questions = [
+    {
+        'title': item.label,
+        'action': {
+            'type': 'call_handler',
+            'qs': {'id': 11},
+            'handler_extra_data': {
+                'mood': item.label
+            }
+        }
+    } for item in statuses
+]
 
+extra_data = {
+    'title': 'Александр, как настроение с утра?',
+    'questions': questions
+}
 
-# extra_data = {
-#     'title': 'Начать событие сон?',
-#     'questions': [
-#         {
-#             'title': 'Нет',
-#             'action': {
-#                 'type': 'delete_notification',
-#                 'qs': {'name': 'Сон'}
-#             }
-#         },
-#         {
-#             'title': 'Сьел!',
-#             'action': {
-#                 'type': 'call_handler',
-#                 'qs': {'id': 9},
-#                 'handler_extra_data': {
-#                     'test_key': 'test_value'
-#                 }
-#             }
-#         },
-#     ]
-# }
-
-# Message.question(transport=NotificationTransport.desktop(), extra_data=extra_data)
+Message.question(transport=NotificationTransport.desktop(), extra_data=extra_data)

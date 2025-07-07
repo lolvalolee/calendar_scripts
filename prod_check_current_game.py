@@ -29,8 +29,7 @@ if response.status_code == 200:
 
         if "gameextrainfo" in player:
             game = player["gameextrainfo"]
-        else:
-            exit(0)
+
 else:
     print(f'Unexpected response code: {response.status_code}')
     exit(0)

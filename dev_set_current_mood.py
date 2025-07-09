@@ -10,3 +10,4 @@ sys.path.append('./')
 statuses, _ = UserStatus.get_objects()
 
 data = json.loads(os.environ.get('handler_extra_data'))
+print(data)

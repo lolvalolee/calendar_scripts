@@ -19,7 +19,7 @@ regexps = [
 ]
 
 # text = "отметь привычку Тренировка выполнена"
-text = json.loads(os.environ.get('handler_extra_data')).lower()
+text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
 print('voice command:', text)
 
 class CommandHandler:

@@ -22,7 +22,7 @@ regexps = [
 text = json.loads(os.environ.get('handler_extra_data'))
 print('voice command:', text)
 
-
+exit(0)
 class CommandHandler:
     cmd = None
     match = None

@@ -19,10 +19,9 @@ regexps = [
 ]
 
 # text = "отметь привычку Тренировка выполнена"
-text = json.loads(os.environ.get('handler_extra_data'))
+text = json.loads(os.environ.get('handler_extra_data')).lower()
 print('voice command:', text)
 
-exit(0)
 class CommandHandler:
     cmd = None
     match = None

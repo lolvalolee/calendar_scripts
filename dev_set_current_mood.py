@@ -3,18 +3,12 @@ import os
 import re
 import sys
 
+sys.path.append('./')
+
 from app.habit.constants import RESULT_COMPLETED, RESULT_FAILED
 from app.habit.models import UserHabit
 from app.notification.models import Message, NotificationTransport
 
-sys.path.append('./')
-
-from app.profile.models import UserStatus
-
-import json
-import os
-import re
-import sys
 
 HABIT_ACTION_REPORT = 'отметь'
 
@@ -86,8 +80,6 @@ class CommandHandler:
         }
         handlers_map[action](*args, **options)
 
-
-Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': f'Текст сообщения: {text}'})
 
 cmd = CommandHandler(text)
 cmd.handle()

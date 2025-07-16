@@ -58,5 +58,5 @@ class UserHabit(CRUDModel):
             return None
         return len(data) and all((item.result == RESULT_COMPLETED for item in data))
 
-    def report(self, result, report_date=None):
-        UserHabitRecord.create(result=result, user_habit=self, report_date=datetime.now())
+    def report(self, result, record_date=None):
+        UserHabitRecord.create(result=result, user_habit=self, record_date=datetime.now())

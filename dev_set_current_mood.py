@@ -70,7 +70,7 @@ class CommandHandler:
         try:
             habit = UserHabit.get_object(name=habit_name)
             try:
-                result = self.match.group('result').lower()
+                result = habit_result_mapping[self.match.group('result').lower()]
             except AttributeError:
                 result = RESULT_COMPLETED
             habit.report(result)

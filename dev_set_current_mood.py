@@ -71,11 +71,9 @@ class CommandHandler:
             habit = UserHabit.get_object(name=habit_name)
             try:
                 result = self.match.group('result').lower()
-                print(habit_result_mapping[result])
             except AttributeError:
                 result = RESULT_COMPLETED
-
-            print(result)
+            habit.report(result)
         except IndexError:
             Message.simple_message(transport=NotificationTransport.telegram(),
                                    extra_data={'title': f'Привычка : {habit_name} не найдена'})

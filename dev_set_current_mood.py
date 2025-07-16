@@ -18,12 +18,14 @@ import sys
 HABIT_ACTION_REPORT = 'отметь'
 
 regexps = [
-    f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>выполнена|отменена|провалена)',
+    f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>выполнен|отмен|провал)',
     r'^((?P<action>начни|закончи) (?P<regular>регулярное )?событие (?P<event_name>.+))'
 ]
 
 # text = "отметь привычку Тренировка выполнена"
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
+print('*************')
+print(text)
 
 class CommandHandler:
     cmd = None

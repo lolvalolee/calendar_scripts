@@ -106,6 +106,7 @@ class CRUDModel(BaseModel):
 
             if isinstance(v, datetime.datetime):
                 kwargs[k] = v.isoformat()
+        print('kwargs', kwargs)
         try:
             r = send_request('post', cls.combine_url(cls.url), data=kwargs)
             print(cls.combine_url(cls.url))

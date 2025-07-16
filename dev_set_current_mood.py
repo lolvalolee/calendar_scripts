@@ -3,6 +3,7 @@ import os
 import re
 import sys
 
+from app.habit.models import UserHabit
 from app.notification.models import Message, NotificationTransport
 
 sys.path.append('./')
@@ -39,6 +40,7 @@ class CommandHandler:
 
     def handle_habit_report(self, *args, **options):
         print('hey!')
+        habit = UserHabit.get_object(name=self.match.group('habit_name').lower())
 
     def handle(self, *args, **options):
         groupdict = self.match.groupdict()
@@ -49,7 +51,7 @@ class CommandHandler:
         }
         handlers_map[action](*args, **options)
 
-Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': f'Текст сообщения: {text}'})
+Message.simple_message(transport=   NotificationTransport.telegram(), extra_data={'title': f'Текст сообщения: {text}'})
 
 cmd = CommandHandler(text)
 cmd.handle()

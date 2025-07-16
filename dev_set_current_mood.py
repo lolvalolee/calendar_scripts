@@ -41,6 +41,7 @@ class CommandHandler:
     def handle_habit_report(self, *args, **options):
         print('hey!')
         habit = UserHabit.get_object(name=self.match.group('habit_name').lower())
+        print(habit)
 
     def handle(self, *args, **options):
         groupdict = self.match.groupdict()

@@ -2,6 +2,9 @@ import json
 import os
 import re
 import sys
+
+from app.notification.models import Message, NotificationTransport
+
 sys.path.append('./')
 
 from app.profile.models import UserStatus
@@ -20,7 +23,6 @@ regexps = [
 
 # text = "отметь привычку Тренировка выполнена"
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
-print('voice command:', text)
 
 class CommandHandler:
     cmd = None
@@ -47,6 +49,7 @@ class CommandHandler:
         }
         handlers_map[action](*args, **options)
 
+Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': f'Текст сообщения: {text}'})
 
 cmd = CommandHandler(text)
 cmd.handle()

@@ -46,9 +46,6 @@ habit_mapping.update({key: key for key in _habit_mapping.keys()})
 # text = "отметь привычку Тренировка выполнена"
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
 
-print('**********')
-print(habit_result_mapping)
-print(regexps)
 
 class CommandHandler:
     cmd = None
@@ -74,9 +71,11 @@ class CommandHandler:
             habit = UserHabit.get_object(name=habit_name)
             try:
                 result = self.match.group('result').lower()
+                print(habit_result_mapping[result])
             except AttributeError:
                 result = RESULT_COMPLETED
-            result
+
+            print(result)
         except IndexError:
             Message.simple_message(transport=NotificationTransport.telegram(),
                                    extra_data={'title': f'Привычка : {habit_name} не найдена'})
@@ -89,6 +88,7 @@ class CommandHandler:
             HABIT_ACTION_REPORT: self.handle_habit_report,
         }
         handlers_map[action](*args, **options)
+
 
 Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'title': f'Текст сообщения: {text}'})
 

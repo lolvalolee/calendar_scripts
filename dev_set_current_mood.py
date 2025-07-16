@@ -22,6 +22,15 @@ regexps = [
     r'^((?P<action>начни|закончи) (?P<regular>регулярное )?событие (?P<event_name>.+))'
 ]
 
+_habit_mapping = {
+    'задротил': ['затратил', ]
+}
+
+habit_mapping = {}
+[habit_mapping.update({key: _value for _value in value}) for key, value in _habit_mapping.items()]
+print(habit_mapping)
+
+
 # text = "отметь привычку Тренировка выполнена"
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
 print('*************')
@@ -47,6 +56,7 @@ class CommandHandler:
         print('hey!')
         habit_name = self.match.group('habit_name').lower()
         try:
+
             habit = UserHabit.get_object(name=habit_name)
         except IndexError:
             Message.simple_message(transport=NotificationTransport.telegram(),

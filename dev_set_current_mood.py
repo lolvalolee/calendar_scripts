@@ -3,6 +3,7 @@ import os
 import re
 import sys
 
+from app.habit.constants import RESULT_COMPLETED, RESULT_FAILED
 from app.habit.models import UserHabit
 from app.notification.models import Message, NotificationTransport
 
@@ -17,13 +18,25 @@ import sys
 
 HABIT_ACTION_REPORT = 'отметь'
 
+_habit_result_mapping = {
+    RESULT_COMPLETED: ['выполнен',],
+    RESULT_FAILED: ['провал',]
+}
+habit_result_mapping = {}
+[habit_result_mapping.update({_value: key for _value in value}) for key, value in _habit_result_mapping.items()]
+
 regexps = [
-    f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>выполнен|отмен|провал)',
+    f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>{"|".join(habit_result_mapping.keys())}',
     r'^((?P<action>начни|закончи) (?P<regular>регулярное )?событие (?P<event_name>.+))'
 ]
 
 _habit_mapping = {
     'задротил': ['затратил', ]
+}
+
+_habit_result_mapping = {
+    RESULT_COMPLETED: ['выполнен',],
+    RESULT_FAILED: ['провал',]
 }
 
 habit_mapping = {}
@@ -32,9 +45,10 @@ habit_mapping.update({key: key for key in _habit_mapping.keys()})
 
 # text = "отметь привычку Тренировка выполнена"
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
-print('*************')
-print(text)
-print(habit_mapping)
+
+print('**********')
+print(habit_result_mapping)
+print(regexps)
 
 class CommandHandler:
     cmd = None
@@ -58,7 +72,11 @@ class CommandHandler:
         habit_name = habit_mapping.get(habit_name, habit_name)
         try:
             habit = UserHabit.get_object(name=habit_name)
-            print(habit)
+            try:
+                result = self.match.group('result').lower()
+            except AttributeError:
+                result = RESULT_COMPLETED
+            result
         except IndexError:
             Message.simple_message(transport=NotificationTransport.telegram(),
                                    extra_data={'title': f'Привычка : {habit_name} не найдена'})

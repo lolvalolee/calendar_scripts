@@ -64,7 +64,6 @@ class CommandHandler:
                                    extra_data={'title': f'Команду невозможно обработать: {text}'})
 
     def handle_habit_report(self, *args, **options):
-        print('hey!')
         habit_name = self.match.group('habit_name').lower()
         habit_name = habit_mapping.get(habit_name, habit_name)
         try:
@@ -92,4 +91,3 @@ Message.simple_message(transport=NotificationTransport.telegram(), extra_data={'
 
 cmd = CommandHandler(text)
 cmd.handle()
-

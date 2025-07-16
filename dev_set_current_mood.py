@@ -55,10 +55,10 @@ class CommandHandler:
     def handle_habit_report(self, *args, **options):
         print('hey!')
         habit_name = self.match.group('habit_name').lower()
-        habit_name = habit_mapping[habit_name]
+        habit_name = habit_mapping.get(habit_name, habit_name)
         try:
-
             habit = UserHabit.get_object(name=habit_name)
+            print(habit)
         except IndexError:
             Message.simple_message(transport=NotificationTransport.telegram(),
                                    extra_data={'title': f'Привычка : {habit_name} не найдена'})

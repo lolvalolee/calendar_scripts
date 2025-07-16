@@ -56,6 +56,7 @@ class CommandHandler:
         if not match:
             Message.simple_message(transport=NotificationTransport.telegram(),
                                    extra_data={'title': f'Команду невозможно обработать: {text}'})
+            exit(0)
 
     def handle_habit_report(self, *args, **options):
         habit_name = self.match.group('habit_name').lower()

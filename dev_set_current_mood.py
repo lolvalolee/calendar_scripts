@@ -26,7 +26,7 @@ habit_result_mapping = {}
 [habit_result_mapping.update({_value: key for _value in value}) for key, value in _habit_result_mapping.items()]
 
 regexps = [
-    f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>{"|".join(habit_result_mapping.keys())}',
+    f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>{"|".join(habit_result_mapping.keys())})',
     r'^((?P<action>начни|закончи) (?P<regular>регулярное )?событие (?P<event_name>.+))'
 ]
 

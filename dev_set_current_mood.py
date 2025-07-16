@@ -27,9 +27,8 @@ _habit_mapping = {
 }
 
 habit_mapping = {}
-[habit_mapping.update({key: _value for _value in value}) for key, value in _habit_mapping.items()]
-print(habit_mapping)
-
+[habit_mapping.update({_value: key for _value in value}) for key, value in _habit_mapping.items()]
+habit_mapping.update({key: key for key in _habit_mapping.keys()})
 
 # text = "отметь привычку Тренировка выполнена"
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
@@ -55,6 +54,7 @@ class CommandHandler:
     def handle_habit_report(self, *args, **options):
         print('hey!')
         habit_name = self.match.group('habit_name').lower()
+        habit_name = habit_mapping[habit_name]
         try:
 
             habit = UserHabit.get_object(name=habit_name)

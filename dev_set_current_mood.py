@@ -34,6 +34,7 @@ habit_mapping.update({key: key for key in _habit_mapping.keys()})
 text = json.loads(os.environ.get('handler_extra_data'))['voice_command'].lower()
 print('*************')
 print(text)
+print(habit_mapping)
 
 class CommandHandler:
     cmd = None

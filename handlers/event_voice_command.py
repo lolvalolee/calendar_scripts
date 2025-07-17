@@ -19,14 +19,12 @@ def start_event(match):
 
     try:
         match.group('regular')
-
-        try:
-            regular_event = RegularEvent.get_object(name=event_name)
-        except IndexError:
-            Message.simple_message(transport=NotificationTransport.telegram(),
-                                   extra_data={'title': f'Не найдено регулярного события: {event_name}'})
-            return
+        regular_event = RegularEvent.get_object(name=event_name)
         regular_event.start_now()
+    except IndexError:
+        Message.simple_message(transport=NotificationTransport.telegram(),
+                               extra_data={'title': f'Не найдено регулярного события: {event_name}'})
+        return
     except AttributeError:
         Event.get_object(title=event_name, start=datetime.now())
 

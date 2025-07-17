@@ -19,6 +19,9 @@ def start_event(match):
 
     try:
         match.group('regular')
+        print('!!!!!!!!!!')
+        print('!!!!!!!!!!')
+        print('!!!!!!!!!!')
         regular_event = RegularEvent.get_object(name=event_name)
         regular_event.start_now()
     except IndexError:

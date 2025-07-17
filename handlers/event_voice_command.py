@@ -18,7 +18,7 @@ def start_event(match):
     event_name = event_name_mapping.get(event_name, event_name)
 
     try:
-        match.group('regular')
+        print(match.group('regular'))
         print('!!!!!!!!!!')
         print('!!!!!!!!!!')
         print('!!!!!!!!!!')

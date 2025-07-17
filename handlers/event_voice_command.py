@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from app.calendar.models import RegularEvent, Event
-
+from app.notification.models import NotificationTransport, Message
 
 _event_name_mapping = {
     'задротил': ['затратил', ]
@@ -20,7 +20,12 @@ def start_event(match):
     try:
         match.group('regular')
 
-        regular_event = RegularEvent.get_object(name=event_name)
+        try:
+            regular_event = RegularEvent.get_object(name=event_name)
+        except IndexError:
+            Message.simple_message(transport=NotificationTransport.telegram(),
+                                   extra_data={'title': f'Не найдено регулярного события: {event_name}'})
+            return
         regular_event.start_now()
     except AttributeError:
         Event.get_object(title=event_name, start=datetime.now())

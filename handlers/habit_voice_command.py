@@ -3,7 +3,6 @@ from app.habit.models import UserHabit
 from app.notification.models import Message, NotificationTransport
 from handlers.constants import HABIT_RESULT_MAPPING
 
-HABIT_ACTION_REPORT = 'отметь'
 
 _habit_mapping = {
     'задротил': ['затратил', ]

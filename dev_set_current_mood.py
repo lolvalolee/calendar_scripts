@@ -3,7 +3,8 @@ import os
 import re
 import sys
 
-from handlers.constants import HABIT_ACTION_REPORT, VOICE_COMMAND_REGEXPS
+from handlers.constants import HABIT_ACTION_REPORT, VOICE_COMMAND_REGEXPS, ACTION_EVENT_START
+from handlers.event_voice_command import start_event
 from handlers.habit_voice_command import handle_habit_report
 
 sys.path.append('./')
@@ -38,6 +39,7 @@ class CommandHandler:
 
         handlers_map = {
             HABIT_ACTION_REPORT: handle_habit_report,
+            ACTION_EVENT_START: start_event,
         }
         handlers_map[action](self.match)
 

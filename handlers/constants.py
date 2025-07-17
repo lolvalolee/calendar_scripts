@@ -13,3 +13,5 @@ VOICE_COMMAND_REGEXPS = [
     f'^(?P<action>{HABIT_ACTION_REPORT}) привычку (?P<habit_name>.+) (?P<result>{"|".join(HABIT_RESULT_MAPPING.keys())})',
     r'^((?P<action>начни|закончи) (?P<regular>регулярное )?событие (?P<event_name>.+))'
 ]
+
+ACTION_EVENT_START = 'начни'

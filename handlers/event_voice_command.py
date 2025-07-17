@@ -17,22 +17,15 @@ def start_event(match):
     event_name = match.group('event_name').lower()
     event_name = event_name_mapping.get(event_name, event_name)
 
-    try:
-        print(match.group('regular'))
-        print('!!!!!!!!!!')
-        print('!!!!!!!!!!')
-        print('!!!!!!!!!!')
-        regular_event = RegularEvent.get_object(name=event_name)
-        regular_event.start_now()
-    except IndexError:
-        Message.simple_message(transport=NotificationTransport.telegram(),
-                               extra_data={'title': f'Не найдено регулярного события: {event_name}'})
-        return
-    except AttributeError:
+    if match.group('regular'):
+        try:
+            regular_event = RegularEvent.get_object(name=event_name)
+            regular_event.start_now()
+        except IndexError:
+            Message.simple_message(transport=NotificationTransport.telegram(),
+                                   extra_data={'title': f'Не найдено регулярного события: {event_name}'})
+    else:
         Event.get_object(title=event_name, start=datetime.now())
-
-    print(':)')
-    print(event_name)
 
 def end_event(match):
     pass

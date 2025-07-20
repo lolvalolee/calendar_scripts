@@ -16,7 +16,7 @@ statuses, _ = UserStatus.get_objects()
 
 questions = [
     {
-        'title': 'Нет',
+        'title': item.name['value'],
         'style': BUTTON_VARIANT_WARNING,
         'action': {
             'type': 'call_handler',

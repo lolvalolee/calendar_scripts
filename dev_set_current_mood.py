@@ -29,5 +29,6 @@ extra_data = {
     'title': 'Начать событие сон?',
     'questions': questions
 }
-
+print(questions)
+print(extra_data)
 Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)

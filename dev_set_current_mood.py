@@ -20,7 +20,10 @@ questions = [
         'style': BUTTON_VARIANT_WARNING,
         'action': {
             'type': 'call_handler',
-            'qs': {'name': 'Сон'}
+            'qs': {'id': 11},
+            'handler_extra_data': {
+                'mood': item.label
+            }
         }
     } for item in statuses
 ]

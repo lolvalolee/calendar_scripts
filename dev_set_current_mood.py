@@ -11,25 +11,28 @@ from handlers.event_voice_command import start_event
 from handlers.habit_voice_command import handle_habit_report
 
 sys.path.append('./')
+print(os.environ.get('handler_extra_data'))
 
-statuses, _ = UserStatus.get_objects()
 
-questions = [
-    {
-        'title': item.name['value'],
-        'style': BUTTON_VARIANT_WARNING,
-        'action': {
-            'type': 'call_handler',
-            'qs': {'id': 11},
-            'handler_extra_data': {
-                'mood': item.label
-            }
-        }
-    } for item in statuses
-]
-
-extra_data = {
-    'title': 'Начать событие сон?',
-    'questions': questions
-}
-Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
+#
+# statuses, _ = UserStatus.get_objects()
+#
+# questions = [
+#     {
+#         'title': item.name['value'],
+#         'style': BUTTON_VARIANT_WARNING,
+#         'action': {
+#             'type': 'call_handler',
+#             'qs': {'id': 11},
+#             'handler_extra_data': {
+#                 'mood': item.label
+#             }
+#         }
+#     } for item in statuses
+# ]
+#
+# extra_data = {
+#     'title': 'Начать событие сон?',
+#     'questions': questions
+# }
+# Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)

@@ -19,7 +19,7 @@ _now = datetime.now()
 if mood == 'Настроение: хорошее':
     Message.simple_messagev2(transport=NotificationTransport.telegram(),
                              title='Супер. Тогда кофе, небольшая разминка и завтрак.')
-
+print(mood, mood == 'Настроение: хорошее')
 
 #
 # statuses, _ = UserStatus.get_objects()

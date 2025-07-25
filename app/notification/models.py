@@ -38,7 +38,7 @@ class Message(CRUDModel):
 
     @classmethod
     def simple_messagev2(cls, title, transport):
-        return cls.create(notification_type=NOTIFICATION_QUESTION, extra_data={'title': title}, transport=transport)
+        return cls.create(notification_type=NOTIFICATION_MESSAGE, extra_data={'title': title}, transport=transport)
 
     @classmethod
     def question(cls, **kwargs):

@@ -2,6 +2,7 @@ import json
 import os
 import re
 import sys
+from datetime import datetime
 
 from app.notification.constants import BUTTON_VARIANT_WARNING
 from app.notification.models import Message, NotificationTransport
@@ -11,7 +12,13 @@ from handlers.event_voice_command import start_event
 from handlers.habit_voice_command import handle_habit_report
 
 sys.path.append('./')
-print(os.environ.get('handler_extra_data'))
+
+mood = json.loads(os.environ.get('handler_extra_data'))['mood']
+_now = datetime.now()
+
+if mood == 'Настроение: хорошее':
+    Message.simple_messagev2(transport=NotificationTransport.telegram(),
+                             title='Супер. Тогда кофе, небольшая разминка и завтрак.')
 
 
 #

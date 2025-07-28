@@ -18,10 +18,28 @@ mood = json.loads(os.environ.get('handler_extra_data'))['mood']
 _now = datetime.now()
 
 if mood == 'Настроение: хорошее':
-    Message.simple_messagev2(transport=NotificationTransport.telegram(),
-                             title='Супер. Тогда кофе, небольшая разминка и завтрак.')
     RegularEvent.get_object(name='утренний кофе').start(start_dt=_now + timedelta(minutes=10))
-print(mood, mood == 'Настроение: хорошее')
+
+    questions = [
+        {
+            'title': item,
+            'style': BUTTON_VARIANT_WARNING,
+            'action': {
+                'type': 'call_handler',
+                'qs': {'name': 'dev_plane_breakfast.py'},
+                'handler_extra_data': {
+                    'meal': item
+                }
+            }
+        } for item in ['каша гречневая', 'омлет', 'просто чай с шоколадкой']
+    ]
+
+    extra_data = {
+        'title': 'Супер. Тогда кофе, небольшая разминка и завтрак. Что будешь кушать?',
+        'questions': questions
+    }
+
+    Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
 
 #
 # statuses, _ = UserStatus.get_objects()

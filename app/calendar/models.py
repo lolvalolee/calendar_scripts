@@ -88,5 +88,5 @@ class RegularEvent(CRUDModel):
 
         self._call_action('POST', 'start-now', data=data)
 
-    def start(self, title, start_dt):
+    def start(self, start_dt, title=None):
         self._call_action('POST', 'start-now', data={'start': start_dt, 'title': title})

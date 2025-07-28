@@ -2,8 +2,9 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
+from app.calendar.models import Event, RegularEvent
 from app.notification.constants import BUTTON_VARIANT_WARNING
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import UserStatus
@@ -19,6 +20,7 @@ _now = datetime.now()
 if mood == 'Настроение: хорошее':
     Message.simple_messagev2(transport=NotificationTransport.telegram(),
                              title='Супер. Тогда кофе, небольшая разминка и завтрак.')
+    RegularEvent.get_object(name='утренний кофе').start(start_dt=_now + timedelta(minutes=10))
 print(mood, mood == 'Настроение: хорошее')
 
 #

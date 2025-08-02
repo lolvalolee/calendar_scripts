@@ -9,6 +9,7 @@ from utils.misc import get_handler_extra_data
 
 sys.path.append('./')
 
+print(get_handler_extra_data())
 mood = get_handler_extra_data()['mood']
 _now = datetime.now()
 

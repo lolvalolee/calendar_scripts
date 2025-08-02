@@ -115,7 +115,7 @@ class RecipeItem(CRUDModel):
 
 
 @dataclass
-class Recipe(CRUDModel):
+class  Recipe(CRUDModel):
     url = '/api/recipe/'
 
     description: str

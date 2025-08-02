@@ -1,8 +1,7 @@
-import json
-from datetime import datetime
 import os
-
+import json
 import requests
+from datetime import datetime
 
 
 def send_request(method, url, data=None, headers=None):
@@ -27,3 +26,7 @@ def send_request(method, url, data=None, headers=None):
         query_params['headers']['Content-Type'] = 'application/json'
 
     return getattr(requests, method)(url, **query_params)
+
+
+def get_handler_extra_data():
+    return json.loads(os.environ.get('handler_extra_data'))['mood']

@@ -27,7 +27,7 @@ if mood == 'Настроение: хорошее':
                 'type': 'call_handler',
                 'qs': {'name': 'dev_plane_breakfast.py'},
                 'handler_extra_data': {
-                    'meal_id': recipe.id
+                    'recipe_id': recipe.id
                 }
             }
         } for recipe in recipes

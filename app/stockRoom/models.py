@@ -126,4 +126,4 @@ class Recipe(CRUDModel):
     measure: int
     count: float
     recipe_items: List[dict]
-
+    tags: List[dict]

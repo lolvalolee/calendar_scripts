@@ -21,7 +21,7 @@ if mood == 'Настроение: хорошее':
 
     questions = [
         {
-            'title': recipe.stock_room_item.name['value'],
+            'title': recipe.stock_room_item['name']['value'],
             'style': BUTTON_VARIANT_WARNING,
             'action': {
                 'type': 'call_handler',

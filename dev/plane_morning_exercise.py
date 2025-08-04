@@ -1,9 +1,5 @@
-import os
-import sys
+from utils.misc import get_handler_extra_data
 
-from app.notification.constants import BUTTON_VARIANT_WARNING
-from app.notification.models import Message, NotificationTransport
-from app.profile.models import UserStatus
 
 def handle():
-    pass
+    print(get_handler_extra_data())

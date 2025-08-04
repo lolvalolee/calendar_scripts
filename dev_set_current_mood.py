@@ -1,19 +1,14 @@
-import sys
 from datetime import datetime, timedelta
 
 from app.calendar.models import Event, RegularEvent
 from app.notification.constants import BUTTON_VARIANT_WARNING
 from app.notification.models import Message, NotificationTransport
 from app.stockRoom.models import Recipe
+from constants.planning import EXERCISES
 from utils.misc import get_handler_extra_data
 
 
-sys.path.append('./')
-
-mood = get_handler_extra_data()['mood']
-_now = datetime.now()
-
-if mood == 'Настроение: хорошее':
+def handle_good_mood():
     RegularEvent.get_object(name='утренний кофе').start(start_dt=_now + timedelta(minutes=10))
 
     recipes, _ = Recipe.get_objects(tag='завтрак')
@@ -39,7 +34,6 @@ if mood == 'Настроение: хорошее':
 
     Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
 
-    exercises = ['нет', 'беговая', 'растягивания', 'оба']
     questions = [
         {
             'title': exercise,
@@ -51,7 +45,7 @@ if mood == 'Настроение: хорошее':
                     'e': exercise
                 }
             }
-        } for exercise in exercises
+        } for exercise in EXERCISES
     ]
 
     extra_data = {
@@ -60,3 +54,10 @@ if mood == 'Настроение: хорошее':
     }
 
     Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
+
+def handle():
+    mood = get_handler_extra_data()['mood']
+    _now = datetime.now()
+
+    if mood == 'Настроение: хорошее':
+        handle_good_mood()

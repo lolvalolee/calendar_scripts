@@ -4,7 +4,10 @@ from app.calendar.models import Event, RegularEvent
 from app.notification.constants import BUTTON_VARIANT_WARNING
 from app.notification.models import Message, NotificationTransport
 from app.stockRoom.models import Recipe
+from app.profile.models import Profile
+
 from constants.planning import EXERCISES
+
 from utils.misc import get_handler_extra_data
 
 
@@ -59,6 +62,9 @@ def handle_good_mood():
 
 def handle():
     mood = get_handler_extra_data()['mood']
+    profile = Profile.get()
+    now = profile.now
+    print(now, now.time())
 
     if mood == 'Настроение: хорошее':
         handle_good_mood()

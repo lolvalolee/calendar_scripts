@@ -65,6 +65,6 @@ def handle():
     profile = Profile.get()
     now = profile.now
     print(now, now.time())
-
+    exit(0)
     if mood == 'Настроение: хорошее':
         handle_good_mood()

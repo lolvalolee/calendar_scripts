@@ -1,6 +1,6 @@
-from datetime import datetime, timedelta, time
+from datetime import timedelta, time
 
-from app.calendar.models import Event, RegularEvent
+from app.calendar.models import RegularEvent
 from app.notification.constants import BUTTON_VARIANT_WARNING
 from app.notification.models import Message, NotificationTransport
 from app.stockRoom.models import Recipe
@@ -18,7 +18,7 @@ def handle_good_mood(profile: Profile):
     RegularEvent.get_object(name='утренний кофе').start(start_dt=now + timedelta(minutes=10))
 
     if now.time() < time(hour=10):
-
+        Message.simple_messagev2(transport=NotificationTransport.telegram()(), extra_data='Поздновато проснулся. Тогда просто кофе и работать. В любом случае - боброе утро, Саша 🙃')
         exit(0)
 
     recipes, _ = Recipe.get_objects(tag='завтрак')

@@ -13,11 +13,12 @@ from utils.misc import get_handler_extra_data
 
 def handle_good_mood(profile: Profile):
     # TODO: check if any events already planned
-    now = profile.now.time()
+    now = profile.now
+    current_time = now.time()
 
     RegularEvent.get_object(name='утренний кофе').start(start_dt=now + timedelta(minutes=10))
 
-    if now.time() < time(hour=10):
+    if current_time < time(hour=10):
         Message.simple_messagev2(transport=NotificationTransport.telegram()(), extra_data='Поздновато проснулся. Тогда просто кофе и работать. В любом случае - боброе утро, Саша 🙃')
         exit(0)
 

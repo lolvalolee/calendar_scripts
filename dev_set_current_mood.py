@@ -46,7 +46,7 @@ if mood == 'Настроение: хорошее':
             'style': BUTTON_VARIANT_WARNING,
             'action': {
                 'type': 'call_handler',
-                'qs': {'name': 'dev_plane_breakfast.py'},
+                'qs': {'id': 16},
                 'handler_extra_data': {
                     'e': exercise
                 }

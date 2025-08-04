@@ -1,36 +1,31 @@
-import sys
-
 from app.notification.constants import BUTTON_VARIANT_WARNING
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import UserStatus
 
 
-sys.path.append('./')
+def handle():
+    statuses, _ = UserStatus.get_objects()
 
-statuses, _ = UserStatus.get_objects()
-
-questions = [
-    {
-        'title': item.name['value'],
-        'style': BUTTON_VARIANT_WARNING,
-        'action': {
-            'type': 'call_handler',
-            'qs': {'name': 'dev_set_current_mood.py'},
-            'handler_extra_data': {
-                'mood': item.label
+    questions = [
+        {
+            'title': item.name['value'],
+            'style': BUTTON_VARIANT_WARNING,
+            'action': {
+                'type': 'call_handler',
+                'qs': {'name': 'dev_set_current_mood.py'},
+                'handler_extra_data': {
+                    'mood': item.label
+                }
             }
-        }
-    } for item in statuses
-]
+        } for item in statuses
+    ]
 
-extra_data = {
-    'title': 'Сань, какое настроение?',
-    'questions': questions
-}
+    extra_data = {
+        'title': 'Сань, какое настроение?',
+        'questions': questions
+    }
 
-Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
-
-
+    Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
 
 
 

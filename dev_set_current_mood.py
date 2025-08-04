@@ -9,6 +9,8 @@ from utils.misc import get_handler_extra_data
 
 
 def handle_good_mood():
+    _now = datetime.now()
+
     RegularEvent.get_object(name='утренний кофе').start(start_dt=_now + timedelta(minutes=10))
 
     recipes, _ = Recipe.get_objects(tag='завтрак')
@@ -57,7 +59,6 @@ def handle_good_mood():
 
 def handle():
     mood = get_handler_extra_data()['mood']
-    _now = datetime.now()
 
     if mood == 'Настроение: хорошее':
         handle_good_mood()

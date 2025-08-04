@@ -19,7 +19,8 @@ def handle_good_mood(profile: Profile):
     RegularEvent.get_object(name='утренний кофе').start(start_dt=now + timedelta(minutes=10))
 
     if current_time > time(hour=10):
-        Message.simple_messagev2(transport=NotificationTransport.telegram()(), extra_data='Поздновато проснулся. Тогда просто кофе и работать. В любом случае - боброе утро, Саша 🙃')
+        Message.simple_messagev2(transport=NotificationTransport.telegram(),
+                                 title='Поздновато проснулся. Тогда просто кофе и работать. В любом случае - боброе утро, Саша 🙃')
         exit(0)
 
     recipes, _ = Recipe.get_objects(tag='завтрак')

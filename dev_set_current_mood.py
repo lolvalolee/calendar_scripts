@@ -42,7 +42,7 @@ if mood == 'Настроение: хорошее':
     exercises = ['нет', 'беговая', 'растягивания', 'оба']
     questions = [
         {
-            'title': 'Как насчет маленькой тренировки?',
+            'title': exercises,
             'style': BUTTON_VARIANT_WARNING,
             'action': {
                 'type': 'call_handler',
@@ -51,11 +51,11 @@ if mood == 'Настроение: хорошее':
                     'e': exercise
                 }
             }
-        } for exercise in  exercises
+        } for exercise in exercises
     ]
 
     extra_data = {
-        'title': 'Супер. Тогда кофе, небольшая разминка и завтрак. Что будешь кушать?',
+        'title': 'Как насчет маленькой тренировки?',
         'questions': questions
     }
 

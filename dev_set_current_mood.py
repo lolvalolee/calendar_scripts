@@ -48,10 +48,10 @@ if mood == 'Настроение: хорошее':
                 'type': 'call_handler',
                 'qs': {'name': 'dev_plane_breakfast.py'},
                 'handler_extra_data': {
-                    'exercise': exercise
+                    'e': exercise
                 }
             }
-        } for exercise in exercises
+        } for exercise in  exercises
     ]
 
     extra_data = {

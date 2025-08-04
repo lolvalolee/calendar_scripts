@@ -10,7 +10,6 @@ from utils.misc import get_handler_extra_data
 
 sys.path.append('./')
 
-print(get_handler_extra_data())
 mood = get_handler_extra_data()['mood']
 _now = datetime.now()
 
@@ -31,6 +30,28 @@ if mood == 'Настроение: хорошее':
                 }
             }
         } for recipe in recipes
+    ]
+
+    extra_data = {
+        'title': 'Супер. Тогда кофе, небольшая разминка и завтрак. Что будешь кушать?',
+        'questions': questions
+    }
+
+    Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
+
+    exercises = ['нет', 'беговая', 'растягивания', 'оба']
+    questions = [
+        {
+            'title': 'Как насчет маленькой тренировки?',
+            'style': BUTTON_VARIANT_WARNING,
+            'action': {
+                'type': 'call_handler',
+                'qs': {'name': 'dev_plane_breakfast.py'},
+                'handler_extra_data': {
+                    'exercise': exercise
+                }
+            }
+        } for exercise in exercises
     ]
 
     extra_data = {

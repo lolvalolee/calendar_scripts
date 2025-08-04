@@ -3,9 +3,7 @@ from app.stockRoom.models import Recipe, Measure, Stock, MealSchedule
 from utils.misc import get_handler_extra_data
 
 
-print(get_handler_extra_data())
 extra_data = get_handler_extra_data()
-# exit(0)
 recipe = Recipe.get_object(id=extra_data['recipe_id'])
 
 meal_stock_item = 'гречневая каша'

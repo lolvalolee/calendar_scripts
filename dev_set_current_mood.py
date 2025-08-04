@@ -42,7 +42,7 @@ if mood == 'Настроение: хорошее':
     exercises = ['нет', 'беговая', 'растягивания', 'оба']
     questions = [
         {
-            'title': exercises,
+            'title': exercise,
             'style': BUTTON_VARIANT_WARNING,
             'action': {
                 'type': 'call_handler',

@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 from app.calendar.models import Event, RegularEvent
 from app.notification.constants import BUTTON_VARIANT_WARNING
@@ -11,10 +11,15 @@ from constants.planning import EXERCISES
 from utils.misc import get_handler_extra_data
 
 
-def handle_good_mood():
-    _now = datetime.now()
+def handle_good_mood(profile: Profile):
+    # TODO: check if any events already planned
+    now = profile.now.time()
 
-    RegularEvent.get_object(name='утренний кофе').start(start_dt=_now + timedelta(minutes=10))
+    RegularEvent.get_object(name='утренний кофе').start(start_dt=now + timedelta(minutes=10))
+
+    if now.time() < time(hour=10):
+
+        exit(0)
 
     recipes, _ = Recipe.get_objects(tag='завтрак')
 
@@ -63,8 +68,5 @@ def handle_good_mood():
 def handle():
     mood = get_handler_extra_data()['mood']
     profile = Profile.get()
-    now = profile.now
-    print(now, now.time())
-    exit(0)
     if mood == 'Настроение: хорошее':
-        handle_good_mood()
+        handle_good_mood(profile)

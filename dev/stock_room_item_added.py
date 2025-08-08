@@ -7,5 +7,6 @@ from app.stockRoom.models import UserStockRoomItem, StockItem
 def handle():
     item = UserStockRoomItem.get_object(os.environ['object_id'])
     stock_item = StockItem.get_object(item.stock_room_item['id'])
-    # print(item, stock_item)
-    print(stock_item)
+    for tag in stock_item.tags:
+        if tag.name == 'есть срок годности':
+            print('hey')

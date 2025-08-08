@@ -52,7 +52,7 @@ class Stock(CRUDModel):
 class StockItem(CRUDModel):
     url = '/api/stock-room/'
     name: dict
-    keys: List[str]
+    
 
 
 @dataclass

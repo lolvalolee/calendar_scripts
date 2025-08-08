@@ -52,7 +52,6 @@ class Stock(CRUDModel):
 class StockItem(CRUDModel):
     url = '/api/stock-room/'
     name: dict
-    
 
 
 @dataclass

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from datetime import time
+from datetime import time, datetime
 from typing import Optional, List
 
 from app.calendar.models import Event
@@ -74,6 +74,11 @@ class UserStockRoomItem(CRUDModel):
     count: float
     stock_room_item: dict
     deleted: bool
+    exp_date: datetime
+
+    def set_exp_date(self, exp_date):
+        data = {'exp_date': exp_date}
+        return send_request('post', self.combine_url(self.url + f'{self.id}/set-exp-date/'), data=data)
 
 
 @dataclass

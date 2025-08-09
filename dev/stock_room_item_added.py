@@ -26,7 +26,7 @@ def handle():
             ]
 
             extra_data = {
-                'title': f'{stock_item.name['value']} сьедобный до',
+                'title': f'{stock_item.name["value"]} сьедобный до',
                 'questions': questions
             }
 

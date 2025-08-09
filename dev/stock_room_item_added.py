@@ -17,7 +17,7 @@ def handle():
                     'title': day,
                     'action': {
                         'type': 'call_handler',
-                        'qs': {'id': 11},
+                        'qs': {'name': 'set_exp_date'},
                         'handler_extra_data': {
                             'd': day, 'i': item.id,
                         }

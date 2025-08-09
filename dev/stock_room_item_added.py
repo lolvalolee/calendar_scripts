@@ -1,5 +1,6 @@
 import os
 
+from app.notification.models import Message, NotificationTransport
 from utils.misc import get_handler_extra_data
 from app.stockRoom.models import UserStockRoomItem, StockItem
 
@@ -9,4 +10,24 @@ def handle():
     stock_item = StockItem.get_object(item.stock_room_item['id'])
     for tag in stock_item.tags:
         if tag['name'] == 'есть срок годности':
-            print('hey')
+            days = range(1, 6)
+
+            questions = [
+                {
+                    'title': day,
+                    'action': {
+                        'type': 'call_handler',
+                        'qs': {'id': 11},
+                        'handler_extra_data': {
+                            'd': day, 'i': item.id,
+                        }
+                    }
+                } for day in days
+            ]
+
+            extra_data = {
+                'title': f'{stock_item.name['value']} сьедобный до',
+                'questions': questions
+            }
+
+            Message.question(transport=NotificationTransport.desktop(), extra_data=extra_data)

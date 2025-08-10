@@ -37,6 +37,11 @@ class Event(CRUDModel):
 
 
 @dataclass
+class SubTask(CRUDModel):
+    url = '/api/subtask/'
+
+
+@dataclass
 class PlannedEvent(CRUDModel):
     url = '/api/event-planned/'
 
@@ -90,3 +95,6 @@ class RegularEvent(CRUDModel):
 
     def start(self, start_dt, title=None):
         self._call_action('POST', 'start-now', data={'start': start_dt, 'title': title})
+
+    def create_subtask(self, title, description=None, **kwargs):
+        return SubTask.cr

@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+from app.calendar.models import RegularEvent
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
 from app.stockRoom.constants import STATUS_IN_STOCK_ROOM
@@ -17,4 +18,6 @@ def handle():
     items = ' '.join([item.stock_room_item['name']['value'] for item in items])
     msg = f'У {items} сегодня заканчивается срок годности. Не забудь!'
     Message.simple_messagev2(transport=NotificationTransport.telegram(), title=msg)
-    print(items)
+
+    regular_event = RegularEvent.get_object(name='готовка')
+    regular_event.create_subtask(title={'value': f'Приготовить {msg}. Ну или выкинуть'})

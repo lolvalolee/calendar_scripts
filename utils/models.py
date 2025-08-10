@@ -122,4 +122,4 @@ class CRUDModel(BaseModel):
 
 
 def get_content_types():
-    return send_request('get', f'{BASE_URL}api/content-type/').json()
+    return send_request('get', f'{BASE_URL}/api/content-type/').json()

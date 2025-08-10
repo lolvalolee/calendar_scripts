@@ -97,4 +97,8 @@ class RegularEvent(CRUDModel):
         self._call_action('POST', 'start-now', data={'start': start_dt, 'title': title})
 
     def create_subtask(self, title, description=None, **kwargs):
-        return SubTask.cr
+        data = {'title': title}
+        if description:
+            data['description'] = description
+
+        return self._call_action('POST', 'sub-task', data=data)

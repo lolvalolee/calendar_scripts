@@ -40,6 +40,11 @@ class Event(CRUDModel):
 class SubTask(CRUDModel):
     url = '/api/subtask/'
 
+    title: dict
+    description: dict
+    created: datetime
+    created_by: dict
+
 
 @dataclass
 class PlannedEvent(CRUDModel):
@@ -101,4 +106,7 @@ class RegularEvent(CRUDModel):
         if description:
             data['description'] = description
 
-        return self._call_action('POST', 'sub-task', data=data)
+        response = self._call_action('POST', 'sub-task', data=data)
+        if response.status_code != 200:
+            return response.json(), False
+        return SubTask(**response.json())

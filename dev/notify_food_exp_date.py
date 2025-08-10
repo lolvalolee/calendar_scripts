@@ -5,6 +5,7 @@ from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
 from app.stockRoom.constants import STATUS_IN_STOCK_ROOM
 from app.stockRoom.models import UserStockRoomItem
+from utils.models import get_content_types
 
 
 def handle():
@@ -21,7 +22,8 @@ def handle():
 
     regular_event = RegularEvent.get_object(name='готовка')
     subtask, created = regular_event.create_subtask(title={'value': f'Приготовить {msg}. Ну или выкинуть'})
-    if created:
-        print(subtask)
-    else:
-        print(subtask)
+    # if created:
+    #     print(subtask)
+    # else:
+    #     print(subtask)
+    print(get_content_types())

@@ -119,3 +119,7 @@ class CRUDModel(BaseModel):
         except Exception as e:
             print('error while execute')
             print(e)
+
+
+def get_content_types():
+    return send_request('get', 'api/content-type/').json()

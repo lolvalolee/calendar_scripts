@@ -20,4 +20,8 @@ def handle():
     Message.simple_messagev2(transport=NotificationTransport.telegram(), title=msg)
 
     regular_event = RegularEvent.get_object(name='готовка')
-    print(regular_event.create_subtask(title={'value': f'Приготовить {msg}. Ну или выкинуть'}).json())
+    subtask, created = regular_event.create_subtask(title={'value': f'Приготовить {msg}. Ну или выкинуть'})
+    if created:
+        print(subtask)
+    else:
+        print(subtask)

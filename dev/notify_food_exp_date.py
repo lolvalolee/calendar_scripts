@@ -26,7 +26,8 @@ def handle():
     Message.simple_messagev2(transport=NotificationTransport.telegram(), title=msg)
 
     regular_event = RegularEvent.get_object(name='готовка')
-    subtask, created = regular_event.create_subtask(title={'value': f'Приготовить {msg}. Ну или выкинуть'})
+    subtask, created = regular_event.create_subtask(
+        title={'value': f'Приготовить {msg}. Ну или выкинуть'}, extra_data={'test': 'test'})
     if created:
         print('create subtask')
         print('created', subtask, subtask.content_type_id)

@@ -104,7 +104,7 @@ class RegularEvent(CRUDModel):
         self._call_action('POST', 'start-now', data={'start': start_dt, 'title': title})
 
     def create_subtask(self, title, description=None, **kwargs):
-        data = {'title': title}
+        data = dict(title=title, **kwargs)
         if description:
             data['description'] = description
 

@@ -46,6 +46,7 @@ class SubTask(CRUDModel):
     created: datetime
     created_by: dict
     status: str
+    extra_data: dict
 
 
 @dataclass

@@ -27,4 +27,5 @@ def handle():
     #     print(subtask)
     # else:
     #     print(subtask)
+    print('***********')
     print(get_content_types())

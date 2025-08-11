@@ -110,4 +110,4 @@ class RegularEvent(CRUDModel):
         response = self._call_action('POST', 'sub-task', data=data)
         if response.status_code != 200:
             return response.json(), False
-        return SubTask(**response.json())
+        return SubTask(**response.json()), True

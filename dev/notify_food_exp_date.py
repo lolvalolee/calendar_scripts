@@ -26,10 +26,9 @@ def handle():
 
     regular_event = RegularEvent.get_object(name='готовка')
     subtask, created = regular_event.create_subtask(title={'value': f'Приготовить {msg}. Ну или выкинуть'})
-    print(subtask.content_type_id)
-    # if created:
-    #     print(subtask)
-    # else:
-    #     print(subtask)
+    if created:
+        print('created', subtask, subtask.content_type_id)
+    else:
+        print(subtask)
     print('***********')
     print(get_content_types())

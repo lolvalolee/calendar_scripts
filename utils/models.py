@@ -88,6 +88,7 @@ class BaseModel:
 
 
 class CRUDModel(BaseModel):
+    model_name = ''
 
     def _label(self):
         return f'{self.__class__.__name__} {self.id}'
@@ -119,6 +120,15 @@ class CRUDModel(BaseModel):
         except Exception as e:
             print('error while execute')
             print(e)
+
+    @property
+    def content_type_id(self):
+        content_types = get_content_types()
+        try:
+            return filter(lambda x: x[1] == self.model_name, content_types)[0]
+        except IndexError:
+            print('content type not found')
+            return None
 
 
 def get_content_types():

@@ -39,6 +39,7 @@ class Event(CRUDModel):
 @dataclass
 class SubTask(CRUDModel):
     url = '/api/subtask/'
+    model_name = 'SubTask'
 
     title: dict
     description: dict
@@ -89,7 +90,7 @@ class RegularEvent(CRUDModel):
             return None
 
     def end_now(self):
-        print(self._call_action('POST', 'end-now'))
+        self._call_action('POST', 'end-now')
 
     def start_now(self, title=None):
         data = {}

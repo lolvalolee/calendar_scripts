@@ -107,7 +107,8 @@ class RegularEvent(CRUDModel):
         data = dict(title=title, **kwargs)
         if description:
             data['description'] = description
-
+        print('create_subtask')
+        print(data)
         response = self._call_action('POST', 'sub-task', data=data)
         if response.status_code != 200:
             return response.json(), False

@@ -12,9 +12,13 @@ def handle():
     profile = Profile.get()
     start = profile.now
     end = start + timedelta(hours=24)
-    items, cnt = UserStockRoomItem.get_objects(exp_date__lte=end, exp_date__gte=start, status=STATUS_IN_STOCK_ROOM)
-    if not cnt:
-        exit(0)
+    # items, cnt = UserStockRoomItem.get_objects(exp_date__lte=end, exp_date__gte=start, status=STATUS_IN_STOCK_ROOM)
+    # if not cnt:
+    #     exit(0)
+
+    items, cnt = UserStockRoomItem.get_objects()
+    # if not cnt:
+    #     exit(0)
 
     items = ' '.join([item.stock_room_item['name']['value'] for item in items])
     msg = f'У {items} сегодня заканчивается срок годности. Не забудь!'

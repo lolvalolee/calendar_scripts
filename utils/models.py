@@ -124,12 +124,11 @@ class CRUDModel(BaseModel):
     @property
     def content_type_id(self):
         content_types = get_content_types()
-        print(content_types)
         try:
             return list(filter(lambda x: x['name'] == self.model_name, content_types))[0]['id']
         except IndexError:
-            print('content type not found')
             return None
+
 
 
 def get_content_types():

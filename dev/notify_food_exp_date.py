@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from app.calendar.models import RegularEvent
+from app.home.models import MainPageDisplay
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
 from app.stockRoom.constants import STATUS_IN_STOCK_ROOM
@@ -29,8 +30,4 @@ def handle():
     if created:
         print('create subtask')
         print('created', subtask, subtask.content_type_id)
-    else:
-        print('not created')
-        print(subtask)
-    print('***********')
-    # print(get_content_types())
+        MainPageDisplay.assign(subtask)

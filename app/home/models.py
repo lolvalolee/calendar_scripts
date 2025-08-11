@@ -15,3 +15,8 @@ class MainPageDisplay(CRUDModel):
     content_object: dict
     content_object_verbose_name: str
     extra_data: dict
+
+    @classmethod
+    def assign(cls, obj, date_from=None, date_to=None, extra_data=None):
+        cls.create(object_id=obj.id, content_object_id=obj.content_object_id, date_from=date_from, date_to=date_to,
+                   extra_data=extra_data)

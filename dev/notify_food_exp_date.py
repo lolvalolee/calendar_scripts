@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from app.calendar.models import RegularEvent
 from app.home.models import MainPageDisplay
@@ -6,7 +6,6 @@ from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
 from app.stockRoom.constants import STATUS_IN_STOCK_ROOM
 from app.stockRoom.models import UserStockRoomItem
-from utils.models import get_content_types
 
 
 def handle():
@@ -27,8 +26,6 @@ def handle():
 
     regular_event = RegularEvent.get_object(name='готовка')
     subtask, created = regular_event.create_subtask(
-        title={'value': f'Приготовить {msg}. Ну или выкинуть'}, extra_data={'test': 'test'})
+        title={'value': f'Приготовить {msg}. Ну или выкинуть'}, extra_data={'test': datetime.now().isoformat()})
     if created:
-        print('create subtask')
-        print('created', subtask, subtask.content_type_id)
         MainPageDisplay.assign(subtask)

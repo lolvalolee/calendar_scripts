@@ -15,6 +15,6 @@ def handle():
     print('called!')
     item = UserHabitRecord.get_object(environ['object_id'])
     # if item.result == RESULT_FAILED:
-    item.update(extra_data={'note_required': True})
-
-    print(item)
+    r = item.update(extra_data={'note_required': True})
+    print(r)
+    print(r.json())

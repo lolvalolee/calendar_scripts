@@ -1,3 +1,4 @@
+import json
 from datetime import timedelta, datetime
 from os import environ
 
@@ -15,6 +16,6 @@ def handle():
     print('called!')
     item = UserHabitRecord.get_object(environ['object_id'])
     # if item.result == RESULT_FAILED:
-    r = item.update(extra_data={'note_required': True})
+    r = item.update(extra_data=json.dumps({'note_required': True}))
     print(r)
     print(r.json())

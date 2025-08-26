@@ -78,7 +78,7 @@ class BaseModel:
         data = data or {}
         data.update(kwargs)
 
-        return send_request(method_name.lower(), self.combine_url(self.url) + f'{self.id}/{action_name}/',
+        return send_request(method_name.lower(), self.combine_url(self.url) + f'{self.id}/{action_name + "/" if action_name else ""}',
                             data=data)
 
     @classmethod
@@ -129,6 +129,8 @@ class CRUDModel(BaseModel):
         except IndexError:
             return None
 
+    def update(self, **kwargs):
+        return self._call_action('PATCH', data=kwargs)
 
 
 def get_content_types():

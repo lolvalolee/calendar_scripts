@@ -1,4 +1,5 @@
 import json
+import uuid
 from datetime import timedelta, datetime
 from os import environ
 
@@ -15,7 +16,4 @@ from app.stockRoom.models import UserStockRoomItem
 def handle():
     print('called!')
     item = UserHabitRecord.get_object(environ['object_id'])
-    # if item.result == RESULT_FAILED:
-    r = item.update(extra_data=json.dumps({'note_required': True}))
-    print(r)
-    print(r.json())
+    r = item.update(extra_data=json.dumps({'note_required': True, 'uuid': str(uuid.uuid4())}))

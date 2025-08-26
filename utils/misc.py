@@ -21,7 +21,7 @@ def send_request(method, url, data=None, headers=None):
         query_params['params'] = query_params['data']
         query_params['headers']['Content-Type'] = 'application/json'
 
-    if method == 'post':
+    if method.lower() in ['post', 'put', 'patch'] :
         query_params['data'] = json.dumps(query_params.pop('data', {}))
         query_params['headers']['Content-Type'] = 'application/json'
 

@@ -13,7 +13,7 @@ class UserHabitRecord(CRUDModel):
     result: str
     record_date: datetime
     user_habit: int
-    extra_data: dict
+    extra_data: dict = None
 
 
 @dataclass

@@ -16,4 +16,4 @@ from app.stockRoom.models import UserStockRoomItem
 def handle():
     print('called!')
     item = UserHabitRecord.get_object(environ['object_id'])
-    r = item.update(extra_data=json.dumps({'note_required': True, 'uuid': str(uuid.uuid4())}))
+    r = item.update(extra_data={'note_required': True, 'uuid': str(uuid.uuid4())})

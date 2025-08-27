@@ -28,8 +28,8 @@ class BaseModel:
     def combine_url(cls, url):
         return BASE_URL + url
 
-    @property
-    def api_url(self):
+    @classmethod
+    def get_api_url(self):
         return self.combine_url(self.url)
 
     @classmethod
@@ -38,7 +38,7 @@ class BaseModel:
 
     @classmethod
     def create(cls, data, url=None, **kwargs):
-        return send_request('post', url or cls.api_url, data=kwargs).json()
+        return send_request('post', url or cls.get_api_url(), data=kwargs).json()
 
     @classmethod
     def get_object(cls, pk=None, **kwargs):

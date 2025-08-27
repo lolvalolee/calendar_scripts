@@ -37,7 +37,7 @@ class BaseModel:
         return send_request('get', url, data=kwargs).json()
 
     @classmethod
-    def create(cls, data, url=None, **kwargs):
+    def create(cls, url=None, **kwargs):
         return send_request('post', url or cls.get_api_url(), data=kwargs).json()
 
     @classmethod

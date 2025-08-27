@@ -3,6 +3,5 @@ from utils.misc import get_handler_extra_data
 
 
 def handle():
-    print(get_handler_extra_data())
     objects, _ = UserHabitRecord.get_objects(extra_data__note_required=True)
     print(objects)

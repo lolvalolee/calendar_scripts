@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from datetime import datetime
 
-from utils.models import BaseModel
+from utils.models import BaseModel, CRUDModel
 
 
 @dataclass
-class Comment(BaseModel):
+class Comment(CRUDModel):
     url = '/api/comment/'
 
     created: datetime

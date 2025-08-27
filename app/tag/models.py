@@ -8,7 +8,6 @@ from utils.models import BaseModel
 class Comment(BaseModel):
     url = '/api/comment/'
 
-    text: str
     created: datetime
     text: dict
     tags: list

@@ -51,7 +51,7 @@ class BaseModel:
         return cls(**data)
 
     @classmethod
-    def get_objects(cls, url=None,**kwargs):
+    def get_objects(cls, url=None, **kwargs):
         objects = []
         url = cls.combine_url(url or cls.url)
         while True:
@@ -134,6 +134,11 @@ class CRUDModel(BaseModel):
 
     def update(self, **kwargs):
         return self._call_action('PATCH', data=kwargs)
+
+    def exists(self, **kwargs):
+        #TODO: rewrite method. it should not retreive all data
+        _, cnt = self.get_objects(**kwargs)
+        return bool(cnt)
 
 
 def get_content_types():

@@ -135,9 +135,10 @@ class CRUDModel(BaseModel):
     def update(self, **kwargs):
         return self._call_action('PATCH', data=kwargs)
 
-    def exists(self, **kwargs):
+    @classmethod
+    def exists(cls, **kwargs):
         #TODO: rewrite method. it should not retreive all data
-        _, cnt = self.get_objects(**kwargs)
+        _, cnt = cls.get_objects(**kwargs)
         return bool(cnt)
 
 

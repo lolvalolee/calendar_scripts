@@ -22,10 +22,9 @@ def send_request(method, url, data=None, headers=None):
         query_params['headers']['Content-Type'] = 'application/json'
 
     if method.lower() in ['post', 'put', 'patch'] :
-        print('here!!!!!!!!!')
         query_params['data'] = json.dumps(query_params.pop('data', {}))
         query_params['headers']['Content-Type'] = 'application/json'
-    print(query_params)
+
     return getattr(requests, method)(url, **query_params)
 
 

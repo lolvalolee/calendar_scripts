@@ -13,7 +13,6 @@ profile = Profile.get()
 
 steam_api_key = ApiKey.get_object(name='steam')
 
-
 steam_id = "76561198082140903"  # Замените на ваш SteamID
 api_key = steam_api_key.key
 

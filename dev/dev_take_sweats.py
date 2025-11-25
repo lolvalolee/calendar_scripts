@@ -9,6 +9,7 @@ def handle():
     profile = Profile.get()
 
     point_type = PointType.get_object(name='Сладости')
+    print(f'amount: {point_type.total_amount}')
     if point_type.total_amount > 0:
         print('too low!')
         exit(0)

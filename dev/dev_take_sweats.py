@@ -9,4 +9,4 @@ def handle():
     start = profile.now
     end = start + timedelta(minutes=15)
     regular_event = RegularEvent.get_object(name='Есть вкусняшки')
-    regular_event.start(start_dt=start, end_dt=end)
+    regular_event.start(start=start, end=end)

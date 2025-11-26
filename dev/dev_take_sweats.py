@@ -9,7 +9,7 @@ from app.tag.models import Comment
 def handle():
     profile = Profile.get()
 
-    notes = Comment.get_objects(tag=['тренировка','совет'])
+    notes, _ = Comment.get_objects(tag=['тренировка','совет'])
     print(notes)
     text = 'Через 10 минут треша. Не забывай: \n' + '\n'.join([f'- {note.text["value"]}' for note in notes])
 

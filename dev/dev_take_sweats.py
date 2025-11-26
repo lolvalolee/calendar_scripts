@@ -12,7 +12,7 @@ def handle():
     notes = Comment.get_objects(tag=['тренировка','совет'])
     print(notes)
     exit(0)
-    
+
     point_type = PointType.get_object(name='Сладости')
     print(f'amount: {point_type.total_amount}')
     if point_type.total_amount > 0:

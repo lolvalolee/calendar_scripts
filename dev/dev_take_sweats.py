@@ -11,6 +11,10 @@ def handle():
 
     notes = Comment.get_objects(tag=['тренировка','совет'])
     print(notes)
+    text = f"""Через 10 минут треша. Не забывай
+- {'\n'.join(notes.text['value'])}"""
+
+    print(text)
     exit(0)
 
     point_type = PointType.get_object(name='Сладости')

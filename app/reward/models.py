@@ -17,3 +17,11 @@ class PointRecord(CRUDModel):
 
     point_type: int
     record: float
+
+
+@dataclass
+class Reward(CRUDModel):
+    url = '/api/reward/'
+
+    count: int
+    claim_count: int

@@ -11,8 +11,7 @@ def handle():
 
     notes = Comment.get_objects(tag=['тренировка','совет'])
     print(notes)
-    text = f"""Через 10 минут треша. Не забывай
-- {'\n'.join(notes.text['value'])}"""
+    text = 'Через 10 минут треша. Не забывай: \n' + '\n'.join([f'- {note.text["value"]}' for note in notes])
 
     print(text)
     exit(0)

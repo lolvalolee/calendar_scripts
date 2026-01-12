@@ -35,6 +35,10 @@ class Event(CRUDModel):
     def yesterday_events(cls, **kwargs):
         return cls.get_objects(range_type='yesterday', **kwargs)
 
+    @classmethod
+    def current_events(cls):
+        return cls.get_objects(action_name='current')
+
 
 @dataclass
 class SubTask(CRUDModel):

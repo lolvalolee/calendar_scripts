@@ -1,4 +1,5 @@
 import datetime
+
 from dataclasses import dataclass, fields
 from json import JSONDecodeError
 from zoneinfo import ZoneInfo
@@ -17,6 +18,41 @@ def apply_default_filters(*default_filters):
             return result
         return wrapper
     return decorator
+
+
+class ObjectsResponse:
+    _objects = []
+    _count = 0
+
+    def __init__(self, objects, count):
+        self._objects = objects
+        self._count = count
+
+    def __iter__(self):
+        self._index = 0
+        return self._objects
+
+    def __next__(self):
+        if self._index < len(self.data):
+            result = self.data[self._index]
+            self._index += 1
+            return result
+        else:
+            raise StopIteration
+
+    def __getitem__(self, idx):
+        return self._objects[idx]
+
+    def __len__(self):
+        return self._count
+
+    def __next__(self):
+        if self._index < len(self._count):
+            result = self._objects[self._index]
+            self._index += 1
+            return result
+        else:
+            raise StopIteration
 
 
 @dataclass
@@ -51,9 +87,13 @@ class BaseModel:
         return cls(**data)
 
     @classmethod
-    def get_objects(cls, url=None, **kwargs):
+    def get_objects(cls, url=None, action_name=None, **kwargs):
         objects = []
         url = cls.combine_url(url or cls.url)
+
+        if action_name:
+            url = f'{url}/{action_name}/'
+
         while True:
             data = cls.retrieve(url, **kwargs)
             total_count = data.get('count')

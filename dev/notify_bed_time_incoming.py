@@ -13,7 +13,7 @@ def handle():
 
     print(Event.current_events())
     allowed_events = ['Сон', 'Ходьба на беговой', 'Ванна']
-    if list(filter(lambda e: e.name['value'] in allowed_events, Event.current_events())):
+    if list(filter(lambda e: e.title['value'] in allowed_events, Event.current_events())):
         print('!!!')
         exit(0)
 

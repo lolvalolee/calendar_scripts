@@ -15,8 +15,6 @@ def handle():
     allowed_events = ['Сон', 'Ходьба на беговой', 'Ванна']
     print(current_events)
     if not current_events or list(filter(lambda e: e.title['value'] in allowed_events, current_events)):
-        Message.simple_messagev2(
-            'Через час спать. Сейчас - в душ на горшок и в люлю!',NotificationTransport.telegram())
         questions = [
             {
                 'title': 'Иду в душ',

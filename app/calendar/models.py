@@ -15,6 +15,7 @@ class Event(CRUDModel):
     sub_tasks: list
     regular_event: int
     event_type: str
+    canceled: datetime
 
     @property
     def duration(self):

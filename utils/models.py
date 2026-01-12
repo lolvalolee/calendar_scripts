@@ -103,7 +103,7 @@ class BaseModel:
                 url = data['next']
             else:
                 break
-        return objects, total_count
+        return ObjectsResponse(objects, total_count)
 
     @classmethod
     def get_objects_count(cls, **kwargs):

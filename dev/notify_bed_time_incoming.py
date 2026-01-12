@@ -13,7 +13,7 @@ def handle():
 
     current_events = list(Event.current_events())
     allowed_events = ['Сон', 'Ходьба на беговой', 'Ванна']
-
+    print(current_events)
     if not current_events:
         exit(0)
 

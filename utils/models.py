@@ -92,7 +92,7 @@ class BaseModel:
         url = cls.combine_url(url or cls.url)
 
         if action_name:
-            url = f'{url}/{action_name}/'
+            url = f'{url}{action_name}/'
 
         while True:
             data = cls.retrieve(url, **kwargs)

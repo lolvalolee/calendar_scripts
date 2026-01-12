@@ -15,7 +15,9 @@ def handle():
     allowed_events = ['Сон', 'Ходьба на беговой', 'Ванна']
     print(current_events)
     if not current_events:
-        exit(0)
+        Message.simple_messagev2(
+            f'Ты забил на одно из запланировных дел. Обьясни в чем причина. Создай нотификацию с uuid {obj.extra_data["uuid"]}',
+            NotificationTransport.telegram())
 
     if list(filter(lambda e: e.title['value'] in allowed_events, current_events)):
         print('!!!')

@@ -1,6 +1,7 @@
 from datetime import timedelta, datetime
 
 from app.calendar.models import RegularEvent, Event
+from app.handler.constants import ACTION_CALL_HANDLER
 from app.home.models import MainPageDisplay
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
@@ -19,7 +20,15 @@ def handle():
             {
                 'title': 'Иду в душ',
                 'action': {
-                    'type': 'call_handler',
+                    'type': ACTION_CALL_HANDLER,
+                    'qs': {'name': 'take_reward'},
+                    'handler_extra_data': {'i': '+'}
+                }
+            },
+            {
+                'title': 'Чуть позже',
+                'action': {
+                    'type': ACTION_CALL_HANDLER,
                     'qs': {'name': 'take_reward'},
                     'handler_extra_data': {'i': '+'}
                 }

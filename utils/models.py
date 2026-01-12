@@ -120,7 +120,7 @@ class BaseModel:
     @classmethod
     def search(cls, search):
         return cls.get_objects(search=search)
-    
+
 
 class CRUDModel(BaseModel):
     model_name = ''

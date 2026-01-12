@@ -1,6 +1,6 @@
 from datetime import timedelta, datetime
 
-from app.calendar.models import RegularEvent
+from app.calendar.models import RegularEvent, Event
 from app.home.models import MainPageDisplay
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
@@ -10,4 +10,7 @@ from app.stockRoom.models import UserStockRoomItem
 
 def handle():
     profile = Profile.get()
-    current_events = Event
+    profile = Profile.get()
+    start = profile.now
+    print(Event.current_events())
+    exit(0)

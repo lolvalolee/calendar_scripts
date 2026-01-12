@@ -119,9 +119,8 @@ class BaseModel:
 
     @classmethod
     def search(cls, search):
-        data , _ = cls.get_objects(search=search)
-        return data
-
+        return cls.get_objects(search=search)
+    
 
 class CRUDModel(BaseModel):
     model_name = ''

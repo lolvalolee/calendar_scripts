@@ -10,7 +10,11 @@ from app.stockRoom.models import UserStockRoomItem
 
 def handle():
     profile = Profile.get()
-    profile = Profile.get()
-    start = profile.now
+
     print(Event.current_events())
+    allowed_events = ['Сон', 'Ходьба на беговой', 'Ванна']
+    if list(filter(lambda e: e.name['value'] in allowed_events, Event.current_events())):
+        print('!!!')
+        exit(0)
+
     exit(0)

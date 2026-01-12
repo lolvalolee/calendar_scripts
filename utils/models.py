@@ -23,6 +23,7 @@ def apply_default_filters(*default_filters):
 class ObjectsResponse:
     _objects = []
     _count = 0
+    _index = 0
 
     def __init__(self, objects, count):
         self._objects = objects
@@ -30,11 +31,11 @@ class ObjectsResponse:
 
     def __iter__(self):
         self._index = 0
-        return self._objects
+        return self._objects.__iter__()
 
     def __next__(self):
-        if self._index < len(self.data):
-            result = self.data[self._index]
+        if self._index < len(self._objects):
+            result = self._objects[self._index]
             self._index += 1
             return result
         else:
@@ -45,14 +46,6 @@ class ObjectsResponse:
 
     def __len__(self):
         return self._count
-
-    def __next__(self):
-        if self._index < len(self._count):
-            result = self._objects[self._index]
-            self._index += 1
-            return result
-        else:
-            raise StopIteration
 
 
 @dataclass

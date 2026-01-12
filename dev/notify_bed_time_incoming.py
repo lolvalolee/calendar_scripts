@@ -40,6 +40,6 @@ def handle():
             'questions': questions
         }
 
-        Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
+        Message.question(transport=NotificationTransport.desktop(), extra_data=extra_data)
 
     exit(0)

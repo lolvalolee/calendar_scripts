@@ -29,4 +29,8 @@ def send_request(method, url, data=None, headers=None):
 
 
 def get_handler_extra_data():
-    return json.loads(os.environ.get('handler_extra_data'))
+    try:
+        print(os.environ.get('handler_extra_data'))
+        return json.loads(os.environ.get('handler_extra_data'))
+    except TypeError as e:
+        return {}

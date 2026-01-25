@@ -10,7 +10,7 @@ def handle():
             'title': 'Кусь',
             'action': {
                 'type': ACTION_CALL_HANDLER,
-                'qs': {'name': 'test_handler_ana'},
+                'qs': {'qs': '12'},
                 'handler_extra_data': {'i': '-'}
             }
         },
@@ -18,7 +18,7 @@ def handle():
             'title': 'Грызь!',
             'action': {
                 'type': ACTION_CALL_HANDLER,
-                'qs': {'name': 'test_handler_ana'},
+                'qs': {'qs': '12'},
                 'handler_extra_data': {'i': '+'}
             }
         },

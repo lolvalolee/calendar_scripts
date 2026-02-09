@@ -1,5 +1,7 @@
 import os
 import json
+from json import JSONDecodeError
+
 import requests
 from datetime import datetime
 
@@ -31,5 +33,5 @@ def send_request(method, url, data=None, headers=None):
 def get_handler_extra_data():
     try:
         return json.loads(os.environ.get('handler_extra_data'))
-    except TypeError as e:
+    except (TypeError, JSONDecodeError) as e:
         return {}

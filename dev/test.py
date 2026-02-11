@@ -8,9 +8,9 @@ def handle():
     data = get_handler_extra_data()
 
     if data:
-        stock = Stock.objects.get(id=1)
+        stock = Stock.get_object(id=1)
         print(stock)
-        stock_room_item = StockItem.objects.get(name=data['i'], stock=stock.id)
+        stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)
         print(stock_room_item)
         exit(0)
 

@@ -1,10 +1,18 @@
 from app.handler.constants import ACTION_CALL_HANDLER
 from app.notification.models import Message, NotificationTransport
+from app.stockRoom.models import Stock, StockItem
 from utils.misc import get_handler_extra_data
 
 
 def handle():
-    print(get_handler_extra_data())
+    data = get_handler_extra_data()
+
+    if data:
+        stock = Stock.objects.get(id=1)
+        print(stock)
+        stock_room_item = StockItem.objects.get(name=data['i'], stock=stock.id)
+        print(stock_room_item)
+
     meal = ['opti meal', 'purina']
     questions = [
         {

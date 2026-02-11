@@ -42,15 +42,12 @@ class Stock(CRUDModel):
                 'stock_room_item': stock_room_item,
                 'count': count,
                 'recipe_items': recipe_items}
-        print('data to send: ', data)
         r =  send_request('post', self.combine_url(self.url + f'{self.id}/plane-to-cook/'), data=data)
-        print(r)
-        print(r.json())
 
 
 @dataclass
 class StockItem(CRUDModel):
-    url = '/api/stock-room/'
+    url = '/api/stock-room-item/'
     name: dict
     tags: List[dict]
 
@@ -120,7 +117,7 @@ class RecipeItem(CRUDModel):
 
 
 @dataclass
-class  Recipe(CRUDModel):
+class Recipe(CRUDModel):
     url = '/api/recipe/'
 
     description: str

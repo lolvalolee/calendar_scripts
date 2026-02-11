@@ -72,8 +72,10 @@ class BaseModel:
     @classmethod
     def get_object(cls, pk=None, **kwargs):
         if not pk and kwargs:
-            obj, _ = cls.get_objects(**kwargs)
-            return obj[0]
+            try:
+                return cls.get_objects(**kwargs)[0]
+            except IndexError:
+                return None
 
         data = cls.retrieve(cls.combine_url(cls.url) + f'{pk}/')
         _data = {'id': data.get('id')}

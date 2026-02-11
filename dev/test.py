@@ -14,6 +14,7 @@ def handle():
         print(stock)
         stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)
         print(stock_room_item)
+        stock.use(stock_room_item_id=stock_room_item.id, method=measure.id, count=1)
         exit(0)
 
     meal = ['opti meal', 'purina']

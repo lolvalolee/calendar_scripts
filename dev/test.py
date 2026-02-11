@@ -1,6 +1,6 @@
 from app.handler.constants import ACTION_CALL_HANDLER
 from app.notification.models import Message, NotificationTransport
-from app.stockRoom.models import Stock, StockItem
+from app.stockRoom.models import Stock, StockItem, Measure
 from utils.misc import get_handler_extra_data
 
 
@@ -9,6 +9,8 @@ def handle():
 
     if data:
         stock = Stock.get_object(id=1)
+        measure = Measure.get_object(name='штук')
+        print(measure)
         print(stock)
         stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)
         print(stock_room_item)

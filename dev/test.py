@@ -10,12 +10,8 @@ def handle():
     if data:
         stock = Stock.get_object(id=1)
         measure = Measure.get_object(name='штук')
-        print(measure)
-        print(stock)
         stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)
-        print(stock_room_item)
-        stock.use(stock_room_item_id=stock_room_item.id, measure_id=measure.id, count=1)
-        exit(0)
+        print(stock.use(stock_room_item_id=stock_room_item.id, measure_id=measure.id, count=1))
 
     meal = ['opti meal', 'purina']
     questions = [

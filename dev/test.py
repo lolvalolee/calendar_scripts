@@ -8,7 +8,7 @@ def handle():
     meal = ['opti meal', 'purina']
     questions = [
         {
-            'title': 'Кусь',
+            'title': item,
             'action': {
                 'type': ACTION_CALL_HANDLER,
                 'qs': {'name': 'test'},

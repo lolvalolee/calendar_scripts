@@ -12,6 +12,7 @@ def handle():
         print(stock)
         stock_room_item = StockItem.objects.get(name=data['i'], stock=stock.id)
         print(stock_room_item)
+        exit(0)
 
     meal = ['opti meal', 'purina']
     questions = [

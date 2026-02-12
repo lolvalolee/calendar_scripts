@@ -8,11 +8,11 @@ def handle():
     data = get_handler_extra_data()
 
     if data:
-        if data['m']:
+        if data.get('m'):
             Message.simple_messagev2('here!')
             print(data)
             exit(0)
-            
+
             stock = Stock.get_object(id=1)
             measure = Measure.get_object(name='штук')
             stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)

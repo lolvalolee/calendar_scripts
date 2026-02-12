@@ -8,12 +8,38 @@ def handle():
     data = get_handler_extra_data()
 
     if data:
-        stock = Stock.get_object(id=1)
-        measure = Measure.get_object(name='штук')
-        stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)
-        print(stock.use(stock_room_item_id=stock_room_item.id, measure_id=measure.id, count=1))
+        if data['m']:
+            Message.simple_messagev2('here!')
+            print(data)
+            exit(0)
+            
+            stock = Stock.get_object(id=1)
+            measure = Measure.get_object(name='штук')
+            stock_room_item = StockItem.get_object(name=data['i'], stock=stock.id)
+            print(stock.use(stock_room_item_id=stock_room_item.id, measure_id=measure.id, count=1))
+        else:
+            questions = [
+                {
+                    'title': measure.name,
+                    'action': {
+                        'type': ACTION_CALL_HANDLER,
+                        'qs': {'name': 'test'},
+                        'handler_extra_data': {'i': data['i'], 'm': measure.id},
+                    }
+                }
+                for measure in Measure.get_objects()
+            ]
 
-    meal = ['opti meal', 'purina']
+            extra_data = {
+                'title': 'Сколько?',
+                'questions': questions
+            }
+
+            Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
+
+        exit(0)
+
+    meal = ['opti meal', 'purina', 'авфавыаы']
     questions = [
         {
             'title': item,

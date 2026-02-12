@@ -44,7 +44,7 @@ def handle():
 
     questions = [
         {
-            'title': item.stock_room_item['name']['value'],
+            'title': f"{item.stock_room_item['name']['value']} {item.measure['name']} {item.count}",
             'action': {
                 'type': ACTION_CALL_HANDLER,
                 'qs': {'name': 'test'},

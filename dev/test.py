@@ -1,6 +1,6 @@
 from app.handler.constants import ACTION_CALL_HANDLER
 from app.notification.models import Message, NotificationTransport
-from app.stockRoom.models import Stock, StockItem, Measure
+from app.stockRoom.models import Stock, StockItem, Measure, UserStockRoomItem
 from utils.misc import get_handler_extra_data
 
 

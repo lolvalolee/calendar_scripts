@@ -39,6 +39,33 @@ def handle():
 
         exit(0)
 
+
+    stock = Stock.get_object(id=1)
+
+    questions = [
+        {
+            'title': item.name['value'],
+            'action': {
+                'type': ACTION_CALL_HANDLER,
+                'qs': {'name': 'test'},
+                'handler_extra_data': {'i': item.id}
+            }
+        }
+        for item in UserStockRoomItem.get_objects(stock=stock.id)
+    ]
+
+    extra_data = {
+        'title': 'Предметы склада',
+        'questions': questions
+    }
+
+    Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
+
+
+
+    exit(0)
+
+
     stock = Stock.get_object(id=1)
 
     questions = [

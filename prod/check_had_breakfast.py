@@ -10,7 +10,7 @@ def handle():
     now = profile.now
     start_gte = now - timedelta(hours=2)
 
-    regular_event = RegularEvent.get_object(name='завтрак')
+    regular_event = RegularEvent.get_object(name='Завтрак')
 
     if not list(regular_event.get_events(start_gte=start_gte.isoformat())):
         Message.simple_messagev2('Позавтракай!', NotificationTransport.telegram())

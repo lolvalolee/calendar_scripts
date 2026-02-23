@@ -70,7 +70,7 @@ class BaseModel:
         return send_request('post', url or cls.get_api_url(), data=kwargs).json()
 
     @classmethod
-    def get_object(cls, pk=None, **kwargs):
+    def get_object(cls, pk=None, **kwargs) -> 'BaseModel' or None:
         if not pk and kwargs:
             try:
                 return cls.get_objects(**kwargs)[0]
@@ -82,7 +82,7 @@ class BaseModel:
         return cls(**data)
 
     @classmethod
-    def get_objects(cls, url=None, action_name=None, **kwargs):
+    def get_objects(cls, url=None, action_name=None, **kwargs) -> ObjectsResponse:
         objects = []
         url = cls.combine_url(url or cls.url)
 

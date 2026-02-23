@@ -14,3 +14,5 @@ def handle():
 
     if not list(regular_event.get_events(start_gte=start_gte.isoformat())):
         Message.simple_messagev2('Позавтракай!', NotificationTransport.telegram())
+    else:
+        Message.simple_messagev2('Позавтракал, умничка!', NotificationTransport.telegram())

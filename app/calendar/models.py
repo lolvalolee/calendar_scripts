@@ -16,6 +16,7 @@ class Event(CRUDModel):
     regular_event: int
     event_type: str
     canceled: bool
+    extra_data: None
 
     @property
     def duration(self):

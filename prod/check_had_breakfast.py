@@ -8,3 +8,4 @@ def handle():
 
     regular_event = RegularEvent.get_object(name='завтрак')
     print(regular_event)
+    print(regular_event.events)

@@ -81,9 +81,14 @@ class RegularEvent(CRUDModel):
     max_duration: int
     duration_required: bool
     created: datetime
+    tags: list[dict]
 
     @apply_default_filters('-start')
     def events(self, start=None, end=None, start_lte=None, end_lte=None, start_gte=None, end_gte=None, **kwargs) -> List[Event]:
+        return Event.get_objects(regular_event=self.id, start_gte=start_gte)
+
+    @apply_default_filters('-start')
+    def get_events(self, start=None, end=None, start_lte=None, end_lte=None, start_gte=None, end_gte=None, **kwargs) -> List[Event]:
         return Event.get_objects(regular_event=self.id, start_gte=start_gte)
 
     def planned_events(self, start_gte=None, end_gte=None, **kwargs):

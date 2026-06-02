@@ -1,9 +1,8 @@
-from app.training.models import UserExercise
+from app.training.models import UserExercise, UserTraining
 
 from utils.misc import get_handler_extra_data
 
 
 def handle():
-    exercises = UserExercise.get_objects()
-    print( list(exercises))
-    print(get_handler_extra_data())
+    exercises = list(UserExercise.get_objects())
+    print(UserTraining.create())

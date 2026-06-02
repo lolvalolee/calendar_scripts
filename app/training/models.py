@@ -5,7 +5,7 @@ from utils.models import CRUDModel
 
 @dataclass
 class UserExercise(CRUDModel):
-    url = '/api/point-type/'
+    url = '/api/user-exercise/'
 
     name: dict
     total_amount: float
@@ -22,4 +22,6 @@ class UserTrainingExercise(CRUDModel):
 
 
 class UserTraining(CRUDModel):
+    url = '/api/user-training/'
+    
     user_training_exercises: list

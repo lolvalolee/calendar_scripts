@@ -9,6 +9,7 @@ class UserExercise(CRUDModel):
 
     name: dict
     total_amount: float
+    extra_data: dict
 
 
 class UserTrainingExercise(CRUDModel):

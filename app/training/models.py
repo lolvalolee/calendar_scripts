@@ -8,7 +8,6 @@ class UserExercise(CRUDModel):
     url = '/api/user-exercise/'
 
     name: dict
-    total_amount: float
     extra_data: dict
 
 

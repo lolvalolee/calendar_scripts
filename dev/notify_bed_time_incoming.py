@@ -1,12 +1,7 @@
-from datetime import timedelta, datetime
-
-from app.calendar.models import RegularEvent, Event
+from app.calendar.models import Event
 from app.handler.constants import ACTION_CALL_HANDLER
-from app.home.models import MainPageDisplay
 from app.notification.models import Message, NotificationTransport
 from app.profile.models import Profile
-from app.stockRoom.constants import STATUS_IN_STOCK_ROOM
-from app.stockRoom.models import UserStockRoomItem
 
 
 def handle():
@@ -14,7 +9,7 @@ def handle():
 
     current_events = list(Event.current_events())
     allowed_events = ['Сон', 'Ходьба на беговой', 'Ванна']
-    print(current_events)
+
     if not current_events or list(filter(lambda e: e.title['value'] in allowed_events, current_events)):
         questions = [
             {

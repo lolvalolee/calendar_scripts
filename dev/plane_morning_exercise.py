@@ -70,7 +70,7 @@ def select_training_time(n=None):
             'action': {
                 'type': ACTION_CALL_HANDLER,
                 'qs': {'name': 'test1'},
-                'handler_extra_data': {'a': ACTION_ACCEPT, 'i': item}
+                'handler_extra_data': {'a': ACTION_SET_TIME, 'i': item}
             }
         } for item in options
     ]

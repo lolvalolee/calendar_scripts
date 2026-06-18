@@ -1,6 +1,9 @@
+from datetime import datetime, timedelta
+
 from app.handler.constants import ACTION_CALL_HANDLER
 from app.training.models import UserExercise, UserTraining
 from app.notification.models import Message, NotificationTransport
+from app.calendar.models import RegularEvent
 
 from utils.misc import get_handler_extra_data
 
@@ -58,7 +61,7 @@ def create_question():
     Message.question(transport=NotificationTransport.telegram(), extra_data=extra_data)
 
 
-def set_training_time(n=None):
+def select_training_time(n=None):
     options = [item for item in range(0, 60, 10)]
 
     questions = [
@@ -74,16 +77,28 @@ def set_training_time(n=None):
     Message.question_v2('Через сколько начать?', questions, transport=NotificationTransport.telegram())
 
 
+def plane_training(i):
+    now = datetime.now()
+    start = now + timedelta(minutes=i)
+
+    regular_event = RegularEvent.get_object(name='завтрак')
+    regular_event.create(name={'value': 'завтрак'}, start=start)
+
+
 def handle():
     data = get_handler_extra_data()
     n = data.get('n', 0)
+    i = data.get('i', 0)
     action = data.get('a')
 
     if not action:
         create_question()
 
     if action == ACTION_ACCEPT:
-        set_training_time()
+        select_training_time()
+
+    if action == ACTION_SET_TIME:
+        plane_training(i)
 
     #
     # print(get_handler_extra_data())

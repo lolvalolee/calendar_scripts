@@ -126,3 +126,6 @@ class RegularEvent(CRUDModel):
             return response.json(), False
 
         return SubTask(**response.json()), True
+
+    def create_event(self, **kwargs):
+        Event.create(regular_event=self.id, **kwargs)

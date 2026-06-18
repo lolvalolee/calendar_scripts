@@ -82,7 +82,7 @@ def plane_training(i):
     start = now + timedelta(minutes=i)
 
     regular_event = RegularEvent.get_object(name='завтрак')
-    print(regular_event.create(name={'value': 'завтрак'}, start=start))
+    print(regular_event.create_event(name={'value': 'завтрак'}, start=start))
 
 
 def handle():

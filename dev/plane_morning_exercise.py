@@ -59,8 +59,7 @@ def create_question():
 
 
 def set_training_time(n=None):
-    options = [{'label': 'now', 'value': 0}]
-    options.extend([item for item in range(0, 60, 10)])
+    options = [item for item in range(0, 60, 10)]
 
     questions = [
         {

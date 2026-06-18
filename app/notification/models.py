@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+from utils.logger import logger
 from app.notification.constants import NOTIFICATION_MESSAGE, NOTIFICATION_QUESTION
 from utils.models import BaseModel, CRUDModel
 
@@ -43,5 +44,15 @@ class Message(CRUDModel):
 
     @classmethod
     def question(cls, **kwargs):
+        logger.error('This method is outdated use question_v2 instead')
         kwargs['notification_type'] = NOTIFICATION_QUESTION
         return cls.create(**kwargs)
+
+    @classmethod
+    def question_v2(cls, title, questions, **kwargs):
+        kwargs['notification_type'] = NOTIFICATION_QUESTION
+        extra_data = {
+            'title': title,
+            'questions': questions
+        }
+        return cls.create(extra_data=extra_data, **kwargs)

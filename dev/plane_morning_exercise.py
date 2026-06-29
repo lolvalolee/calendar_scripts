@@ -59,7 +59,6 @@ def plane_training(i):
     start = now + timedelta(minutes=i)
 
     regular_event = RegularEvent.get_object(name='завтрак')
-    r = regular_event.create_event(title={'value': 'завтрак'}, start=start)
 
     exercises = list(UserExercise.get_objects(extra_data__morning=1))
     _exercises = []
@@ -73,10 +72,8 @@ def plane_training(i):
 
     r = UserTraining.create(user_training_exercises=[
         dict(position=item[0],  **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
-    ])
-    # print([
-    #     dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
-    # ])
+    ], event={'title': {'value': 'завтрак'}, 'start': start, regular_event: regular_event.id})
+
     print(r.json())
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())

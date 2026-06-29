@@ -27,7 +27,7 @@ def create_question():
             'title': ANSWER_YES,
             'action': {
                 'type': ACTION_CALL_HANDLER,
-                'qs': {'name': 'test1'},
+                'qs': {'name': 'morning_exercise'},
                 'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT}
             }
         }

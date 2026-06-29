@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from app.handler.constants import ACTION_CALL_HANDLER
 from app.notification.models import Message, NotificationTransport
 from app.calendar.models import RegularEvent
-from app.training.models import UserTrainingExercise, UserExercise
+from app.training.models import UserTrainingExercise, UserExercise, UserTraining
 
 from utils.misc import get_handler_extra_data
 
@@ -71,8 +71,10 @@ def plane_training(i):
         except KeyError:
             pass
 
-    print(_exercises)
-    print(list(sorted(_exercises, key=lambda x: x[0])))
+    UserTraining.create(user_training_exercises=[
+        dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
+    ])
+
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

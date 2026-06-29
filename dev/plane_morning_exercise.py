@@ -71,10 +71,10 @@ def plane_training(i):
         except KeyError:
             pass
 
-    UserTraining.create(user_training_exercises=[
+    r = UserTraining.create(user_training_exercises=[
         dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
     ])
-
+    print(r)
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

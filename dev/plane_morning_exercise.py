@@ -61,7 +61,7 @@ def plane_training(i):
     regular_event = RegularEvent.get_object(name='завтрак')
     r = regular_event.create_event(title={'value': 'завтрак'}, start=start)
 
-    exercises = UserExercise.get_objects(extra_data__morning=1)
+    exercises = list(UserExercise.get_objects(extra_data__morning=1))
     print(exercises)
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())

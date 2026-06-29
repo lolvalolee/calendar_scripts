@@ -28,7 +28,7 @@ def create_question():
             'action': {
                 'type': ACTION_CALL_HANDLER,
                 'qs': {'name': 'morning_exercise'},
-                'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT, 'i': ACTION_ACCEPT}
+                'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT, 'a': ACTION_ACCEPT}
             }
         }
     ]
@@ -86,6 +86,7 @@ def handle():
     data = get_handler_extra_data()
 
     i = data.get('i', 0)
+    print('i:', i)
     action = data.get('a')
 
     if not action:

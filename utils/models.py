@@ -144,9 +144,7 @@ class CRUDModel(BaseModel):
 
             if isinstance(v, datetime.datetime):
                 kwargs[k] = v.isoformat()
-        r = send_request('post', cls.combine_url(cls.url), data=kwargs)
-        print(r.json())
-        return r
+        return send_request('post', cls.combine_url(cls.url), data=kwargs)
 
     @property
     def content_type_id(self):

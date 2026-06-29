@@ -65,14 +65,14 @@ def plane_training(i):
     _exercises = []
     for item in exercises:
         try:
-            order = item.extra_data['order'].splt(',')
+            order = item.extra_data['order'].split(',')
             turns = item.extra_data['turns']
             _exercises.extend([(int(order), {'id': item.id, 'count': turns}) for item in order])
         except KeyError:
             pass
 
     print(_exercises)
-    
+
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

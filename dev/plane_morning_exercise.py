@@ -67,16 +67,16 @@ def plane_training(i):
         try:
             order = exercise.extra_data['order'].split(',')
             turns = exercise.extra_data['turns']
-            _exercises.extend([(int(item), {'id': exercise.id, 'count': turns}) for item in order])
+            _exercises.extend([(int(item), {'user_exercise': exercise.id, 'count': turns}) for item in order])
         except KeyError:
             pass
 
     r = UserTraining.create(user_training_exercises=[
-        dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
+        dict(position=item[0],  **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
     ])
-    print([
-        dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
-    ])
+    # print([
+    #     dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
+    # ])
     print(r.json())
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())

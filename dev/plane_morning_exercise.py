@@ -74,7 +74,10 @@ def plane_training(i):
     r = UserTraining.create(user_training_exercises=[
         dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
     ])
-    print(r)
+    print([
+        dict(position=item[0], **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
+    ])
+    print(r.json())
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

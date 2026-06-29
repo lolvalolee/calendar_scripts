@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from app.handler.constants import ACTION_CALL_HANDLER
 from app.notification.models import Message, NotificationTransport
 from app.calendar.models import RegularEvent
+from app.training.models import UserTrainingExercise, UserExercise
 
 from utils.misc import get_handler_extra_data
 
@@ -59,12 +60,19 @@ def plane_training(i):
 
     regular_event = RegularEvent.get_object(name='завтрак')
     r = regular_event.create_event(title={'value': 'завтрак'}, start=start)
-    if r.ok:
-        Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
+
+    exercises = UserExercise.get_objects(extra_data__morning=1)
+    print(exercises)
+    # if r.ok:
+    #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 
 
 def handle():
     data = get_handler_extra_data()
+
+    plane_training(1)
+
+    return
     n = data.get('n', 0)
     i = data.get('i', 0)
     action = data.get('a')

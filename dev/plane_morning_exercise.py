@@ -72,7 +72,7 @@ def plane_training(i):
 
     r = UserTraining.create(user_training_exercises=[
         dict(position=item[0],  **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
-    ], event={'title': {'value': 'завтрак'}, 'start': start, regular_event: regular_event.id})
+    ], event={'title': {'value': 'завтрак'}, 'start': start, 'regular_event': regular_event.id})
 
     print(r.json())
     # if r.ok:

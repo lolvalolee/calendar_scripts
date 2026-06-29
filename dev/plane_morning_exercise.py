@@ -74,7 +74,7 @@ def plane_training(i):
         dict(position=item[0],  **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
     ], event={'title': {'value': 'завтрак'}, 'start': start.isoformat(), 'regular_event': regular_event.id})
 
-    print(r.json())
+    print(r)
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

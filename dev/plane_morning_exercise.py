@@ -62,9 +62,17 @@ def plane_training(i):
     r = regular_event.create_event(title={'value': 'завтрак'}, start=start)
 
     exercises = list(UserExercise.get_objects(extra_data__morning=1))
+    _exercises = []
     for item in exercises:
-        print(item.extra_data)
-    print(exercises)
+        try:
+            order = item.extra_data['order'].splt(',')
+            turns = item.extra_data['turns']
+            _exercises.extend([(int(order), {'id': item.id, 'count': turns}) for item in order])
+        except KeyError:
+            pass
+
+    print(_exercises)
+    
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

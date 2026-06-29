@@ -28,7 +28,8 @@ def create_question():
             'action': {
                 'type': ACTION_CALL_HANDLER,
                 'qs': {'name': 'morning_exercise'},
-                'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT, 'a': ACTION_ACCEPT}
+                # 'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT},
+                'handler_extra_data': {'a': ACTION_ACCEPT}
             }
         }
     ]

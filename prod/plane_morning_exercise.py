@@ -16,6 +16,7 @@ ACTION_FORGET = 4
 ACTION_SET_TIME = 5
 
 TRAINING_REGULAR_EVENT_NAME = 'Тренировка'
+HANDLER_NAME = 'morning_exercise'
 
 
 def create_question():
@@ -27,7 +28,7 @@ def create_question():
             'title': ANSWER_YES,
             'action': {
                 'type': ACTION_CALL_HANDLER,
-                'qs': {'name': 'morning_exercise'},
+                'qs': {'name': HANDLER_NAME},
                 # 'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT},
                 'handler_extra_data': {'a': ACTION_ACCEPT}
             }
@@ -50,7 +51,7 @@ def select_training_time(n=None):
             'title': f"{item if item else 'now'}",
             'action': {
                 'type': ACTION_CALL_HANDLER,
-                'qs': {'name': 'test1'},
+                'qs': {'name': HANDLER_NAME},
                 'handler_extra_data': {'a': ACTION_SET_TIME, 'i': item}
             }
         } for item in options
@@ -88,8 +89,6 @@ def handle():
 
     i = data.get('i', 0)
     action = data.get('a')
-    print('i:', i)
-    print('a:', action)
 
     if not action:
         create_question()

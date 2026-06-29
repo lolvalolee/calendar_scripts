@@ -86,8 +86,9 @@ def handle():
     data = get_handler_extra_data()
 
     i = data.get('i', 0)
-    print('i:', i)
     action = data.get('a')
+    print('i:', i)
+    print('a:', action)
 
     if not action:
         create_question()

@@ -67,7 +67,7 @@ def plane_training(i):
         try:
             order = item.extra_data['order'].split(',')
             turns = item.extra_data['turns']
-            _exercises.extend([(int(order), {'id': item.id, 'count': turns}) for item in order])
+            _exercises.extend([(int(item), {'id': item.id, 'count': turns}) for item in order])
         except KeyError:
             pass
 

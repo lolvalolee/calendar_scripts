@@ -4,9 +4,10 @@ from app.handler.constants import ACTION_CALL_HANDLER
 from app.notification.models import Message, NotificationTransport
 from app.calendar.models import RegularEvent
 from app.training.models import UserExercise, UserTraining
+from constants.commmon import ACTION_KEY
+from constants.text import ANSWER_NO, ANSWER_YES
 
 from utils.misc import get_handler_extra_data
-
 
 ACTION_ACCEPT = 1
 ACTION_SKIP = 2
@@ -14,18 +15,20 @@ ACTION_SKIP_AND_PLANE = 3
 ACTION_FORGET = 4
 ACTION_SET_TIME = 5
 
+TRAINING_REGULAR_EVENT_NAME = 'тренировка'
+
 
 def create_question():
     questions = [
         {
-            'title': f"Нет",
+            'title': ANSWER_NO,
         },
         {
-            'title': f"Да",
+            'title': ANSWER_YES,
             'action': {
                 'type': ACTION_CALL_HANDLER,
                 'qs': {'name': 'test1'},
-                'handler_extra_data': {'a': ACTION_ACCEPT}
+                'handler_extra_data': {ACTION_KEY: ACTION_ACCEPT}
             }
         }
     ]
@@ -58,11 +61,10 @@ def plane_training(i):
     now = datetime.now()
     start = now + timedelta(minutes=i)
 
-    regular_event = RegularEvent.get_object(name='завтрак')
+    regular_event = RegularEvent.get_object(name=TRAINING_REGULAR_EVENT_NAME)
 
-    exercises = list(UserExercise.get_objects(extra_data__morning=1))
     _exercises = []
-    for exercise in exercises:
+    for exercise in UserExercise.get_objects(extra_data__morning=1):
         try:
             order = exercise.extra_data['order'].split(',')
             turns = exercise.extra_data['turns']
@@ -70,9 +72,11 @@ def plane_training(i):
         except KeyError:
             pass
 
-    r = UserTraining.create(user_training_exercises=[
-        dict(position=item[0],  **item[1]) for item in sorted(_exercises, key=lambda x: x[0])
-    ], event={'title': {'value': 'завтрак'}, 'start': start.isoformat(), 'regular_event': regular_event.id})
+    r = UserTraining.create(
+        user_training_exercises=[dict(position=item[0],  **item[1]) for item in sorted(_exercises, key=lambda x: x[0])],
+        event={'title': {'value': 'утреняя тренировка'},
+              'start': start.isoformat(),
+              'regular_event': regular_event.id})
 
     if r.ok:
         Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())

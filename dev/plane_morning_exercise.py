@@ -72,7 +72,7 @@ def plane_training(i):
             pass
 
     print(_exercises)
-    print(list(sorted(_exercises, key=lambda x: x[1])))
+    print(list(sorted(_exercises, key=lambda x: x[0])))
     # if r.ok:
     #     Message.simple_messagev2('Запланировано!', NotificationTransport.telegram())
 

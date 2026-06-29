@@ -63,11 +63,11 @@ def plane_training(i):
 
     exercises = list(UserExercise.get_objects(extra_data__morning=1))
     _exercises = []
-    for item in exercises:
+    for exercise in exercises:
         try:
-            order = item.extra_data['order'].split(',')
-            turns = item.extra_data['turns']
-            _exercises.extend([(int(item), {'id': item.id, 'count': turns}) for item in order])
+            order = exercise.extra_data['order'].split(',')
+            turns = exercise.extra_data['turns']
+            _exercises.extend([(int(item), {'id': exercise.id, 'count': turns}) for item in order])
         except KeyError:
             pass
 

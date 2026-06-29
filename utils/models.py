@@ -144,19 +144,9 @@ class CRUDModel(BaseModel):
 
             if isinstance(v, datetime.datetime):
                 kwargs[k] = v.isoformat()
-
-        try:
-            r = send_request('post', cls.combine_url(cls.url), data=kwargs)
-            print(cls.combine_url(cls.url))
-            print(r.json())
-            return r.json()
-        except JSONDecodeError:
-            print(r)
-            print(dir(r))
-            print('response not decoded')
-        except Exception as e:
-            print('error while execute')
-            print(e)
+        r = send_request('post', cls.combine_url(cls.url), data=kwargs)
+        print(r.json())
+        return r
 
     @property
     def content_type_id(self):

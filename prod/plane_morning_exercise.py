@@ -15,7 +15,7 @@ ACTION_SKIP_AND_PLANE = 3
 ACTION_FORGET = 4
 ACTION_SET_TIME = 5
 
-TRAINING_REGULAR_EVENT_NAME = 'тренировка'
+TRAINING_REGULAR_EVENT_NAME = 'Тренировка'
 
 
 def create_question():

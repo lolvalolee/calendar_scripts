@@ -59,7 +59,7 @@ def create_question(exercise: Exercise) -> None:
         },
     ]
 
-    Message.question("Предметы склада", questions, NotificationTransport.telegram())
+    Message.question("Предметы склада", questions, NotificationTransport.desktop())
 
 
 def handle() -> None:

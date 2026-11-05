@@ -1,68 +1,83 @@
-"""Проверка регулярного события N за последние два часа.
+"""Тестовий хендлер: питає, що зробити з предметом склада.
 
-Если у события N за окно нет ни одной выполненной записи — просим DeepSeek
-написать напоминание о пользе спорта и отправляем его как уведомление.
+Бекенд викликає ``handle()`` і передає параметри через ``handler_extra_data``.
+Два виклики одного скрипта:
+
+* **старт** — параметрів немає, беремо предмет за індексом ``n`` (типово 0)
+  і шлемо питання з кнопками;
+* **відповідь** — приходить від натиснутої кнопки: ``i`` — id предмета,
+  ``a`` — код дії (``ACTION_INCREASE`` / ``ACTION_SKIP`` / …).
+
+Моделі самі ходять на сервер — ні клієнта, ні налаштувань у скрипті немає.
 """
 
-import sys
-from datetime import datetime, timedelta
+import logging
 
-import requests
+from calendar_scripts import get_handler_extra_data
+from calendar_scripts.models import Exercise, Message, NotificationTransport
 
-from calendar_scripts.models import ApiKey, Message, NotificationTransport, RegularEvent
+#: Дія правила ``call_handler``: натиск на кнопку викликає цей же скрипт.
+ACTION_CALL_HANDLER = "call_handler"
 
+ACTION_INCREASE = 1
+ACTION_SKIP = 2
+ACTION_SKIP_AND_PLANE = 3
+ACTION_FORGET = 4
 
-sys.path.append("./")
+#: Назва цього скрипта — з нею бекенд викликає його по кнопці.
+HANDLER_NAME = "test"
 
-#: Id регулярного события, которое проверяем.
-REGULAR_EVENT_ID = 1
-
-#: Окно проверки — последние два часа.
-WINDOW = timedelta(hours=2)
-
-#: Название ключа, которым подписываем запрос к DeepSeek.
-KEY_NAME = "deepseek"
-
-desktop = NotificationTransport.desktop()
+logger = logging.getLogger(__name__)
 
 
-def events_last_two_hours(regular_event: RegularEvent) -> list:
-    """Записи регулярного события за последние ``WINDOW``."""
-    now = datetime.now().astimezone()
-    return regular_event.events(start__gte=now - WINDOW, end__lte=now)
-
-
-def sport_text(key: str) -> str:
-    """Сгенерировать текст о пользе спорта через DeepSeek."""
-    response = requests.post(
-        "https://api.deepseek.com/chat/completions",
-        headers={"Authorization": f"Bearer {key}"},
-        json={
-            "model": "deepseek-chat",
-            "messages": [
-                {"role": "system", "content": "You are a helpful assistant."},
-                {
-                    "role": "user",
-                    "content": "Сегодня не было тренировки. Напиши короткое "
-                    "сообщение (1-2 предложения) о том, что важно "
-                    "заниматься спортом каждый день.",
-                },
-            ],
+def create_question(exercise: Exercise) -> None:
+    """Надсилає в телеграм питання з кнопками для одного предмета."""
+    questions = [
+        {
+            "title": "Увеличить количество",
+            "action": {
+                "type": ACTION_CALL_HANDLER,
+                "qs": {"name": HANDLER_NAME},
+                "handler_extra_data": {"i": exercise.id, "a": ACTION_INCREASE},
+            },
         },
-        timeout=30,
-    )
-    response.raise_for_status()
-    return response.json()["choices"][0]["message"]["content"].strip()
+        {
+            "title": "Пропустить",
+            "action": {
+                "type": ACTION_CALL_HANDLER,
+                "qs": {"name": HANDLER_NAME},
+                "handler_extra_data": {"i": exercise.id, "a": ACTION_SKIP},
+            },
+        },
+        {
+            "title": "Отменить на сегодня",
+            "action": {
+                "type": ACTION_CALL_HANDLER,
+                "qs": {"name": HANDLER_NAME},
+                "handler_extra_data": {"i": exercise.id, "a": ACTION_SKIP},
+            },
+        },
+    ]
+
+    Message.question("Предметы склада", questions, NotificationTransport.telegram())
 
 
 def handle() -> None:
-    regular_event = RegularEvent.get_object(REGULAR_EVENT_ID)
-    if events_last_two_hours(regular_event):
+    data = get_handler_extra_data()
+    logger.info("handler_extra_data=%s", data)
+
+    # Пришла відповідь на кнопку: id предмета є прямо в параметрах.
+    if (exercise_id := data.get("i")) is not None:
+        exercise = Exercise.get(exercise_id)
+        logger.info("обрано дію %s для предмета %s", data.get("a"), exercise.id)
         return
 
-    key = ApiKey.get_object(KEY_NAME)
-    Message.simple_message(sport_text(key.key), desktop)
+    # Старт: предмет за індексом ``n``; немає такого — просто виходимо.
+    n = data.get("n", 0)
+    try:
+        exercise = Exercise.objects()[n]
+    except IndexError:
+        logger.info("предметів менше, ніж %s", n + 1)
+        return
 
-
-if __name__ == "__main__":
-    handle()
+    create_question(exercise)
